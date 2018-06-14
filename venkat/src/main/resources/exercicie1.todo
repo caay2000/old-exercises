@@ -1,0 +1,24 @@
+Thinking in Functional Style:-
+	Solving Commonly Recurring Code Problems using Java's Functional Capabilities.
+Venkat Subramaniam
+venkats@agiledeveloper.com
+@venkat_s
+==============================================================================
+
+Functional Style
+-Immutability
+-Higher-order Functions
+-Functional Composition
+-Lazy Evaluation
+
+Exercise 1: Declarative and Functional:
+
+Exercise 2: Using Stream:
+
+Exercise 3: Grouping:
+
+Exercise 4: Decorator:
+
+Exercise 5: Transformation:
+
+Exercise 6: Infinite Streams:

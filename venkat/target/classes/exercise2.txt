@@ -1,0 +1,5 @@
+google.com
+localhost
+yahoo.com
+sky.uk
+localhost

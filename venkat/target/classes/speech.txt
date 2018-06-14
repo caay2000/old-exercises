@@ -1,0 +1,12 @@
+Normal fucntions
+we ass oject ro funcitons
+we create object in functions
+we return objects from functions
+
+
+
+
+Martin fowler : Collection Pipeline Pattern
+
+
+http://bit.ly/2sVG1I0
