@@ -33,6 +33,17 @@ public class GildedRoseTest {
         assertEquals(8, item.quality);
     }
 
+    @Test
+    public void quality_is_never_negative() {
+        Item item = anItem("foo", 10, 0);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(0, item.quality);
+    }
+
+
+
     private Item anItem(String name, int sellIn, int quality) {
         return new Item(name, sellIn, quality);
     }
