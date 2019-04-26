@@ -6,9 +6,12 @@ import org.junit.Test;
 
 public class GildedRoseTest {
 
+    private static final String DEFAULT_ITEM = "foo";
+    private static final String AGED_BRIE = "Aged Brie";
+
     @Test
     public void sellIn_decreases_gradually() {
-        Item item = anItem("foo", 10, 10);
+        Item item = anItem(DEFAULT_ITEM, 10, 10);
 
         aGildedRose(item).updateQuality();
 
@@ -17,7 +20,7 @@ public class GildedRoseTest {
 
     @Test
     public void quality_decreases_gradually() {
-        Item item = anItem("foo", 10, 10);
+        Item item = anItem(DEFAULT_ITEM, 10, 10);
 
         aGildedRose(item).updateQuality();
 
@@ -26,7 +29,7 @@ public class GildedRoseTest {
 
     @Test
     public void quality_decreases_twice_as_fast_when_sellIn_expired() {
-        Item item = anItem("foo", 0, 10);
+        Item item = anItem(DEFAULT_ITEM, 0, 10);
 
         aGildedRose(item).updateQuality();
 
@@ -35,7 +38,7 @@ public class GildedRoseTest {
 
     @Test
     public void quality_is_never_negative() {
-        Item item = anItem("foo", 10, 0);
+        Item item = anItem(DEFAULT_ITEM, 10, 0);
 
         aGildedRose(item).updateQuality();
 
@@ -44,12 +47,23 @@ public class GildedRoseTest {
 
     @Test
     public void aged_brie_increases_in_quality_the_older_it_gets(){
-        Item item = anItem("Aged Brie", 10, 10);
+        Item item = anItem(AGED_BRIE, 10, 10);
 
         aGildedRose(item).updateQuality();
 
         assertEquals(11, item.quality);
     }
+
+    @Test
+    public void quality_is_never_more_than_50(){
+        Item item = anItem(AGED_BRIE, 10, 49);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(50, item.quality);
+    }
+
+
 
     private Item anItem(String name, int sellIn, int quality) {
         return new Item(name, sellIn, quality);
