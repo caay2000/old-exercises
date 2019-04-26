@@ -9,6 +9,7 @@ public class GildedRoseTest {
     private static final String DEFAULT_ITEM = "foo";
     private static final String AGED_BRIE = "Aged Brie";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
 
     @Test
     public void sellIn_decreases_gradually() {
@@ -80,6 +81,42 @@ public class GildedRoseTest {
         aGildedRose(item).updateQuality();
 
         assertEquals(10, item.quality);
+    }
+
+    @Test
+    public void backstage_pass_increases_quality(){
+        Item item = anItem(BACKSTAGE_PASS, 20, 10);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(11, item.quality);
+    }
+
+    @Test
+    public void backstage_pass_increases_quality_less_10_days(){
+        Item item = anItem(BACKSTAGE_PASS, 10, 10);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(12, item.quality);
+    }
+
+    @Test
+    public void backstage_pass_increases_quality_less_5_days(){
+        Item item = anItem(BACKSTAGE_PASS, 5, 10);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(13, item.quality);
+    }
+
+    @Test
+    public void backstage_pass_increases_quality_drops_to_zero_after_concet(){
+        Item item = anItem(BACKSTAGE_PASS, 0, 10);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(0, item.quality);
     }
 
     private Item anItem(String name, int sellIn, int quality) {
