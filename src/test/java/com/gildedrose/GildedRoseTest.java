@@ -42,7 +42,14 @@ public class GildedRoseTest {
         assertEquals(0, item.quality);
     }
 
+    @Test
+    public void aged_brie_increases_in_quality_the_older_it_gets(){
+        Item item = anItem("Aged Brie", 10, 10);
 
+        aGildedRose(item).updateQuality();
+
+        assertEquals(11, item.quality);
+    }
 
     private Item anItem(String name, int sellIn, int quality) {
         return new Item(name, sellIn, quality);
