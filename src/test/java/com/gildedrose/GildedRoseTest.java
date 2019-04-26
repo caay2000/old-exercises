@@ -8,6 +8,7 @@ public class GildedRoseTest {
 
     private static final String DEFAULT_ITEM = "foo";
     private static final String AGED_BRIE = "Aged Brie";
+    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     @Test
     public void sellIn_decreases_gradually() {
@@ -46,7 +47,7 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void aged_brie_increases_in_quality_the_older_it_gets(){
+    public void aged_brie_increases_in_quality_the_older_it_gets() {
         Item item = anItem(AGED_BRIE, 10, 10);
 
         aGildedRose(item).updateQuality();
@@ -55,7 +56,7 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void quality_is_never_more_than_50(){
+    public void quality_is_never_more_than_50() {
         Item item = anItem(AGED_BRIE, 10, 49);
 
         aGildedRose(item).updateQuality();
@@ -63,7 +64,23 @@ public class GildedRoseTest {
         assertEquals(50, item.quality);
     }
 
+    @Test
+    public void sulfuras_never_has_to_be_sold() {
+        Item item = anItem(SULFURAS, 10, 10);
 
+        aGildedRose(item).updateQuality();
+
+        assertEquals(10, item.sellIn);
+    }
+
+    @Test
+    public void sulfuras_never_decreases_quality() {
+        Item item = anItem(SULFURAS, 10, 10);
+
+        aGildedRose(item).updateQuality();
+
+        assertEquals(10, item.quality);
+    }
 
     private Item anItem(String name, int sellIn, int quality) {
         return new Item(name, sellIn, quality);
