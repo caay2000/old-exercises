@@ -1,7 +1,6 @@
-package com.gildedrose.model.product;
+package com.gildedrose.model;
 
 import com.gildedrose.Item;
-import com.gildedrose.model.Product;
 
 public class BackstagePass extends Product {
 

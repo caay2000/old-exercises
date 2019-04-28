@@ -2,11 +2,11 @@ package com.gildedrose.model;
 
 import com.gildedrose.Item;
 
-public abstract class Product {
+public class Product {
 
-    public static final String AGED_BRIE = "Aged Brie";
-    public static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    private static final String AGED_BRIE = "Aged Brie";
+    private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     private static final int EXPIRE_DAY = 0;
     private static final int MIN_ITEM_QUALITY = 0;
@@ -18,39 +18,35 @@ public abstract class Product {
         this.item = item;
     }
 
-    public String getName() {
-        return this.item.name;
-    }
-
-    public int getQuality() {
+    private int getQuality() {
         return this.item.quality;
     }
 
-    public int getDaysToExpire() {
+    protected int getDaysToExpire() {
         return this.item.sellIn;
     }
 
-    public boolean isExpired() {
+    protected boolean isExpired() {
         return this.item.sellIn < EXPIRE_DAY;
     }
 
-    public void expireOneDay() {
+    protected void expireOneDay() {
         this.item.sellIn--;
     }
 
-    public void decreaseQuality() {
+    protected void decreaseQuality() {
         if (getQuality() > MIN_ITEM_QUALITY) {
             this.item.quality--;
         }
     }
 
-    public void increaseQuality() {
+    protected void increaseQuality() {
         if (getQuality() < MAX_ITEM_QUALITY) {
             this.item.quality++;
         }
     }
 
-    public void killQuality() {
+    protected void killQuality() {
         this.item.quality = 0;
     }
 
@@ -63,6 +59,21 @@ public abstract class Product {
         decreaseQuality();
         if (isExpired()) {
             decreaseQuality();
+        }
+    }
+
+    public static class Factory {
+
+        public static Product aProduct(Item item) {
+            switch (item.name) {
+                case Product.AGED_BRIE:
+                    return new AgedBrie(item);
+                case Product.SULFURAS:
+                    return new Sulfuras(item);
+                case Product.BACKSTAGE_PASS:
+                    return new BackstagePass(item);
+            }
+            return new Product(item);
         }
     }
 }
