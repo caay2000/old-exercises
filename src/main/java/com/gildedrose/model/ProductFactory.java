@@ -3,6 +3,7 @@ package com.gildedrose.model;
 import com.gildedrose.Item;
 import com.gildedrose.model.product.AgedBrie;
 import com.gildedrose.model.product.DefaultProduct;
+import com.gildedrose.model.product.Sulfuras;
 
 public class ProductFactory {
 
@@ -10,6 +11,8 @@ public class ProductFactory {
         switch (item.name) {
             case Product.AGED_BRIE:
                 return new AgedBrie(item);
+            case Product.SULFURAS:
+                return new Sulfuras(item);
         }
         return new DefaultProduct(item);
     }

@@ -55,17 +55,11 @@ public abstract class Product {
     }
 
     public void processExpireDate() {
-        if (getName().equals(SULFURAS)) {
-            return;
-        }
         expireOneDay();
     }
 
     public void processQuality() {
-        if (getName().equals(SULFURAS)) {
-            return;
-        }
-        else if (getName().equals(BACKSTAGE_PASS)) {
+        if (getName().equals(BACKSTAGE_PASS)) {
             if (isExpired()) {
                 killQuality();
             } else {
