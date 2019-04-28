@@ -1,25 +1,24 @@
 package com.gildedrose;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.gildedrose.model.Product;
+import com.gildedrose.model.ProductFactory;
 class GildedRose {
 
     private static final String AGED_BRIE = "Aged Brie";
     private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
-    private List<Product> products;
+    //private List<Product> products;
+
+    private Item[] items;
 
     public GildedRose(Item[] items) {
-        products = Arrays.asList(items).stream()
-                .map(e -> new Product(e))
-                .collect(Collectors.toList());
+        this.items = items;
     }
 
     public void updateQuality() {
-        for (Product product : products) {
-
+        for (Item item : items) {
+            Product product = ProductFactory.aProduct(item);
             processExpireDate(product);
             processQuality(product);
         }

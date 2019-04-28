@@ -1,5 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.model;
 
+import com.gildedrose.Item;
 public class Product {
 
     private static final int EXPIRE_DAY = 0;
