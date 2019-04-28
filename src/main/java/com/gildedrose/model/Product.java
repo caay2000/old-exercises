@@ -1,7 +1,12 @@
 package com.gildedrose.model;
 
 import com.gildedrose.Item;
+
 public class Product {
+
+    private static final String AGED_BRIE = "Aged Brie";
+    private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     private static final int EXPIRE_DAY = 0;
 
@@ -48,5 +53,41 @@ public class Product {
 
     public void killQuality() {
         this.item.quality = 0;
+    }
+
+    public void processExpireDate() {
+        if (getName().equals(SULFURAS)) {
+            return;
+        }
+        expireOneDay();
+    }
+
+    public void processQuality() {
+        if (getName().equals(SULFURAS)) {
+            return;
+        }
+        if (getName().equals(AGED_BRIE)) {
+            increaseQuality();
+            if (isExpired()) {
+                increaseQuality();
+            }
+        } else if (getName().equals(BACKSTAGE_PASS)) {
+            if (isExpired()) {
+                killQuality();
+            } else {
+                increaseQuality();
+                if (getDaysToExpire() < 10) {
+                    increaseQuality();
+                }
+                if (getDaysToExpire() < 5) {
+                    increaseQuality();
+                }
+            }
+        } else {
+            decreaseQuality();
+            if (isExpired()) {
+                decreaseQuality();
+            }
+        }
     }
 }
