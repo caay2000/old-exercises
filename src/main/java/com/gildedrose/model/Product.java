@@ -2,14 +2,13 @@ package com.gildedrose.model;
 
 import com.gildedrose.Item;
 
-public class Product {
+public abstract class Product {
 
-    private static final String AGED_BRIE = "Aged Brie";
-    private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
-    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    public static final String AGED_BRIE = "Aged Brie";
+    public static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     private static final int EXPIRE_DAY = 0;
-
     private static final int MIN_ITEM_QUALITY = 0;
     private static final int MAX_ITEM_QUALITY = 50;
 
@@ -66,12 +65,7 @@ public class Product {
         if (getName().equals(SULFURAS)) {
             return;
         }
-        if (getName().equals(AGED_BRIE)) {
-            increaseQuality();
-            if (isExpired()) {
-                increaseQuality();
-            }
-        } else if (getName().equals(BACKSTAGE_PASS)) {
+        else if (getName().equals(BACKSTAGE_PASS)) {
             if (isExpired()) {
                 killQuality();
             } else {
