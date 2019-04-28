@@ -59,23 +59,10 @@ public abstract class Product {
     }
 
     public void processQuality() {
-        if (getName().equals(BACKSTAGE_PASS)) {
-            if (isExpired()) {
-                killQuality();
-            } else {
-                increaseQuality();
-                if (getDaysToExpire() < 10) {
-                    increaseQuality();
-                }
-                if (getDaysToExpire() < 5) {
-                    increaseQuality();
-                }
-            }
-        } else {
+
+        decreaseQuality();
+        if (isExpired()) {
             decreaseQuality();
-            if (isExpired()) {
-                decreaseQuality();
-            }
         }
     }
 }
