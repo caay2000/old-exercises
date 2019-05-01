@@ -2,10 +2,17 @@ package com.gildedrose.model;
 
 import com.gildedrose.Item;
 
-public class BackstagePass extends Product {
+public class BackstagePass extends AbstractProduct {
+
+    static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
 
     public BackstagePass(Item item) {
         super(item);
+    }
+
+    @Override
+    public void processExpireDate() {
+        this.expireDays(1);
     }
 
     @Override

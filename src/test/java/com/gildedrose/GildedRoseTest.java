@@ -10,6 +10,7 @@ public class GildedRoseTest {
     private static final String AGED_BRIE = "Aged Brie";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    private static final String CONJURED_DEFAULT_ITEM = "Conjured " + DEFAULT_ITEM;
 
     @Test
     public void sellIn_decreases_gradually() {
@@ -145,6 +146,17 @@ public class GildedRoseTest {
         aGildedRose(item).updateQuality();
 
         assertEquals(0, item.quality);
+    }
+
+    @Test
+    public void conjured_default_item_twice_quality_drop() {
+        Item item = anItem(CONJURED_DEFAULT_ITEM, 10, 10);
+        Item expiredItem = anItem(CONJURED_DEFAULT_ITEM, 0, 10);
+
+        aGildedRose(item, expiredItem).updateQuality();
+
+        assertEquals(8, item.quality);
+        assertEquals(6, expiredItem.quality);
     }
 
     private Item anItem(String name, int sellIn, int quality) {

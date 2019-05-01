@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 import com.gildedrose.model.Product;
+import com.gildedrose.model.ProductFactory;
 
 class GildedRose {
 
@@ -12,7 +13,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            Product product = Product.Factory.aProduct(item);
+            Product product = ProductFactory.aProduct(item);
             product.processExpireDate();
             product.processQuality();
         }
