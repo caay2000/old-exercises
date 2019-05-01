@@ -5,7 +5,7 @@ import com.gildedrose.model.ProductFactory;
 
 class GildedRose {
 
-    private Item[] items;
+    private final Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;

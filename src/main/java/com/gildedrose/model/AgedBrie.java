@@ -12,7 +12,7 @@ public class AgedBrie extends AbstractProduct {
 
     @Override
     public void processExpireDate() {
-        this.expireDays(1);
+        this.expireOneDay();
     }
 
     @Override

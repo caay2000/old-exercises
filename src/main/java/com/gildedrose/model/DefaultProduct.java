@@ -8,7 +8,7 @@ public class DefaultProduct extends AbstractProduct {
     }
 
     public void processExpireDate() {
-        expireDays(1);
+        expireOneDay();
     }
 
     public void processQuality() {

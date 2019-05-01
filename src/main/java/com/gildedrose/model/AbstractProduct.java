@@ -7,9 +7,9 @@ public abstract class AbstractProduct implements Product {
     private static final int MIN_ITEM_QUALITY = 0;
     private static final int MAX_ITEM_QUALITY = 50;
 
-    private Item item;
+    private final Item item;
 
-    public AbstractProduct(Item item) {
+    AbstractProduct(Item item) {
         this.item = item;
     }
 
@@ -25,8 +25,8 @@ public abstract class AbstractProduct implements Product {
         return this.item.sellIn < EXPIRE_DAY;
     }
 
-    protected void expireDays(int value) {
-        this.item.sellIn = this.item.sellIn - value;
+    protected void expireOneDay() {
+        this.item.sellIn--;
     }
 
     protected void decreaseQuality() {

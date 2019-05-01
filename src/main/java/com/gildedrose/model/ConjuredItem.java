@@ -4,7 +4,7 @@ public class ConjuredItem implements Product {
 
     static final String NAME = "Conjured";
 
-    private Product product;
+    private final Product product;
 
     public ConjuredItem(Product product) {
         this.product = product;
