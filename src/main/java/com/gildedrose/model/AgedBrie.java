@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 
 class AgedBrie extends AbstractProduct {
 
-    static final String AGED_BRIE = "Aged Brie";
+    static final String NAME = "Aged Brie";
 
     public AgedBrie(Item item) {
         super(item);

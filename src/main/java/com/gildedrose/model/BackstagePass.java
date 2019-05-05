@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 
 class BackstagePass extends AbstractProduct {
 
-    static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
+    static final String NAME = "Backstage passes to a TAFKAL80ETC concert";
 
     public BackstagePass(Item item) {
         super(item);
