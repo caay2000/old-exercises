@@ -13,10 +13,6 @@ public abstract class AbstractProduct implements Product {
         this.item = item;
     }
 
-    private int getQuality() {
-        return this.item.quality;
-    }
-
     protected int getDaysToExpire() {
         return this.item.sellIn;
     }
@@ -29,16 +25,12 @@ public abstract class AbstractProduct implements Product {
         this.item.sellIn--;
     }
 
-    protected void decreaseQuality() {
-        if (getQuality() > MIN_ITEM_QUALITY) {
-            this.item.quality--;
-        }
+    protected void decreaseQuality(int value) {
+        this.item.quality = Math.max(this.item.quality - value, MIN_ITEM_QUALITY);
     }
 
-    protected void increaseQuality() {
-        if (getQuality() < MAX_ITEM_QUALITY) {
-            this.item.quality++;
-        }
+    protected void increaseQuality(int value) {
+        this.item.quality = Math.min(this.item.quality + value, MAX_ITEM_QUALITY);
     }
 
     protected void killQuality() {

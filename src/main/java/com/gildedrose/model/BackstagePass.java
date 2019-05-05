@@ -19,14 +19,12 @@ public class BackstagePass extends AbstractProduct {
     public void processQuality() {
         if (isExpired()) {
             killQuality();
+        } else if (getDaysToExpire() < 5) {
+            increaseQuality(3);
+        } else if (getDaysToExpire() < 10) {
+            increaseQuality(2);
         } else {
-            increaseQuality();
-            if (getDaysToExpire() < 10) {
-                increaseQuality();
-            }
-            if (getDaysToExpire() < 5) {
-                increaseQuality();
-            }
+            increaseQuality(1);
         }
     }
 }

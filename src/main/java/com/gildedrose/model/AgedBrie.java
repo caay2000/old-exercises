@@ -17,9 +17,10 @@ public class AgedBrie extends AbstractProduct {
 
     @Override
     public void processQuality() {
-        increaseQuality();
         if (isExpired()) {
-            increaseQuality();
+            increaseQuality(2);
+        } else {
+            increaseQuality(1);
         }
     }
 }

@@ -13,9 +13,10 @@ public class DefaultProduct extends AbstractProduct {
 
     public void processQuality() {
 
-        decreaseQuality();
         if (isExpired()) {
-            decreaseQuality();
+            decreaseQuality(2);
+        } else {
+            decreaseQuality(1);
         }
     }
 }
