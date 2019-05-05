@@ -2,7 +2,7 @@ package com.gildedrose.model;
 
 import com.gildedrose.Item;
 
-public class BackstagePass extends AbstractProduct {
+class BackstagePass extends AbstractProduct {
 
     static final String BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert";
 

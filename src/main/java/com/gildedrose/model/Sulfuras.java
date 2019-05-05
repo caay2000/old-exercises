@@ -2,7 +2,7 @@ package com.gildedrose.model;
 
 import com.gildedrose.Item;
 
-public class Sulfuras extends AbstractProduct {
+class Sulfuras extends AbstractProduct {
 
     static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 

@@ -1,6 +1,6 @@
 package com.gildedrose.model;
 
-public class ConjuredItem implements Product {
+class ConjuredItem implements Product {
 
     static final String NAME = "Conjured";
 

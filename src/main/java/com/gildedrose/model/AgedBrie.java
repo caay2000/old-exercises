@@ -2,7 +2,7 @@ package com.gildedrose.model;
 
 import com.gildedrose.Item;
 
-public class AgedBrie extends AbstractProduct {
+class AgedBrie extends AbstractProduct {
 
     static final String AGED_BRIE = "Aged Brie";
 

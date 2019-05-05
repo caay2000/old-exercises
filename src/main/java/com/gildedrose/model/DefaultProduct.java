@@ -1,7 +1,8 @@
 package com.gildedrose.model;
 
 import com.gildedrose.Item;
-public class DefaultProduct extends AbstractProduct {
+
+class DefaultProduct extends AbstractProduct {
 
     public DefaultProduct(Item item) {
         super(item);
