@@ -6,13 +6,10 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.2.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.merkleinc</groupId>
     <artifactId>interview-kata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>interview-kata</name>
-    <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -20,8 +17,35 @@
     </properties>
 
     <modules>
+        <module>model-internal</module>
+        <module>customer-adapter</module>
+        <module>common</module>
         <module>service</module>
         <module>customer-product-repository</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

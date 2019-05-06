@@ -14,6 +14,7 @@ This repository will return a `Customer` object with the following attributes:
 
 | Type    | Name          |
 |---------|---------------|
+| String  | id            |
 | String  | accountNumber |
 | String  | name          |
 | String  | gender        |

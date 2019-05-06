@@ -1,4 +1,4 @@
-package com.merkleinc.interviewkata.model;
+package com.merkleinc.interviewkata.customer.model;
 
 public class Customer {
     String id;
