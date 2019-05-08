@@ -32,6 +32,5 @@ public class Basic_7_Count_Exercise {
 
         //Write your code here
 
-        System.out.println(count);
     }
 }

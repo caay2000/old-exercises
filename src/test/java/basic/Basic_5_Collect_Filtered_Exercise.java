@@ -25,10 +25,8 @@ public class Basic_5_Collect_Filtered_Exercise {
     @Test
     public void streams() {
 
+        //Write your code here
 
-        List<Integer> list = //Write your code here
-
-        printList(list);
     }
 
     private void printList(List<Integer> list) {

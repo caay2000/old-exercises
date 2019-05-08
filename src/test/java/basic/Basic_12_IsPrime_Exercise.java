@@ -37,6 +37,6 @@ public class Basic_12_IsPrime_Exercise {
     private boolean isPrimeStream(int number) {
 
         //Write your code here
-
+        return false;
     }
 }
