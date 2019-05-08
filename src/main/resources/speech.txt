@@ -1,0 +1,10 @@
+Normal functions
+we pass object to functions
+we create object in functions
+we return objects from functions
+
+
+-Immutability
+-Higher-order Functions
+-Functional Composition
+-Lazy Evaluation
