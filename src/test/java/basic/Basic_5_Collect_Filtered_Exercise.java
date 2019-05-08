@@ -3,7 +3,6 @@ package basic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.Test;
 
 public class Basic_5_Collect_Filtered_Exercise {
@@ -26,9 +25,8 @@ public class Basic_5_Collect_Filtered_Exercise {
     @Test
     public void streams() {
 
-        List<Integer> list = numbers.stream()
-                .filter(e -> e % 2 == 0)
-                .collect(Collectors.toList());
+
+        List<Integer> list = //Write your code here
 
         printList(list);
     }

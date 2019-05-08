@@ -20,8 +20,6 @@ public class Basic_3_Even_Numbers_Exercise {
     @Test
     public void streams() {
 
-        numbers.stream()
-                .filter(i -> i % 2 == 0)
-                .forEach(e -> System.out.println(e));
+        //Write your code here
     }
 }

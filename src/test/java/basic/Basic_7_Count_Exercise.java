@@ -30,9 +30,7 @@ public class Basic_7_Count_Exercise {
     @Test
     public void streams() throws Exception {
 
-        long count = getFileLines().stream()
-                .filter(i -> i.equals("localhost"))
-                .count();
+        //Write your code here
 
         System.out.println(count);
     }

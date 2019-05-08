@@ -2,7 +2,6 @@ package basic;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 import org.junit.Test;
 
 public class Basic_12_IsPrime_Exercise {
@@ -36,6 +35,8 @@ public class Basic_12_IsPrime_Exercise {
     }
 
     private boolean isPrimeStream(int number) {
-        return number > 1 && IntStream.range(2, number).noneMatch(i -> number % i == 0);
+
+        //Write your code here
+
     }
 }
