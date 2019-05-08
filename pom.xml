@@ -7,45 +7,51 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.2.RELEASE</version>
     </parent>
-    <groupId>com.merkleinc</groupId>
-    <artifactId>interview-kata</artifactId>
+
+    <groupId>com.merkleinc.interview-kata</groupId>
+    <artifactId>interview-kata-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <java.version>1.8</java.version>
+        <jacoco-maven.version>0.8.3</jacoco-maven.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
     </properties>
 
     <modules>
-        <module>model-internal</module>
-        <module>customer-adapter</module>
-        <module>common</module>
-        <module>service</module>
+        <module>interview-kata-api-parent</module>
+        <module>interview-kata-commons</module>
+        <module>interview-kata-application-parent</module>
+        <module>interview-kata-service-parent</module>
+        <module>interview-kata-adapter-parent</module>
         <module>customer-product-repository</module>
     </modules>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>

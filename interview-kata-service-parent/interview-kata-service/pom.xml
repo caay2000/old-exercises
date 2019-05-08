@@ -6,30 +6,42 @@
 
     <parent>
         <groupId>com.merkleinc.interview-kata</groupId>
-        <artifactId>interview-kata-parent</artifactId>
+        <artifactId>interview-kata-service-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>customer-product-repository</artifactId>
+    <artifactId>interview-kata-service</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.merkleinc.interview-kata</groupId>
+            <artifactId>interview-kata-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.merkleinc.interview-kata</groupId>
+            <artifactId>interview-kata-application</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.8</version>
-        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

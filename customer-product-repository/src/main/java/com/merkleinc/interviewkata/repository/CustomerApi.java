@@ -1,7 +1,6 @@
 package com.merkleinc.interviewkata.repository;
 
 import java.util.List;
-
 import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 import com.merkleinc.interviewkata.repository.model.Customer;
 import com.merkleinc.interviewkata.repository.model.CustomerProduct;

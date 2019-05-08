@@ -59,15 +59,15 @@ The Product Repository will provide us with the `Product` object with the follow
 
 Our client has asked us to provide a REST API that will return information about their subscribers.
 
-They are expecting the following `GET` http request `http://localhost:8080/customer/1` to return the following
-customer information in json format:
+They are expecting the following `GET` http request `http://localhost:8080/com.merkleinc.interviewkata.customer/1` to return the following
+com.merkleinc.interviewkata.customer information in json format:
 
 ```json
 {
     "firstName":"Miguel",
     "middleName":"",
     "lastName":"Ferrandis",
-    "gender":"male",
+    "gender":"M",
     "birthday":"12th December 1980",
     "age":"32",
     "address":"C/Bergara 22 P3 P6 08085-Barcelona (Spain)",
@@ -76,7 +76,7 @@ customer information in json format:
 }
 ```
 
-However, as you might have realised, the repository is not returning the customer data in this format. 
+However, as you might have realised, the repository is not returning the com.merkleinc.interviewkata.customer data in this format. 
 We have already agreed with them the following rules:
 
 * **Name:**
@@ -116,14 +116,14 @@ We have already agreed with them the following rules:
 > NOTES FOR OURSELVES:
 >
 >Possible updates/changes
->* make a request for an unknown customer
->* do updates to the customer
+>* make a request for an unknown com.merkleinc.interviewkata.customer
+>* do updates to the com.merkleinc.interviewkata.customer
  
 ## 2) Customer product information REST API
 
-Our client also needs a REST API to provide a list of subscriptions a customer has.
+Our client also needs a REST API to provide a list of subscriptions a com.merkleinc.interviewkata.customer has.
 
-They are expecting the following `GET` http request `http://localhost:8080/customer/1/products` to return the following
+They are expecting the following `GET` http request `http://localhost:8080/com.merkleinc.interviewkata.customer/1/products` to return the following
 products information in json format:
 
 ```json
@@ -135,20 +135,20 @@ products information in json format:
 
 > NOTES FOR OURSELVES:
 >
->We can also have the repo with two functions, getAll, and getAllByPartyId. Then make the customer repo to return partyId not for all the customers, so the ones with partyId will be able to use the filter function, while the others will need to pick the correct products using accountNumber
+>We can also have the repo with two functions, getAll, and getAllByPartyId. Then make the com.merkleinc.interviewkata.customer repo to return partyId not for all the customers, so the ones with partyId will be able to use the filter function, while the others will need to pick the correct products using accountNumber
     
 
 ## 3) Customer invoice information REST API
 
-Finally, our client needs a REST API to provide the monthly invoice for a customer. 
+Finally, our client needs a REST API to provide the monthly invoice for a com.merkleinc.interviewkata.customer. 
 We will need to return the active products for the specified month, their prices and a total.
 
-They are expecting the following `GET` http request `http://localhost:8080/customer/1/invoices` to return the following
+They are expecting the following `GET` http request `http://localhost:8080/com.merkleinc.interviewkata.customer/1/invoices` to return the following
 invoice information in json format:
 
 ```json
 {
-	"customer": {
+	"com.merkleinc.interviewkata.customer": {
 		"firstName": "Raquel",
 		"middleName": "",
 		"lastName": "",

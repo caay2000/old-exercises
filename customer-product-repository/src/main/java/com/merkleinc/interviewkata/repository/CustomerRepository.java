@@ -5,17 +5,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 import com.merkleinc.interviewkata.repository.model.Customer;
 import com.merkleinc.interviewkata.repository.model.CustomerProduct;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.List;
 
 public class CustomerRepository implements CustomerApi {
 
@@ -59,18 +53,18 @@ public class CustomerRepository implements CustomerApi {
     }
 
     private Customer findCustomerByAccountNumber(String accountNumber) {
-        for (Customer customer : customers){
-            if (customer.getAccountNumber().equalsIgnoreCase(accountNumber)){
+        for (Customer customer : customers) {
+            if (customer.getAccountNumber().equalsIgnoreCase(accountNumber)) {
                 return customer;
             }
         }
         return null;
     }
 
-    private List<CustomerProduct> findProductsByCustomerId(String id){
+    private List<CustomerProduct> findProductsByCustomerId(String id) {
         List<CustomerProduct> customerProducts = new ArrayList<>();
-        for (CustomerProduct customerProduct : customerProducts){
-            if (customerProduct.getCustomerId().equalsIgnoreCase(id)){
+        for (CustomerProduct customerProduct : customerProducts) {
+            if (customerProduct.getCustomerId().equalsIgnoreCase(id)) {
                 customerProducts.add(customerProduct);
             }
         }
