@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 
-public class Basic_8_MapToInt {
+public class Basic_8_Map {
 
     private List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
@@ -18,7 +18,7 @@ public class Basic_8_MapToInt {
     @Test
     public void streams() {
         numbers.stream()
-                .mapToInt(e -> e * 2)
+                .map(e -> e * 2)
                 .forEach(e -> System.out.println(e));
     }
 }
