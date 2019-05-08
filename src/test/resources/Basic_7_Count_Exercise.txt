@@ -1,0 +1,7 @@
+google.com
+localhost
+yahoo.com
+sky.uk
+localhost
+marca.com
+bing.com
