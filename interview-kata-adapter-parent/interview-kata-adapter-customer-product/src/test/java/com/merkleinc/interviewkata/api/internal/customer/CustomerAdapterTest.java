@@ -65,7 +65,7 @@ public class CustomerAdapterTest {
         Optional<com.merkleinc.interviewkata.api.internal.customer.model.Customer> result = testee.getCustomer(VALID_CUSTOMER);
 
         Assert.assertTrue(result.isPresent());
-//        Assert.assertEquals(expetedCustomer(), result.get());
+        Assert.assertEquals(expetedCustomer(), result.get());
     }
 
     private Customer aCustomer() {
