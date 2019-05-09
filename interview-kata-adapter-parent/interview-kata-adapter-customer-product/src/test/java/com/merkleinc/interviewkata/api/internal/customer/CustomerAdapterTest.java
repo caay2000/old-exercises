@@ -2,8 +2,8 @@ package com.merkleinc.interviewkata.api.internal.customer;
 
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,6 +25,7 @@ public class CustomerAdapterTest {
     private static final String VALID_CUSTOMER = "EXISTS";
     private static final String ID = "id";
     private static final String NAME = "name";
+    private static final String GENDER = "Male";
     private static final LocalDate TODAY = LocalDate.now();
     private static final String EMAIL = "email";
     private static final String PHONE = "phone";
@@ -33,8 +34,7 @@ public class CustomerAdapterTest {
     private static final String ADDRESS_2 = "address2";
     private static final String CITY = "city";
     private static final String POST_CODE = "postCode";
-    private static final String GENDER = "M";
-    private static final String COUNTRY = "UK";
+    private static final String COUNTRY = "United Kingdom";
 
     @Mock
     private CustomerRepository customerRepository;
@@ -44,7 +44,6 @@ public class CustomerAdapterTest {
     @Before
     public void setUp() {
         testee = new CustomerAdapter(customerRepository);
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -70,7 +69,7 @@ public class CustomerAdapterTest {
     }
 
     private Customer aCustomer() {
-        return new Customer(ID, NAME, GENDER, LocalDate.now().toString(), EMAIL, PHONE, ACCOUNT_NUMBER,
+        return new Customer(ID, NAME, GENDER, LocalDate.now().format(DateTimeFormatter.ofPattern("M/d/yyyy")), EMAIL, PHONE, ACCOUNT_NUMBER,
                 new Address(ADDRESS_1, ADDRESS_2, CITY, POST_CODE, COUNTRY));
     }
 
