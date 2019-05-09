@@ -22,7 +22,7 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
                 .withAccountNumber(source.getAccountNumber())
                 .withName(source.getName())
                 .withGender(Gender.from(source.getGender()))
-                .withBirthday(LocalDate.parse(source.getBirthday(), DateTimeFormatter.ofPattern("d/MM/yyyy")))
+                .withBirthday(LocalDate.parse(source.getBirthday(), DateTimeFormatter.ofPattern("M/d/yyyy")))
                 .withEmail(source.getEmail())
                 .withPhoneNumber(source.getPhoneNumber())
                 .withAddress(addressTranslator.translate(source.getAddress()))

@@ -12,7 +12,7 @@
       "addressLine2": "8th",
       "city": "Rathdrum",
       "postCode": "V14",
-      "country": "United Kingdom"
+      "country": "Ireland"
     }
   },
   {
@@ -66,7 +66,7 @@
   {
     "id": 5,
     "name": "Andrey Crickmoor",
-    "gender": "Unespecified",
+    "gender": "Unspecified",
     "birthday": "9/27/1960",
     "email": "acrickmoor4@amazonaws.com",
     "phoneNumber": "398-972-4493",

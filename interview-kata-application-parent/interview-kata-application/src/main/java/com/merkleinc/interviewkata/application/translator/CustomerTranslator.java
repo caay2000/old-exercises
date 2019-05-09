@@ -3,7 +3,9 @@ package com.merkleinc.interviewkata.application.translator;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.merkleinc.common.Translator;
 import com.merkleinc.interviewkata.api.internal.customer.model.Address;
@@ -50,14 +52,24 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
     }
 
     private String getFirstName(String name) {
+
         return Splitter.on(" ").splitToList(name).get(0);
     }
 
     private String getMiddleName(String name) {
+
+        List<String> nameSpplitted = Splitter.on(" ").splitToList(name);
+        if (nameSpplitted.size() > 2) {
+            return nameSpplitted.get(1);
+        }
         return null;
     }
 
     private String getLastName(String name) {
-        return Splitter.on(" ").splitToList(name).get(1);
+        List<String> nameSplitted = Splitter.on(" ").splitToList(name);
+        if (nameSplitted.size() > 2) {
+            return Joiner.on(" ").join(nameSplitted.subList(2, nameSplitted.size()));
+        }
+        return nameSplitted.get(1);
     }
 }
