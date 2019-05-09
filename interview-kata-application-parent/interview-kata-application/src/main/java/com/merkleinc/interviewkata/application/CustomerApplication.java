@@ -15,7 +15,7 @@ public class CustomerApplication implements CustomerApi {
     private final Translator<com.merkleinc.interviewkata.api.internal.customer.model.Customer, Customer> customerTranslator;
 
     @Inject
-    public CustomerApplication(com.merkleinc.interviewkata.api.internal.customer.CustomerApi customerApi) {
+    public CustomerApplication(@Named("customerAdapter") com.merkleinc.interviewkata.api.internal.customer.CustomerApi customerApi) {
 
         this.customerApi = customerApi;
         this.customerTranslator = new CustomerTranslator();

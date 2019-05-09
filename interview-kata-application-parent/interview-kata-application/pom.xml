@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>com.merkleinc.interview-kata</groupId>
+            <artifactId>interview-kata-adapter-customer-product</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.merkleinc.interview-kata</groupId>
             <artifactId>interview-kata-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -33,6 +38,11 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
         </dependency>
     </dependencies>
 

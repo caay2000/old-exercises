@@ -2,6 +2,7 @@ package com.merkleinc.interviewkata.api.internal.customer;
 
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 import org.junit.Assert;
@@ -43,6 +44,7 @@ public class CustomerAdapterTest {
     @Before
     public void setUp() {
         testee = new CustomerAdapter(customerRepository);
+
     }
 
     @Test(expected = IllegalArgumentException.class)

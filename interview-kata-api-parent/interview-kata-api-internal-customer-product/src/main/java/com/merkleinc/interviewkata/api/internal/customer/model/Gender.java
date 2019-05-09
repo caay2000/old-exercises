@@ -19,7 +19,7 @@ public enum Gender {
 
     public static Gender from(String value) {
         return Arrays.asList(Gender.values()).stream()
-                .filter(e -> e.equals(value))
+                .filter(e -> e.name().equalsIgnoreCase(value))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(value + " not found on Gender enum"));
     }
