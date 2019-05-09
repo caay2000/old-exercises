@@ -17,15 +17,15 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
     @Override
     public Customer translate(com.merkleinc.interviewkata.repository.model.Customer source) {
 
-        return new Customer.Builder()
-                .withId(source.getId())
-                .withAccountNumber(source.getAccountNumber())
-                .withName(source.getName())
-                .withGender(Gender.from(source.getGender()))
-                .withBirthday(LocalDate.parse(source.getBirthday(), DateTimeFormatter.ofPattern("M/d/yyyy")))
-                .withEmail(source.getEmail())
-                .withPhoneNumber(source.getPhoneNumber())
-                .withAddress(addressTranslator.translate(source.getAddress()))
+        return Customer.builder()
+                .id(source.getId())
+                .accountNumber(source.getAccountNumber())
+                .name(source.getName())
+                .gender(Gender.from(source.getGender()))
+                .birthday(LocalDate.parse(source.getBirthday(), DateTimeFormatter.ofPattern("M/d/yyyy")))
+                .email(source.getEmail())
+                .phoneNumber(source.getPhoneNumber())
+                .address(addressTranslator.translate(source.getAddress()))
                 .build();
     }
 }

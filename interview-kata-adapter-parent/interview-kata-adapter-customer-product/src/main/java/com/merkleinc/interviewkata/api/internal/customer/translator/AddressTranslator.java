@@ -8,12 +8,12 @@ public class AddressTranslator implements Translator<com.merkleinc.interviewkata
 
     @Override
     public Address translate(com.merkleinc.interviewkata.repository.model.Address source) {
-        return new Address.Builder()
-                .withAddressLine1(source.getAddressLine1())
-                .withAddressLine2(source.getAddressLine2())
-                .withCity(source.getCity())
-                .withPostCode(source.getPostCode())
-                .withCountry(Country.from(source.getCountry()))
+        return Address.builder()
+                .addressLine1(source.getAddressLine1())
+                .addressLine2(source.getAddressLine2())
+                .city(source.getCity())
+                .postCode(source.getPostCode())
+                .country(Country.from(source.getCountry()))
                 .build();
     }
 }
