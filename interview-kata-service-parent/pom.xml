@@ -15,6 +15,7 @@
 
     <modules>
         <module>interview-kata-service</module>
+        <module>interview-kata-service-report</module>
     </modules>
 
 </project>

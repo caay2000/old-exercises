@@ -16,17 +16,17 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
 
     @Override
     public Customer translate(com.merkleinc.interviewkata.api.internal.customer.model.Customer source) {
-        Customer customer = new Customer();
-        customer.setFirstName(getFirstName(source.getName()));
-        customer.setMiddleName(getMiddleName(source.getName()));
-        customer.setLastName(getLastName(source.getName()));
-        customer.setGender(source.getGender().getValue());
-        customer.setBirthDay(source.getBirthday().format(DateTimeFormatter.ofPattern("d MMMM uuuu")));
-        customer.setAge(Integer.toString(Period.between(source.getBirthday(), LocalDate.now()).getYears()));
-        customer.setAddress(getAddress(source.getAddress()));
-        customer.setContactNumber(getPhoneNumber(source.getPhoneNumber(), source.getAddress().getCountry()));
-        customer.setContactEmail(source.getEmail());
-        return customer;
+        return Customer.builder()
+                .firstName(getFirstName(source.getName()))
+                .middleName(getMiddleName(source.getName()))
+                .lastName(getLastName(source.getName()))
+                .gender(source.getGender().getValue())
+                .birthDay(source.getBirthday().format(DateTimeFormatter.ofPattern("d MMMM uuuu")))
+                .age(Integer.toString(Period.between(source.getBirthday(), LocalDate.now()).getYears()))
+                .address(getAddress(source.getAddress()))
+                .contactNumber(getPhoneNumber(source.getPhoneNumber(), source.getAddress().getCountry()))
+                .contactEmail(source.getEmail())
+                .build();
     }
 
     private String getPhoneNumber(String phoneNumber, Country country) {

@@ -1,8 +1,6 @@
 package com.merkleinc.interviewkata.api.internal.customer.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Customer {
 
     private final String id;
@@ -62,44 +60,6 @@ public class Customer {
 
     public Address getAddress() {
         return address;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) &&
-                Objects.equals(accountNumber, customer.accountNumber) &&
-                Objects.equals(name, customer.name) &&
-                gender == customer.gender &&
-                Objects.equals(birthday, customer.birthday) &&
-                Objects.equals(email, customer.email) &&
-                Objects.equals(phoneNumber, customer.phoneNumber) &&
-                Objects.equals(address, customer.address);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, accountNumber, name, gender, birthday, email, phoneNumber, address);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("accountNumber", accountNumber)
-                .append("name", name)
-                .append("gender", gender)
-                .append("birthday", birthday)
-                .append("email", email)
-                .append("phoneNumber", phoneNumber)
-                .append("address", address)
-                .toString();
     }
 
     public static class Builder {

@@ -52,6 +52,10 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven.version}</version>
             </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+            </plugin>
         </plugins>
     </build>
 
