@@ -23,8 +23,4 @@ public enum Gender {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(value + " not found on Gender enum"));
     }
-
-    public boolean equals(String gender) {
-        return this.value.equals(gender);
-    }
 }
