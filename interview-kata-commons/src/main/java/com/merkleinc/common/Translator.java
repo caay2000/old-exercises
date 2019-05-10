@@ -1,6 +1,6 @@
 package com.merkleinc.common;
 
-public interface Translator<FROM, TO> {
+public interface Translator<F, T> {
 
-    TO translate(FROM source);
+    T translate(F source);
 }

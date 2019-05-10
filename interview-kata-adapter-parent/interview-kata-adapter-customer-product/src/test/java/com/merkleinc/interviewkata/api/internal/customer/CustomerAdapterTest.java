@@ -38,11 +38,11 @@ public class CustomerAdapterTest {
     @Mock
     private com.merkleinc.interviewkata.repository.CustomerApi customerRepository;
 
-    private CustomerApi testee;
+    private CustomerInternalApi testee;
 
     @Before
     public void setUp() {
-        testee = new CustomerAdapter(customerRepository);
+        testee = new CustomerInternalAdapter(customerRepository);
     }
 
     @Test(expected = IllegalArgumentException.class)

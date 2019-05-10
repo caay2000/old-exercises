@@ -4,15 +4,16 @@ import java.util.Optional;
 import javax.inject.Named;
 import com.merkleinc.interviewkata.api.internal.customer.model.Customer;
 import com.merkleinc.interviewkata.api.internal.customer.translator.CustomerTranslator;
+import com.merkleinc.interviewkata.repository.CustomerApi;
 import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 
 @Named("customerAdapter")
-public class CustomerAdapter implements CustomerApi {
+public class CustomerInternalAdapter implements CustomerInternalApi {
 
-    private final com.merkleinc.interviewkata.repository.CustomerApi customerRepository;
+    private final CustomerApi customerRepository;
     private final CustomerTranslator customerTranslator;
 
-    public CustomerAdapter(com.merkleinc.interviewkata.repository.CustomerApi customerRepository) {
+    public CustomerInternalAdapter(CustomerApi customerRepository) {
         this.customerRepository = customerRepository;
         this.customerTranslator = new CustomerTranslator();
     }
