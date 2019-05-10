@@ -11,7 +11,7 @@ import com.merkleinc.interviewkata.api.model.Customer;
 
 public class CustomerTranslator implements Translator<com.merkleinc.interviewkata.api.internal.customer.model.Customer, Customer> {
 
-    public static final String DATE_PATTERN = "d MMMM uuuu";
+    private static final String DATE_PATTERN = "d MMMM uuuu";
 
     @Override
     public Customer translate(com.merkleinc.interviewkata.api.internal.customer.model.Customer source) {
@@ -52,7 +52,7 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
         final String middleName;
         final String lastName;
 
-        public NameProvider(String name) {
+        NameProvider(String name) {
             String[] split = name.split(" ", 3);
             this.firstName = split[0];
             if (split.length == 2) {
