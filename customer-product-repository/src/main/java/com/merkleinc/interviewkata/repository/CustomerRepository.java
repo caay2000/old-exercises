@@ -11,7 +11,7 @@ import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 import com.merkleinc.interviewkata.repository.model.Customer;
 import com.merkleinc.interviewkata.repository.model.CustomerProduct;
 
-public class CustomerRepository implements CustomerApi {
+public class CustomerRepository implements CustomerRepositoryApi {
 
     private final List<Customer> customers;
     private final List<CustomerProduct> customerProducts;

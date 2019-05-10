@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import com.merkleinc.interviewkata.api.internal.customer.model.Country;
 import com.merkleinc.interviewkata.api.internal.customer.model.Gender;
+import com.merkleinc.interviewkata.repository.CustomerRepositoryApi;
 import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 import com.merkleinc.interviewkata.repository.model.Address;
 import com.merkleinc.interviewkata.repository.model.Customer;
@@ -36,18 +37,13 @@ public class CustomerAdapterTest {
     private static final String COUNTRY = "United Kingdom";
 
     @Mock
-    private com.merkleinc.interviewkata.repository.CustomerApi customerRepository;
+    private CustomerRepositoryApi customerRepository;
 
     private CustomerInternalApi testee;
 
     @Before
     public void setUp() {
         testee = new CustomerInternalAdapter(customerRepository);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void nullCustomerId() {
-        testee.getCustomer(null);
     }
 
     @Test

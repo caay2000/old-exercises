@@ -3,15 +3,15 @@ package com.merkleinc.interviewkata.api.internal.configuration;
 import java.io.IOException;
 import java.util.List;
 import javax.inject.Named;
-import com.merkleinc.interviewkata.repository.CustomerApi;
+import com.merkleinc.interviewkata.repository.CustomerRepositoryApi;
 import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 import com.merkleinc.interviewkata.repository.model.Customer;
 import com.merkleinc.interviewkata.repository.model.CustomerProduct;
 
 @Named("customerRepository")
-public class CustomerRepositoryConfiguration implements CustomerApi {
+public class CustomerRepositoryConfiguration implements CustomerRepositoryApi {
 
-    private final CustomerApi customerRepository;
+    private final CustomerRepositoryApi customerRepository;
 
     public CustomerRepositoryConfiguration() throws IOException {
         this.customerRepository = new com.merkleinc.interviewkata.repository.CustomerRepository();

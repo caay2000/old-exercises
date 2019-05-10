@@ -7,7 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.merkleinc.interviewkata.repository.model.Product;
-public class ProductRepository implements ProductApi {
+public class ProductRepository implements ProductRepositoryApi {
 
     private final List<Product> products;
 

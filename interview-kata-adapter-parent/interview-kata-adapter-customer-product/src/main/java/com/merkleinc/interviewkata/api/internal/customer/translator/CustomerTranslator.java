@@ -8,6 +8,7 @@ import com.merkleinc.interviewkata.api.internal.customer.model.Gender;
 
 public class CustomerTranslator implements Translator<com.merkleinc.interviewkata.repository.model.Customer, Customer> {
 
+    private static final String DATE_FORMAT_PATTERN = "M/d/yyyy";
     private final AddressTranslator addressTranslator;
 
     public CustomerTranslator() {
@@ -22,7 +23,7 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
                 .accountNumber(source.getAccountNumber())
                 .name(source.getName())
                 .gender(Gender.from(source.getGender()))
-                .birthday(LocalDate.parse(source.getBirthday(), DateTimeFormatter.ofPattern("M/d/yyyy")))
+                .birthday(LocalDate.parse(source.getBirthday(), DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN)))
                 .email(source.getEmail())
                 .phoneNumber(source.getPhoneNumber())
                 .address(addressTranslator.translate(source.getAddress()))

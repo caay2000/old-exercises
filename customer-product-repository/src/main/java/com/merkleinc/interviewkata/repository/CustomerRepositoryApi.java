@@ -5,7 +5,7 @@ import com.merkleinc.interviewkata.repository.exception.RepositoryException;
 import com.merkleinc.interviewkata.repository.model.Customer;
 import com.merkleinc.interviewkata.repository.model.CustomerProduct;
 
-public interface CustomerApi {
+public interface CustomerRepositoryApi {
 
     Customer getCustomer(String customerId) throws RepositoryException;
 
