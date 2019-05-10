@@ -3,10 +3,7 @@ package com.merkleinc.interviewkata.application.translator;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
 import com.merkleinc.common.Translator;
 import com.merkleinc.interviewkata.api.internal.customer.model.Address;
 import com.merkleinc.interviewkata.api.internal.customer.model.Country;
@@ -14,14 +11,17 @@ import com.merkleinc.interviewkata.api.model.Customer;
 
 public class CustomerTranslator implements Translator<com.merkleinc.interviewkata.api.internal.customer.model.Customer, Customer> {
 
+    public static final String DATE_PATTERN = "d MMMM uuuu";
+
     @Override
     public Customer translate(com.merkleinc.interviewkata.api.internal.customer.model.Customer source) {
+        NameProvider nameProvider = new NameProvider(source.getName());
         return Customer.builder()
-                .firstName(getFirstName(source.getName()))
-                .middleName(getMiddleName(source.getName()))
-                .lastName(getLastName(source.getName()))
+                .firstName(nameProvider.firstName)
+                .middleName(nameProvider.middleName)
+                .lastName(nameProvider.lastName)
                 .gender(source.getGender().getValue())
-                .birthDay(source.getBirthday().format(DateTimeFormatter.ofPattern("d MMMM uuuu")))
+                .birthday(getBirthday(source.getBirthday()))
                 .age(Integer.toString(Period.between(source.getBirthday(), LocalDate.now()).getYears()))
                 .address(getAddress(source.getAddress()))
                 .contactNumber(getPhoneNumber(source.getPhoneNumber(), source.getAddress().getCountry()))
@@ -29,47 +29,39 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
                 .build();
     }
 
+    private String getBirthday(LocalDate birthday) {
+        return birthday.format(DateTimeFormatter.ofPattern(DATE_PATTERN));
+    }
+
     private String getPhoneNumber(String phoneNumber, Country country) {
-        return new StringBuilder()
-                .append(country.getPhonePrefix())
-                .append(" ")
-                .append(phoneNumber.replaceAll("-", " "))
-                .toString();
+        return String.format("%s %s", country.getPhonePrefix(), phoneNumber.replaceAll("-", " "));
     }
 
     private String getAddress(Address address) {
-        return new StringBuilder()
-                .append(address.getAddressLine1())
-                .append(StringUtils.isNotEmpty(address.getAddressLine2()) ? " " + address.getAddressLine2() : "")
-                .append(" ")
-                .append(address.getPostCode())
-                .append("-")
-                .append(address.getCity())
-                .append(" (")
-                .append(address.getCountry().getValue())
-                .append(")")
-                .toString();
-    }
 
-    private String getFirstName(String name) {
-
-        return Splitter.on(" ").splitToList(name).get(0);
-    }
-
-    private String getMiddleName(String name) {
-
-        List<String> nameSpplitted = Splitter.on(" ").splitToList(name);
-        if (nameSpplitted.size() > 2) {
-            return nameSpplitted.get(1);
+        String addressLine = address.getAddressLine1();
+        if (StringUtils.isNotEmpty(address.getAddressLine2())) {
+            addressLine = addressLine.concat(" ").concat(address.getAddressLine2());
         }
-        return null;
+        return String.format("%s %s-%s (%s)", addressLine, address.getPostCode(), address.getCity(), address.getCountry().getValue());
     }
 
-    private String getLastName(String name) {
-        List<String> nameSplitted = Splitter.on(" ").splitToList(name);
-        if (nameSplitted.size() > 2) {
-            return Joiner.on(" ").join(nameSplitted.subList(2, nameSplitted.size()));
+    private static class NameProvider {
+
+        final String firstName;
+        final String middleName;
+        final String lastName;
+
+        public NameProvider(String name) {
+            String[] split = name.split(" ", 3);
+            this.firstName = split[0];
+            if (split.length == 2) {
+                this.middleName = null;
+                this.lastName = split[1];
+            } else {
+                this.middleName = split[1];
+                this.lastName = split[2];
+            }
         }
-        return nameSplitted.get(1);
     }
 }

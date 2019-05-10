@@ -45,7 +45,7 @@ public class CustomerV1ControllerTest {
                 .firstName("Ellsworth")
                 .lastName("Cicerone")
                 .gender("M")
-                .birthDay("12 March 1998")
+                .birthday("12 March 1998")
                 .address("67380 Fallview Way 8th V14-Rathdrum (Ireland)")
                 .contactNumber("+353 509 454 8496")
                 .contactEmail("ecicerone0@people.com.cn")
@@ -61,7 +61,7 @@ public class CustomerV1ControllerTest {
                 .firstName("Ora")
                 .lastName("Tickner")
                 .gender("F")
-                .birthDay("1 December 1984")
+                .birthday("1 December 1984")
                 .address("7 Fordem Park La Follette D6W-Ballinteer (Ireland)")
                 .contactNumber("+353 645 308 3605")
                 .contactEmail("otickner1@sina.com.cn")
@@ -78,7 +78,7 @@ public class CustomerV1ControllerTest {
                 .middleName("Ray")
                 .lastName("Champneys")
                 .gender("M")
-                .birthDay("17 April 1964")
+                .birthday("17 April 1964")
                 .address("9 Golf View Park Haas BT2-Belfast (United Kingdom)")
                 .contactNumber("+44 490 270 9258")
                 .contactEmail("mchampneys2@plala.or.jp")
@@ -94,7 +94,7 @@ public class CustomerV1ControllerTest {
                 .firstName("Lennie")
                 .lastName("O'Concannon")
                 .gender("M")
-                .birthDay("28 October 1964")
+                .birthday("28 October 1964")
                 .address("992 Carey Street Old Shore D04-Booterstown (Ireland)")
                 .contactNumber("+353 890 400 7048")
                 .contactEmail("lo3@army.mil")
@@ -110,7 +110,7 @@ public class CustomerV1ControllerTest {
                 .firstName("Andrey")
                 .lastName("Crickmoor")
                 .gender("X")
-                .birthDay("27 September 1960")
+                .birthday("27 September 1960")
                 .address("52 Monument Park Drewry GU32-Weston (United Kingdom)")
                 .contactNumber("+44 398 972 4493")
                 .contactEmail("acrickmoor4@amazonaws.com")
@@ -129,8 +129,8 @@ public class CustomerV1ControllerTest {
                 .andExpect(middleNameMatcher)
                 .andExpect(jsonPath("$.lastName").value(expected.getLastName()))
                 .andExpect(jsonPath("$.gender").value(expected.getGender()))
-                .andExpect(jsonPath("$.birthDay").value(expected.getBirthDay()))
-                .andExpect(jsonPath("$.age").value(calculateAge(expected.getBirthDay())))
+                .andExpect(jsonPath("$.birthday").value(expected.getBirthday()))
+                .andExpect(jsonPath("$.age").value(calculateAge(expected.getBirthday())))
                 .andExpect(jsonPath("$.address").value(expected.getAddress()))
                 .andExpect(jsonPath("$.contactNumber").value(expected.getContactNumber()))
                 .andExpect(jsonPath("$.contactEmail").value(expected.getContactEmail()));
@@ -147,7 +147,7 @@ public class CustomerV1ControllerTest {
         private final String middleName;
         private final String lastName;
         private final String gender;
-        private final String birthDay;
+        private final String birthday;
         private final String age;
         private final String address;
         private final String contactNumber;

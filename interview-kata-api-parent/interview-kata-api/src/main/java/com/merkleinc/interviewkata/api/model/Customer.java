@@ -11,7 +11,7 @@ public class Customer {
     private final String middleName;
     private final String lastName;
     private final String gender;
-    private final String birthDay;
+    private final String birthday;
     private final String age;
     private final String address;
     private final String contactNumber;
