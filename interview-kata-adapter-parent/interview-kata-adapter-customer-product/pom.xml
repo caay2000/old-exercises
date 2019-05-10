@@ -22,6 +22,8 @@
             <groupId>com.merkleinc.interview-kata</groupId>
             <artifactId>customer-product-repository</artifactId>
             <version>${project.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../../lib/customer-product-repository.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.merkleinc.interview-kata</groupId>

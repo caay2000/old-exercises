@@ -27,7 +27,6 @@
         <module>interview-kata-application-parent</module>
         <module>interview-kata-service-parent</module>
         <module>interview-kata-adapter-parent</module>
-        <module>customer-product-repository</module>
     </modules>
 
     <build>
