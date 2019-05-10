@@ -17,8 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.util.StringUtils;
-import com.merkleinc.interviewkata.api.model.Customer;
 import com.merkleinc.interviewkata.rest.v1.CustomerV1Controller;
+import lombok.Builder;
+import lombok.Getter;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CustomerV1Controller.class)
@@ -40,7 +41,7 @@ public class CustomerV1ControllerTest {
 
         ResultActions resultActions = mvc.perform(get("/customer/1"))
                 .andExpect(status().isOk());
-        assertResponse(resultActions, Customer.builder()
+        assertResponse(resultActions, AssertCustomer.builder()
                 .firstName("Ellsworth")
                 .lastName("Cicerone")
                 .gender("M")
@@ -56,7 +57,7 @@ public class CustomerV1ControllerTest {
 
         ResultActions resultActions = mvc.perform(get("/customer/2"))
                 .andExpect(status().isOk());
-        assertResponse(resultActions, Customer.builder()
+        assertResponse(resultActions, AssertCustomer.builder()
                 .firstName("Ora")
                 .lastName("Tickner")
                 .gender("F")
@@ -72,7 +73,7 @@ public class CustomerV1ControllerTest {
 
         ResultActions resultActions = mvc.perform(get("/customer/3"))
                 .andExpect(status().isOk());
-        assertResponse(resultActions, Customer.builder()
+        assertResponse(resultActions, AssertCustomer.builder()
                 .firstName("Mason")
                 .middleName("Ray")
                 .lastName("Champneys")
@@ -89,7 +90,7 @@ public class CustomerV1ControllerTest {
 
         ResultActions resultActions = mvc.perform(get("/customer/4"))
                 .andExpect(status().isOk());
-        assertResponse(resultActions, Customer.builder()
+        assertResponse(resultActions, AssertCustomer.builder()
                 .firstName("Lennie")
                 .lastName("O'Concannon")
                 .gender("M")
@@ -105,7 +106,7 @@ public class CustomerV1ControllerTest {
 
         ResultActions resultActions = mvc.perform(get("/customer/5"))
                 .andExpect(status().isOk());
-        assertResponse(resultActions, Customer.builder()
+        assertResponse(resultActions, AssertCustomer.builder()
                 .firstName("Andrey")
                 .lastName("Crickmoor")
                 .gender("X")
@@ -117,7 +118,7 @@ public class CustomerV1ControllerTest {
         );
     }
 
-    private void assertResponse(ResultActions result, Customer expected) throws Exception {
+    private void assertResponse(ResultActions result, AssertCustomer expected) throws Exception {
 
         ResultMatcher middleNameMatcher = StringUtils.isEmpty(expected.getMiddleName())
                 ? jsonPath("$.middleName").doesNotExist()
@@ -137,6 +138,20 @@ public class CustomerV1ControllerTest {
 
     private String calculateAge(String date) {
         return Integer.toString(Period.between(LocalDate.parse(date, DateTimeFormatter.ofPattern("d MMMM uuuu")), LocalDate.now()).getYears());
+    }
+
+    @Builder
+    @Getter
+    private static class AssertCustomer {
+        private final String firstName;
+        private final String middleName;
+        private final String lastName;
+        private final String gender;
+        private final String birthDay;
+        private final String age;
+        private final String address;
+        private final String contactNumber;
+        private final String contactEmail;
     }
 }
 

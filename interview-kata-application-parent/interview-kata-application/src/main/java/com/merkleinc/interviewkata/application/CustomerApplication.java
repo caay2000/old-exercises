@@ -25,9 +25,7 @@ public class CustomerApplication implements CustomerApi {
     @Override
     public Customer get(String id) {
         Optional<com.merkleinc.interviewkata.api.internal.customer.model.Customer> customer = customerApi.getCustomer(id);
-        if (customer.isPresent()) {
-            return customerTranslator.translate(customer.get());
-        }
-        throw new NotFoundException("customer " + id + " not found");
+        return customer.map(e -> customerTranslator.translate(e))
+                .orElseThrow(() -> new NotFoundException("customer " + id + " not found"));
     }
 }
