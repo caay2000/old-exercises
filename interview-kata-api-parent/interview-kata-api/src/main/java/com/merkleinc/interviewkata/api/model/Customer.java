@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 public class Customer {
 
-    private final String id;
     private final String firstName;
     private final String middleName;
     private final String lastName;

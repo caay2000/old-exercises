@@ -148,7 +148,7 @@ invoice information in json format:
 
 ```json
 {
-	"com.merkleinc.interviewkata.customer": {
+	"customer": {
 		"firstName": "Raquel",
 		"middleName": "",
 		"lastName": "",

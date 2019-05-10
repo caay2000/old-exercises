@@ -6,6 +6,7 @@ import javax.inject.Named;
 import com.merkleinc.common.Translator;
 import com.merkleinc.interviewkata.api.CustomerApi;
 import com.merkleinc.interviewkata.api.model.Customer;
+import com.merkleinc.interviewkata.application.exception.NotFoundException;
 import com.merkleinc.interviewkata.application.translator.CustomerTranslator;
 
 @Named("customerApplication")
@@ -27,6 +28,6 @@ public class CustomerApplication implements CustomerApi {
         if (customer.isPresent()) {
             return customerTranslator.translate(customer.get());
         }
-        return null;
+        throw new NotFoundException("customer " + id + " not found");
     }
 }

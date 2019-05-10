@@ -14,6 +14,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.util.StringUtils;
+import com.merkleinc.interviewkata.api.model.Customer;
 import com.merkleinc.interviewkata.rest.v1.CustomerV1Controller;
 
 @RunWith(SpringRunner.class)
@@ -25,83 +29,110 @@ public class CustomerV1ControllerTest {
     private MockMvc mvc;
 
     @Test
+    public void customer_invalid() throws Exception {
+        mvc.perform(get("/customer/invalid"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.error").value("customer invalid not found"));
+    }
+
+    @Test
     public void customer_1() throws Exception {
-        String birthDay = "12 March 1998";
-        mvc.perform(get("/customer/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Ellsworth"))
-                .andExpect(jsonPath("$.middleName").doesNotExist())
-                .andExpect(jsonPath("$.lastName").value("Cicerone"))
-                .andExpect(jsonPath("$.gender").value("M"))
-                .andExpect(jsonPath("$.birthDay").value(birthDay))
-                .andExpect(jsonPath("$.age").value(calculateAge(birthDay)))
-                .andExpect(jsonPath("$.address").value("67380 Fallview Way 8th V14-Rathdrum (Ireland)"))
-                .andExpect(jsonPath("$.contactNumber").value("+353 509 454 8496"))
-                .andExpect(jsonPath("$.contactEmail").value("ecicerone0@people.com.cn"));
+
+        ResultActions resultActions = mvc.perform(get("/customer/1"))
+                .andExpect(status().isOk());
+        assertResponse(resultActions, Customer.builder()
+                .firstName("Ellsworth")
+                .lastName("Cicerone")
+                .gender("M")
+                .birthDay("12 March 1998")
+                .address("67380 Fallview Way 8th V14-Rathdrum (Ireland)")
+                .contactNumber("+353 509 454 8496")
+                .contactEmail("ecicerone0@people.com.cn")
+                .build());
     }
 
     @Test
     public void customer_2() throws Exception {
-        String birthDay = "1 December 1984";
-        mvc.perform(get("/customer/2"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Ora"))
-                .andExpect(jsonPath("$.middleName").doesNotExist())
-                .andExpect(jsonPath("$.lastName").value("Tickner"))
-                .andExpect(jsonPath("$.gender").value("F"))
-                .andExpect(jsonPath("$.birthDay").value(birthDay))
-                .andExpect(jsonPath("$.age").value(calculateAge(birthDay)))
-                .andExpect(jsonPath("$.address").value("7 Fordem Park La Follette D6W-Ballinteer (Ireland)"))
-                .andExpect(jsonPath("$.contactNumber").value("+353 645 308 3605"))
-                .andExpect(jsonPath("$.contactEmail").value("otickner1@sina.com.cn"));
+
+        ResultActions resultActions = mvc.perform(get("/customer/2"))
+                .andExpect(status().isOk());
+        assertResponse(resultActions, Customer.builder()
+                .firstName("Ora")
+                .lastName("Tickner")
+                .gender("F")
+                .birthDay("1 December 1984")
+                .address("7 Fordem Park La Follette D6W-Ballinteer (Ireland)")
+                .contactNumber("+353 645 308 3605")
+                .contactEmail("otickner1@sina.com.cn")
+                .build());
     }
 
     @Test
     public void customer_3() throws Exception {
-        String birthDay = "17 April 1964";
-        mvc.perform(get("/customer/3"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Mason"))
-                .andExpect(jsonPath("$.middleName").value("Ray"))
-                .andExpect(jsonPath("$.lastName").value("Champneys"))
-                .andExpect(jsonPath("$.gender").value("M"))
-                .andExpect(jsonPath("$.birthDay").value(birthDay))
-                .andExpect(jsonPath("$.age").value(calculateAge(birthDay)))
-                .andExpect(jsonPath("$.address").value("9 Golf View Park Haas BT2-Belfast (United Kingdom)"))
-                .andExpect(jsonPath("$.contactNumber").value("+44 490 270 9258"))
-                .andExpect(jsonPath("$.contactEmail").value("mchampneys2@plala.or.jp"));
+
+        ResultActions resultActions = mvc.perform(get("/customer/3"))
+                .andExpect(status().isOk());
+        assertResponse(resultActions, Customer.builder()
+                .firstName("Mason")
+                .middleName("Ray")
+                .lastName("Champneys")
+                .gender("M")
+                .birthDay("17 April 1964")
+                .address("9 Golf View Park Haas BT2-Belfast (United Kingdom)")
+                .contactNumber("+44 490 270 9258")
+                .contactEmail("mchampneys2@plala.or.jp")
+                .build());
     }
 
     @Test
     public void customer_4() throws Exception {
-        String birthDay = "28 October 1964";
-        mvc.perform(get("/customer/4"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Lennie"))
-                .andExpect(jsonPath("$.middleName").doesNotExist())
-                .andExpect(jsonPath("$.lastName").value("O'Concannon"))
-                .andExpect(jsonPath("$.gender").value("M"))
-                .andExpect(jsonPath("$.birthDay").value(birthDay))
-                .andExpect(jsonPath("$.age").value(calculateAge(birthDay)))
-                .andExpect(jsonPath("$.address").value("992 Carey Street Old Shore D04-Booterstown (Ireland)"))
-                .andExpect(jsonPath("$.contactNumber").value("+353 890 400 7048"))
-                .andExpect(jsonPath("$.contactEmail").value("lo3@army.mil"));
+
+        ResultActions resultActions = mvc.perform(get("/customer/4"))
+                .andExpect(status().isOk());
+        assertResponse(resultActions, Customer.builder()
+                .firstName("Lennie")
+                .lastName("O'Concannon")
+                .gender("M")
+                .birthDay("28 October 1964")
+                .address("992 Carey Street Old Shore D04-Booterstown (Ireland)")
+                .contactNumber("+353 890 400 7048")
+                .contactEmail("lo3@army.mil")
+                .build());
     }
 
     @Test
     public void customer_5() throws Exception {
-        String birthDay = "27 September 1960";
-        mvc.perform(get("/customer/5"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Andrey"))
-                .andExpect(jsonPath("$.middleName").doesNotExist())
-                .andExpect(jsonPath("$.lastName").value("Crickmoor"))
-                .andExpect(jsonPath("$.gender").value("X"))
-                .andExpect(jsonPath("$.birthDay").value(birthDay))
-                .andExpect(jsonPath("$.age").value(calculateAge(birthDay)))
-                .andExpect(jsonPath("$.address").value("52 Monument Park Drewry GU32-Weston (United Kingdom)"))
-                .andExpect(jsonPath("$.contactNumber").value("+44 398 972 4493"))
-                .andExpect(jsonPath("$.contactEmail").value("acrickmoor4@amazonaws.com"));
+
+        ResultActions resultActions = mvc.perform(get("/customer/5"))
+                .andExpect(status().isOk());
+        assertResponse(resultActions, Customer.builder()
+                .firstName("Andrey")
+                .lastName("Crickmoor")
+                .gender("X")
+                .birthDay("27 September 1960")
+                .address("52 Monument Park Drewry GU32-Weston (United Kingdom)")
+                .contactNumber("+44 398 972 4493")
+                .contactEmail("acrickmoor4@amazonaws.com")
+                .build()
+        );
+    }
+
+    private void assertResponse(ResultActions result, Customer expected) throws Exception {
+
+        ResultMatcher middleNameMatcher = StringUtils.isEmpty(expected.getMiddleName())
+                ? jsonPath("$.middleName").doesNotExist()
+                : jsonPath("$.middleName").value(expected.getMiddleName());
+
+        result.andExpect(jsonPath("$.id").doesNotHaveJsonPath())
+                .andExpect(jsonPath("$.firstName").value(expected.getFirstName()))
+                .andExpect(middleNameMatcher)
+                .andExpect(jsonPath("$.lastName").value(expected.getLastName()))
+                .andExpect(jsonPath("$.gender").value(expected.getGender()))
+                .andExpect(jsonPath("$.birthDay").value(expected.getBirthDay()))
+                .andExpect(jsonPath("$.age").value(calculateAge(expected.getBirthDay())))
+                .andExpect(jsonPath("$.address").value(expected.getAddress()))
+                .andExpect(jsonPath("$.contactNumber").value(expected.getContactNumber()))
+                .andExpect(jsonPath("$.contactEmail").value(expected.getContactEmail()));
     }
 
     private String calculateAge(String date) {
