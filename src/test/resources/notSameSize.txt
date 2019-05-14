@@ -1,0 +1,2 @@
+C:\Users\acasanovas\workspace\kiwibcn\word-chain\src\test\resources\dictionaries\wordsDictionary.txt
+cat sheep
