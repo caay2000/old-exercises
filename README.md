@@ -5,14 +5,14 @@ Below is a programming problem. Please read the description thoroughly then crea
 - You should provide sufficient evidence that your solution is complete by indicating that it works correctly against the supplied test data 
 
 ## Word Chain Solver :
-Two words are connected by a word chain if it is possible to change one into the other by making a series of single-character changes, such that every intermediate form is also a word. For example, CAT and DOG are connected with a word chain because CAT, COT, COG and DOG are all words. DEMONIC and UMBRELLA are not. 
+Two items are connected by a word chain if it is possible to change one into the other by making a series of single-character changes, such that every intermediate form is also a word. For example, CAT and DOG are connected with a word chain because CAT, COT, COG and DOG are all items. DEMONIC and UMBRELLA are not. 
 
-Write a program that takes a list of words (for example /usr/share/dict/words on a unix system or download the file from : https://github.com/dwyl/english-words/blob/master/words.txt if you are using windows) and then reads pairs of words on stdin and prints 'YES' if the words are connected by a chain, and 'NO' if they are not. If YES, the words in the word chain should be listed out on the console. The program should take the path to the word list from a file, and should then loop, reading pairs of whitespace-delimited words from the file and printing 'YES' or 'NO.' 
+Write a program that takes a list of items (for example /usr/share/dict/items on a unix system or download the file from : https://github.com/dwyl/english-items/blob/master/items.txt if you are using windows) and then reads pairs of items on stdin and prints 'YES' if the items are connected by a chain, and 'NO' if they are not. If YES, the items in the word chain should be listed out on the console. The program should take the path to the word list from a file, and should then loop, reading pairs of whitespace-delimited items from the file and printing 'YES' or 'NO.' 
 
 ## Constraints:
-Only one operation is allowed between words in the chain. 
+Only one operation is allowed between items in the chain. 
 
-The operation may consist of changing any single character but the length of the words should not change. 
+The operation may consist of changing any single character but the length of the items should not change. 
 
 All comparisons should be case insensitive. 
 

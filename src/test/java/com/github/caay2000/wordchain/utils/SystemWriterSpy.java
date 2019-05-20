@@ -1,4 +1,4 @@
-package com.github.caay2000.wordchain;
+package com.github.caay2000.wordchain.utils;
 
 import java.util.ArrayList;
 import java.util.List;

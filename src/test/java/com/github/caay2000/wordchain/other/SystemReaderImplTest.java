@@ -7,7 +7,7 @@
 //import org.junit.Assert;
 //import org.junit.Test;
 //import com.github.caay2000.wordchain.SystemReaderImpl;
-//import com.github.caay2000.wordchain.dictionary.Dictionary;
+//import com.github.caay2000.wordchain.application.dictionary.Dictionary;
 //
 //public class SystemReaderImplTest {
 //
@@ -43,7 +43,7 @@
 //        private List<String> words = new ArrayList<>();
 //
 //        @Override
-//        public void addWord(String word) {
+//        public void addItem(String word) {
 //            words.add(word);
 //        }
 //
