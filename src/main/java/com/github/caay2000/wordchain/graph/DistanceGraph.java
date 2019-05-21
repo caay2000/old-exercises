@@ -1,4 +1,4 @@
-package com.github.caay2000.wordchain.application.graph;
+package com.github.caay2000.wordchain.graph;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -7,16 +7,16 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import com.github.caay2000.wordchain.application.dictionary.Dictionary;
+import com.github.caay2000.wordchain.dictionary.Dictionary;
 
 public class DistanceGraph implements Graph {
 
     private final Map<Integer, Set<String>> distanceMap;
 
-    public DistanceGraph(Dictionary wordDictionary, String start, String end) {
+    public DistanceGraph(Dictionary dictionary, String start, String end) {
         this.distanceMap = new LinkedHashMap<>();
 
-        Set<String> nextCandidates = findNextCandidates(wordDictionary, start);
+        Set<String> nextCandidates = findNextCandidates(dictionary, start);
         createDistanceMap(nextCandidates, end);
     }
 
@@ -27,19 +27,19 @@ public class DistanceGraph implements Graph {
                 .sorted()
                 .map(distanceMap::get)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private Set<String> findNextCandidates(Dictionary wordDictionary, String word) {
 
         return wordDictionary.getWordsOfSize(word.length()).stream()
-                .filter(e -> countDifferentChars(word, e) == 1)
-                .collect(Collectors.toSet());
+                .filter(e -> getDistanceOf(word, e) == 1)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private void createDistanceMap(Set<String> nextCandidates, String end) {
         for (String nextCandidate : nextCandidates) {
-            int distance = countDifferentChars(nextCandidate, end);
+            int distance = getDistanceOf(nextCandidate, end);
             Set<String> wordsOfDistance = getGraphForDistance(distance);
             wordsOfDistance.add(nextCandidate);
         }
@@ -54,12 +54,11 @@ public class DistanceGraph implements Graph {
         return itemsOfSize;
     }
 
-    private int countDifferentChars(String word, String candidate) {
-
+    private int getDistanceOf(String start, String end) {
         int changes = 0;
 
-        for (int i = 0, charArrayLength = word.toCharArray().length; i < charArrayLength; i++) {
-            if (Character.toLowerCase(word.toCharArray()[i]) != Character.toLowerCase(candidate.toCharArray()[i])) {
+        for (int i = 0, charArrayLength = start.toCharArray().length; i < charArrayLength; i++) {
+            if (start.toCharArray()[i] != end.toCharArray()[i]) {
                 changes++;
             }
         }

@@ -1,10 +1,8 @@
-package com.github.caay2000.wordchain.application.dictionary;
+package com.github.caay2000.wordchain.dictionary;
 
 import java.util.Set;
 
 public interface Dictionary {
-
-    void load();
 
     boolean containsWord(String word);
 

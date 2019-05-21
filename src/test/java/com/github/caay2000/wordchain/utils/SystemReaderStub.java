@@ -8,15 +8,12 @@ public class SystemReaderStub implements SystemReader {
 
     private final SystemInput systemInput;
 
-    private boolean called = false;
-
     public SystemReaderStub(String dictionaryFile, List<SystemInput.Pair> pairList) {
         systemInput = new SystemInput(dictionaryFile, pairList);
     }
 
     @Override
-    public SystemInput readInput() {
-        called = true;
+    public SystemInput readInput(String file) {
         return systemInput;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.caay2000.wordchain;
 
+import java.io.IOException;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,137 +13,124 @@ public class WordChainSolverTest {
 
     private static final String DEFAULT_DICTIONARY = "dictionaries/wordsDictionary.txt";
     private static final String SIMPLE_DICTIONARY = "dictionaries/simpleDictionary.txt";
+    private static final String[] ANY_INPUT = {"anyInput"};
 
     @Test
-    public void firstWordNotInDictionary() {
+    public void firstWordNotInDictionary() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("xyz", "any")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("NO", systemWriter.getWrites().get(0));
     }
 
     @Test
-    public void secondWordNotInDictionary() {
+    public void secondWordNotInDictionary() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("any", "xyz")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("NO", systemWriter.getWrites().get(0));
     }
 
     @Test
-    public void differentLenghtWords() {
+    public void differentLenghtWords() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("any", "word")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("NO", systemWriter.getWrites().get(0));
     }
 
     @Test
-    public void fromAAtoAB() {
+    public void fromCATtoDOG() throws IOException {
+
+        SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), Arrays.asList(new SystemInput.Pair("cat", "dog")));
+        SystemWriterSpy systemWriter = new SystemWriterSpy();
+
+        WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
+        testee.execute(ANY_INPUT);
+
+        Assert.assertEquals(1, systemWriter.getWrites().size());
+        Assert.assertEquals("YES [CAT, CAG, COG, DOG]", systemWriter.getWrites().get(0));
+    }
+
+    @Test
+    public void fromUMBRELLAtoDEMONIC() throws IOException {
+
+        SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), Arrays.asList(new SystemInput.Pair("umbrella", "demonic")));
+        SystemWriterSpy systemWriter = new SystemWriterSpy();
+
+        WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
+        testee.execute(ANY_INPUT);
+
+        Assert.assertEquals(1, systemWriter.getWrites().size());
+        Assert.assertEquals("NO", systemWriter.getWrites().get(0));
+    }
+
+    @Test
+    public void fromAAtoAB() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "ab")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("YES [AA, AB]", systemWriter.getWrites().get(0));
     }
 
     @Test
-    public void fromAAtoBB() {
+    public void fromAAtoBB() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "bb")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("YES [AA, AB, BB]", systemWriter.getWrites().get(0));
     }
 
     @Test
-    public void fromAAtoCE() {
+    public void fromAAtoCE() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "ce")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("YES [AA, AC, CC, CE]", systemWriter.getWrites().get(0));
     }
 
     @Test
-    public void fromAAtoXX() {
+    public void fromAAtoXX() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "xx")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
-        testee.execute();
+        testee.execute(ANY_INPUT);
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("NO", systemWriter.getWrites().get(0));
     }
-
-
-    //
-    //@Test
-    //public void notSameSize() throws IOException, URISyntaxException {
-    //    systemReader.setExpectations(getFileContent("notSameSize.txt"));
-    //
-    //    testee.execute("basicInput.txt");
-    //
-    //    Assert.assertEquals(1, systemWriter.getWrites().size());
-    //    Assert.assertEquals("NO", systemWriter.getWrites().get(0));
-    //}
-    //
-    //@Test
-    //public void basicInput() throws IOException, URISyntaxException {
-    //    systemReader.setExpectations(getFileContent("basicInput.txt"));
-    //
-    //    testee.execute("basicInput.txt");
-    //
-    //    Assert.assertEquals(1, systemWriter.getWrites().size());
-    //    Assert.assertEquals("YES [cat, cot, cog, dog]", systemWriter.getWrites().get(0));
-    //}
-    //
-    //@Test
-    //public void breakTrend() throws IOException, URISyntaxException {
-    //    systemReader.setExpectations(getFileContent("increaseDiffExample.txt"));
-    //
-    //    testee.execute("increaseDiffExample.txt");
-    //
-    //    for (String write : systemWriter.getWrites()) {
-    //        System.out.println(write);
-    //    }
-    //
-    //
-    //
-    //    //Assert.assertEquals(1, systemWriter.getWrites().size());
-    //    //Assert.assertEquals("YES [cat, cot, cog, dog]", systemWriter.getWrites().get(0));
-    //}
-    //
-    //
 
     private String getFilePath(String file) {
 
