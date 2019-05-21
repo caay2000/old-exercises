@@ -2,6 +2,8 @@ package com.github.caay2000.wordchain;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 import com.github.caay2000.wordchain.io.SystemInput;
@@ -18,7 +20,7 @@ public class WordChainSolverTest {
     @Test
     public void firstWordNotInDictionary() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("xyz", "any")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("xyz", "any")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -31,7 +33,7 @@ public class WordChainSolverTest {
     @Test
     public void secondWordNotInDictionary() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("any", "xyz")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("any", "xyz")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -44,7 +46,7 @@ public class WordChainSolverTest {
     @Test
     public void differentLenghtWords() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("any", "word")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("any", "word")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -57,7 +59,7 @@ public class WordChainSolverTest {
     @Test
     public void fromCATtoDOG() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), Arrays.asList(new SystemInput.Pair("cat", "dog")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), asList(new SystemInput.Pair("cat", "dog")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -70,7 +72,7 @@ public class WordChainSolverTest {
     @Test
     public void fromUMBRELLAtoDEMONIC() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), Arrays.asList(new SystemInput.Pair("umbrella", "demonic")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), asList(new SystemInput.Pair("umbrella", "demonic")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -83,7 +85,7 @@ public class WordChainSolverTest {
     @Test
     public void fromAAtoAB() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "ab")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "ab")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -96,7 +98,7 @@ public class WordChainSolverTest {
     @Test
     public void fromAAtoBB() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "bb")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "bb")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -109,7 +111,7 @@ public class WordChainSolverTest {
     @Test
     public void fromAAtoCE() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "ce")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "ce")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -122,7 +124,7 @@ public class WordChainSolverTest {
     @Test
     public void fromAAtoXX() throws IOException {
 
-        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), Arrays.asList(new SystemInput.Pair("aa", "xx")));
+        SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "xx")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
 
         WordChainSolver testee = new WordChainSolver(systemReader, systemWriter);
@@ -130,6 +132,10 @@ public class WordChainSolverTest {
 
         Assert.assertEquals(1, systemWriter.getWrites().size());
         Assert.assertEquals("NO", systemWriter.getWrites().get(0));
+    }
+
+    private List<SystemInput.Pair> asList(SystemInput.Pair... pair) {
+        return Arrays.stream(pair).collect(Collectors.toList());
     }
 
     private String getFilePath(String file) {

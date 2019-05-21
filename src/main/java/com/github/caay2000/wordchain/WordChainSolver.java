@@ -10,8 +10,8 @@ import com.github.caay2000.wordchain.io.SystemWriter;
 
 public class WordChainSolver {
 
-    private SystemReader systemReader;
-    private SystemWriter systemWriter;
+    private final SystemReader systemReader;
+    private final SystemWriter systemWriter;
 
     public WordChainSolver(SystemReader systemReader, SystemWriter systemWriter) {
         this.systemReader = systemReader;

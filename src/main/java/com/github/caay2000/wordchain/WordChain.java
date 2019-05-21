@@ -5,8 +5,9 @@ import java.util.Objects;
 import java.util.Set;
 import com.github.caay2000.wordchain.dictionary.Dictionary;
 import com.github.caay2000.wordchain.graph.DistanceGraph;
+import com.github.caay2000.wordchain.graph.Graph;
 
-public class WordChain {
+class WordChain {
 
     private static final LinkedHashSet<String> EMPTY_SET = new LinkedHashSet<>();
 
@@ -31,8 +32,6 @@ public class WordChain {
 
     private Set<String> solveChainRecursive(Set<String> currentChain, String start, String end) {
 
-        //System.out.println(String.format("chain %s", currentChain.toString()));
-
         if (isSolved(currentChain, end)) {
             return currentChain;
         }
@@ -44,7 +43,7 @@ public class WordChain {
             Set<String> newChain = solveChainRecursive(setOf(currentChain, candidate), candidate, end);
 
             if (isSolved(newChain, end)) {
-                currentBestSolution = updateBestSolution(newChain, currentBestSolution, end);
+                currentBestSolution = updateBestSolution(newChain, currentBestSolution);
                 if (isImpossibleToFindBetterSolution(currentBestSolution, end)) {
                     return currentBestSolution;
                 }
@@ -53,7 +52,7 @@ public class WordChain {
         return currentBestSolution;
     }
 
-    private Set<String> updateBestSolution(Set<String> chain, Set<String> bestSolution, String end) {
+    private Set<String> updateBestSolution(Set<String> chain, Set<String> bestSolution) {
         if (bestSolution.equals(EMPTY_SET) || chain.size() < bestSolution.size()) {
             bestSolution = new LinkedHashSet<>(chain);
         }
@@ -69,18 +68,13 @@ public class WordChain {
     }
 
     private Set<String> getSortedCandidates(Set<String> chain, String start, String end) {
-        DistanceGraph distanceGraph = new DistanceGraph(this.dictionary, start, end);
+        Graph distanceGraph = new DistanceGraph(this.dictionary, start, end);
         Set<String> allCandidates = distanceGraph.getAllCandidates();
         allCandidates.removeAll(chain);
         return allCandidates;
     }
 
-    private boolean solutionIsBetterThanCurrentChain(Set<String> chain, Set<String> bestSolution) {
-        return !bestSolution.equals(EMPTY_SET) && chain.size() >= bestSolution.size();
-    }
-
     private boolean isValidInput(String start, String end) {
-        // TODO change this implementation for throws
         return Objects.nonNull(start) && isValidWord(start) &&
                 Objects.nonNull(end) && isValidWord(end) &&
                 start.length() == end.length();

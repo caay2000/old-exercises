@@ -13,7 +13,7 @@ public class WordDictionary implements Dictionary {
     public WordDictionary(Set<String> dictionaryContent) {
 
         this.words = new LinkedHashMap<>();
-        dictionaryContent.stream().forEach(this::addWord);
+        dictionaryContent.forEach(this::addWord);
     }
 
     @Override

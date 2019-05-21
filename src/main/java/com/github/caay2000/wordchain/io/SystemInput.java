@@ -10,8 +10,6 @@ import com.github.caay2000.wordchain.WordChainException;
 
 public class SystemInput {
 
-    private static final String DEFAULT_CHARSET = "UTF-8";
-
     private final File dictionaryFile;
     private final List<Pair> pairs;
 

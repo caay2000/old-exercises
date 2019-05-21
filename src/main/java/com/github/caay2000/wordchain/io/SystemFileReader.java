@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.github.caay2000.wordchain.WordChainException;
 
 public class SystemFileReader implements SystemReader {
 
@@ -20,15 +21,15 @@ public class SystemFileReader implements SystemReader {
                     .collect(Collectors.toList());
 
             return new SystemInput(dictionaryFile, pairList);
-        } catch (IOException | RuntimeException e) {
+        } catch (IOException | WordChainException e) {
             throw new IOException(e);
         }
     }
 
-    public SystemInput.Pair createPair(String input) {
+    private SystemInput.Pair createPair(String input) {
         String[] split = input.split(" ");
         if (split.length != 2) {
-            throw new RuntimeException("incorrect parsing of pairs");
+            throw new WordChainException("incorrect parsing of pairs");
         }
         return new SystemInput.Pair(split[0], split[1]);
     }
