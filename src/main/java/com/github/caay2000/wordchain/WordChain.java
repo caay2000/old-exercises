@@ -22,7 +22,7 @@ class WordChain {
         if (isValidInput(start, end)) {
 
             Set<String> initialChain = setOf(EMPTY_SET, start);
-            Set<String> finalChain = solveChainRecursive(initialChain, start, end);
+            Set<String> finalChain = solveChainRecursive(initialChain, EMPTY_SET, start, end);
             if (finalChain.contains(end)) {
                 return finalChain;
             }
@@ -30,26 +30,27 @@ class WordChain {
         return EMPTY_SET;
     }
 
-    private Set<String> solveChainRecursive(Set<String> currentChain, String start, String end) {
+    private Set<String> solveChainRecursive(Set<String> currentChain, Set<String> bestSolution, String start, String end) {
 
-        if (isSolved(currentChain, end)) {
+        if (isSolved(currentChain, end) || bestSolutionIsBetterThanActualChain(currentChain, bestSolution)) {
             return currentChain;
         }
 
         Set<String> allCandidates = getSortedCandidates(currentChain, start, end);
 
-        Set<String> currentBestSolution = EMPTY_SET;
+        Set<String> currentBestSolution = new LinkedHashSet<>(bestSolution);
         for (String candidate : allCandidates) {
-            Set<String> newChain = solveChainRecursive(setOf(currentChain, candidate), candidate, end);
+            Set<String> newChain = solveChainRecursive(setOf(currentChain, candidate), currentBestSolution, candidate, end);
 
             if (isSolved(newChain, end)) {
                 currentBestSolution = updateBestSolution(newChain, currentBestSolution);
-                if (isImpossibleToFindBetterSolution(currentBestSolution, end)) {
-                    return currentBestSolution;
-                }
             }
         }
         return currentBestSolution;
+    }
+
+    private boolean bestSolutionIsBetterThanActualChain(Set<String> currentChain, Set<String> bestSolution) {
+        return !bestSolution.equals(EMPTY_SET) && bestSolution.size()-1 <= currentChain.size() ;
     }
 
     private Set<String> updateBestSolution(Set<String> chain, Set<String> bestSolution) {
@@ -61,10 +62,6 @@ class WordChain {
 
     private boolean isSolved(Set<String> chain, String end) {
         return chain.contains(end);
-    }
-
-    private boolean isImpossibleToFindBetterSolution(Set<String> bestSolution, String end) {
-        return bestSolution.size() == end.length() + 1;
     }
 
     private Set<String> getSortedCandidates(Set<String> chain, String start, String end) {

@@ -44,7 +44,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void differentLenghtWords() throws IOException {
+    public void differentLengthWords() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("any", "word")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -83,7 +83,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void fromAAtoAB() throws IOException {
+    public void onlyOneLetterChange() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "ab")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -96,7 +96,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void fromAAtoBB() throws IOException {
+    public void twoLetterChanges() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "bb")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -109,7 +109,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void fromAAtoCE() throws IOException {
+    public void searchBetterSolutionThanFirstFound() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "ce")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -122,7 +122,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void fromAAtoXX() throws IOException {
+    public void noPossiblePath() throws IOException {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "xx")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();

@@ -4,7 +4,7 @@ You need maven to compile the project.
 From the root directory, simply run ```mvn clean package``` and it will compile the project and create a jar to be executed.
 
 # How to run the program
-You can run the program using ```java -cp wordChainSolver [path_to_your_file]```
+the jar file is located inside target directory. You can run the program using ```java -cp wordChainSolver.jar WordChainSolver [path_to_your_file]```
 
 Your file should have the following format
 ```
