@@ -21,7 +21,7 @@ public class SystemFileReader implements SystemReader {
                     .collect(Collectors.toList());
 
             return new SystemInput(dictionaryFile, pairList);
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             throw new WordChainException(String.format("error reading file %s", filename), e);
         }
     }
