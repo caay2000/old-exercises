@@ -18,7 +18,7 @@ public class SystemConsoleWriter implements SystemWriter {
             outputStream.write(string.getBytes());
             outputStream.write(System.getProperty("line.separator").getBytes());
         } catch (IOException ioe) {
-            throw new WordChainException("error writing to system console", ioe);
+            throw new WordChainException("error writing to system console");
         }
     }
 }

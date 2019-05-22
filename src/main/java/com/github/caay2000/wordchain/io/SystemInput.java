@@ -29,7 +29,7 @@ public class SystemInput {
                 throw sc.ioException();
             }
         } catch (IOException e) {
-            throw new WordChainException(String.format("ERROR loading dictionary: %s", e.getMessage()), e);
+            throw new WordChainException(String.format("ERROR loading dictionary: %s", e.getMessage()));
         }
         return content;
     }

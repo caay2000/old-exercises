@@ -22,7 +22,7 @@ public class SystemFileReader implements SystemReader {
 
             return new SystemInput(dictionaryFile, pairList);
         } catch (IOException | RuntimeException e) {
-            throw new WordChainException(String.format("error reading file %s", filename), e);
+            throw new WordChainException(String.format("error reading file %s", filename));
         }
     }
 

@@ -50,7 +50,7 @@ class WordChain {
     }
 
     private boolean bestSolutionIsBetterThanActualChain(Set<String> currentChain, Set<String> bestSolution) {
-        return !bestSolution.equals(EMPTY_SET) && bestSolution.size()-1 <= currentChain.size() ;
+        return !bestSolution.equals(EMPTY_SET) && bestSolution.size() - 1 <= currentChain.size();
     }
 
     private Set<String> updateBestSolution(Set<String> chain, Set<String> bestSolution) {
