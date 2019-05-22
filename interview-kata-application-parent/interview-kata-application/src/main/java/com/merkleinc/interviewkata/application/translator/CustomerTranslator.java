@@ -43,7 +43,7 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
 
         String addressLine = Stream.of(address.getAddressLine1(), address.getAddressLine2())
                 .filter(StringUtils::isNotEmpty)
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(" "));
         return String.format("%s %s-%s (%s)", addressLine, address.getPostCode(), address.getCity(), address.getCountry().getValue());
     }
 
