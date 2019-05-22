@@ -3,6 +3,8 @@ package com.merkleinc.interviewkata.application.translator;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import com.merkleinc.common.Translator;
 import com.merkleinc.interviewkata.api.internal.customer.model.Address;
@@ -39,10 +41,9 @@ public class CustomerTranslator implements Translator<com.merkleinc.interviewkat
 
     private String getAddress(Address address) {
 
-        String addressLine = address.getAddressLine1();
-        if (StringUtils.isNotEmpty(address.getAddressLine2())) {
-            addressLine = addressLine.concat(" ").concat(address.getAddressLine2());
-        }
+        String addressLine = Stream.of(address.getAddressLine1(), address.getAddressLine2())
+                .filter(StringUtils::isNotEmpty)
+                .collect(Collectors.joining(","));
         return String.format("%s %s-%s (%s)", addressLine, address.getPostCode(), address.getCity(), address.getCountry().getValue());
     }
 
