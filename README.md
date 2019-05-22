@@ -16,12 +16,12 @@ You can have as many pairs of words as you want
 
 # Considerations and assumptions
 
-For this project, I used maven, and the only external jar I used is junit. I also used a maven plugin for running pitest on my test.
+For this project, I used maven, and the only external jar I used is junit. I also used an intellij plugin for running pitest and check mutation coverage.
 
 The core code has been created following a TDD approach, mocking external dependencies manually without any library (creating my own stubs and spies).
 The TDD approach is behavioural (testing module behaviour) this is why the most important tests are the ones living in WordChainSolverTest (that are those tests that are testing the full application logic)
 
-Some of the classes are not junit tested (the IO classes), as I don't want to test (or mock) system code. These classes has been tested manually. 
+Some of the classes are not unit tested (the IO classes), as I don't want to test (or mock) system code. These classes has been tested manually. 
 
 Leaving the IO part of the code outside, the code is divided in four simple steps.
  1. First of all we need to create a dictionary. This dictionary is organized to be efficient when searching for words with an specific size.
