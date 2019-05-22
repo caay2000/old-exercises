@@ -11,7 +11,7 @@ import com.github.caay2000.wordchain.WordChainException;
 public class SystemFileReader implements SystemReader {
 
     @Override
-    public SystemInput readInput(String filename) throws IOException {
+    public SystemInput readInput(String filename) {
 
         try (BufferedReader br = Files.newBufferedReader(Paths.get(filename))) {
 
@@ -21,8 +21,8 @@ public class SystemFileReader implements SystemReader {
                     .collect(Collectors.toList());
 
             return new SystemInput(dictionaryFile, pairList);
-        } catch (IOException | WordChainException e) {
-            throw new IOException(e);
+        } catch (IOException e) {
+            throw new WordChainException(String.format("error reading file %s", filename), e);
         }
     }
 

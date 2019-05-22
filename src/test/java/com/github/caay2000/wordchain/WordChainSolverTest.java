@@ -1,6 +1,5 @@
 package com.github.caay2000.wordchain;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +17,7 @@ public class WordChainSolverTest {
     private static final String[] ANY_INPUT = {"anyInput"};
 
     @Test
-    public void firstWordNotInDictionary() throws IOException {
+    public void firstWordNotInDictionary() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("xyz", "any")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -31,7 +30,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void secondWordNotInDictionary() throws IOException {
+    public void secondWordNotInDictionary() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("any", "xyz")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -44,7 +43,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void differentLengthWords() throws IOException {
+    public void differentLengthWords() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("any", "word")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -57,7 +56,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void fromCATtoDOG() throws IOException {
+    public void fromCATtoDOG() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), asList(new SystemInput.Pair("cat", "dog")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -70,7 +69,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void fromUMBRELLAtoDEMONIC() throws IOException {
+    public void fromUMBRELLAtoDEMONIC() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(DEFAULT_DICTIONARY), asList(new SystemInput.Pair("umbrella", "demonic")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -83,7 +82,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void onlyOneLetterChange() throws IOException {
+    public void onlyOneLetterChange() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "ab")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -96,7 +95,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void twoLetterChanges() throws IOException {
+    public void twoLetterChanges() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "bb")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -109,7 +108,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void searchBetterSolutionThanFirstFound() throws IOException {
+    public void searchBetterSolutionThanFirstFound() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "ce")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();
@@ -122,7 +121,7 @@ public class WordChainSolverTest {
     }
 
     @Test
-    public void noPossiblePath() throws IOException {
+    public void noPossiblePath() {
 
         SystemReader systemReader = new SystemReaderStub(getFilePath(SIMPLE_DICTIONARY), asList(new SystemInput.Pair("aa", "xx")));
         SystemWriterSpy systemWriter = new SystemWriterSpy();

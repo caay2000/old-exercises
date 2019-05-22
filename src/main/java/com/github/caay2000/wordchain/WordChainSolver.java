@@ -1,6 +1,5 @@
 package com.github.caay2000.wordchain;
 
-import java.io.IOException;
 import java.util.Set;
 import com.github.caay2000.wordchain.dictionary.Dictionary;
 import com.github.caay2000.wordchain.dictionary.WordDictionary;
@@ -18,7 +17,7 @@ public class WordChainSolver {
         this.systemWriter = systemWriter;
     }
 
-    public void execute(String[] input) throws IOException {
+    public void execute(String[] input) {
 
         validateInput(input);
 
@@ -32,7 +31,7 @@ public class WordChainSolver {
         }
     }
 
-    private void validateInput(String[] input) throws IOException {
+    private void validateInput(String[] input) {
         if (input.length != 1 || "-h".equals(input[0]) || "-help".equals(input[0])) {
             systemWriter.write("WORD CHAIN SOLVER for HEXAD");
             systemWriter.write("how to run the program:");
@@ -49,7 +48,7 @@ public class WordChainSolver {
         }
     }
 
-    private void printResult(Set<String> solution) throws IOException {
+    private void printResult(Set<String> solution) {
         if (!solution.isEmpty()) {
             systemWriter.write(String.format("YES %s", solution.toString()));
         } else {
