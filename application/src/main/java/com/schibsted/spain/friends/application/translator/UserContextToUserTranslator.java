@@ -1,17 +1,18 @@
 package com.schibsted.spain.friends.application.translator;
 
-import static java.util.Objects.isNull;
-
-import com.schibsted.spain.friends.application.translator.context.UserContext;
+import com.schibsted.spain.friends.application.security.SecurityProvider;
 import com.schibsted.spain.friends.common.Transformer;
 import com.schibsted.spain.friends.common.Translator;
 import com.schibsted.spain.friends.common.Validator;
 import com.schibsted.spain.friends.model.User;
 
+import static java.util.Objects.isNull;
+
 public class UserContextToUserTranslator extends Translator<UserContext, User> {
 
+
     public UserContextToUserTranslator() {
-        super(new UserContextValidator(), new UserContextToUserTransformer());
+        super(new UserContextValidator(), new UserContextToUserTransformer(new SecurityProvider()));
     }
 
     private static class UserContextValidator implements Validator<UserContext> {
@@ -53,9 +54,15 @@ public class UserContextToUserTranslator extends Translator<UserContext, User> {
 
     private static class UserContextToUserTransformer implements Transformer<UserContext, User> {
 
+        private final SecurityProvider securityProvider;
+
+        public UserContextToUserTransformer(SecurityProvider securityProvider) {
+            this.securityProvider = securityProvider;
+        }
+
         @Override
         public User transform(UserContext element) {
-            return null;
+            return new User(element.getUsername(), this.securityProvider.md5(element.getPassword()));
         }
     }
 

@@ -1,11 +1,11 @@
 package com.schibsted.spain.friends.legacy;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.schibsted.spain.friends.application.ApplicationException;
 import com.schibsted.spain.friends.model.api.SignUpApi;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
 
 @RestController
 @RequestMapping("/signup")
@@ -13,6 +13,7 @@ public class SignupLegacyController {
 
     private final SignUpApi signUpApi;
 
+    @Inject
     public SignupLegacyController(SignUpApi signUpApi) {
         this.signUpApi = signUpApi;
     }
@@ -20,5 +21,11 @@ public class SignupLegacyController {
     @PostMapping
     void signUp(@RequestParam("username") String username, @RequestHeader("X-Password") String password) {
         signUpApi.signUp(username, password);
+    }
+
+    @ExceptionHandler({IllegalArgumentException.class, ApplicationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleException() {
+
     }
 }

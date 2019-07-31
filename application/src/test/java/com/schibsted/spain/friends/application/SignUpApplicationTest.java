@@ -1,10 +1,16 @@
 package com.schibsted.spain.friends.application;
 
+import com.schibsted.spain.friends.model.User;
+import com.schibsted.spain.friends.model.internal.api.UserApi;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.AdditionalAnswers;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import com.schibsted.spain.friends.model.internal.api.UserApi;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SignUpApplicationTest {
@@ -90,11 +96,17 @@ public class SignUpApplicationTest {
     }
 
     @Test
-    public void passwordWorks() {
+    public void userApiIsCalled() {
+
+        when(userApi.create(any(User.class))).then(AdditionalAnswers.returnsFirstArg());
 
         SignUpApplication testee = new SignUpApplication(userApi);
+        User user = testee.signUp(VALID_USERNAME, VALID_PASSWORD);
 
-        testee.signUp(VALID_USERNAME, "1234abcd");
+        Assert.assertEquals(VALID_USERNAME, user.getUsername());
+        Assert.assertNotNull(user.getPassword());
+        Assert.assertNotEquals(VALID_PASSWORD, user.getPassword());
+
     }
 
 }
