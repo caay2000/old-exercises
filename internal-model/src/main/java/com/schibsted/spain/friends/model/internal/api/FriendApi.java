@@ -1,15 +1,16 @@
 package com.schibsted.spain.friends.model.internal.api;
 
-import java.util.List;
+import java.util.Set;
 
 public interface FriendApi {
 
-    void request(String from, String to);
+    Set<String> getAllRequests(String from);
 
-    void accept(String from, String to);
+    void addRequest(String from, String to);
 
-    void decline(String from, String to);
+    void removeRequest(String from, String to);
 
-    List<String> friends(String username);
+    Set<String> getAllFriends(String username);
 
+    void makeFriends(String from, String to);
 }

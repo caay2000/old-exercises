@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.model.api;
 
-import java.util.List;
+import java.util.Set;
 
 public interface FriendshipApi {
 
@@ -10,5 +10,5 @@ public interface FriendshipApi {
 
     void decline(String from, String to);
 
-    List<String> friends(String username);
+    Set<String> friends(String username);
 }

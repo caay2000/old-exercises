@@ -26,6 +26,5 @@ public class SignupLegacyController {
     @ExceptionHandler({IllegalArgumentException.class, ApplicationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleException() {
-
     }
 }
