@@ -1,15 +1,13 @@
 package com.schibsted.spain.friends.legacy;
 
-import com.schibsted.spain.friends.application.ApplicationException;
 import com.schibsted.spain.friends.model.api.FriendshipApi;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 
 @RestController
 @RequestMapping("/friendship")
-public class FriendshipLegacyController {
+public class FriendshipLegacyController extends AbsctractLegacyController {
 
     private final FriendshipApi friendshipApi;
 
@@ -52,10 +50,5 @@ public class FriendshipLegacyController {
             @RequestHeader("X-Password") String password
     ) {
         return friendshipApi.friends(username);
-    }
-
-    @ExceptionHandler({IllegalArgumentException.class, ApplicationException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleException() {
     }
 }

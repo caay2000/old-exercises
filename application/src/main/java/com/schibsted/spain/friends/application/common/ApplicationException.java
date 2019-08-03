@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.application;
+package com.schibsted.spain.friends.application.common;
 
 public class ApplicationException extends RuntimeException {
 
