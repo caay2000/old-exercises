@@ -1,9 +1,9 @@
-package com.schibsted.spain.friends.security;
+package com.schibsted.spain.friends.service.security;
 
-import com.schibsted.spain.friends.model.User;
 import com.schibsted.spain.friends.model.internal.user.UserApi;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -13,9 +13,11 @@ import static org.springframework.security.crypto.factory.PasswordEncoderFactori
 class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserApi userApi;
+    private final PasswordEncoder encoder;
 
     UserDetailsService(UserApi userApi) {
         this.userApi = userApi;
+        this.encoder = createDelegatingPasswordEncoder();
     }
 
     @Override
@@ -27,7 +29,7 @@ class UserDetailsService implements org.springframework.security.core.userdetail
 
         UserDetails build = org.springframework.security.core.userdetails.User.builder()
                 .username(username)
-                .password(createDelegatingPasswordEncoder().encode(user.get().getPassword()))
+                .password(encoder.encode(user.get().getPassword()))
                 .authorities(new ArrayList<>())
                 .build();
 

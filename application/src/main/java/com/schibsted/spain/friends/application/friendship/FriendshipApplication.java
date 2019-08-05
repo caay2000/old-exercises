@@ -6,8 +6,7 @@ import com.schibsted.spain.friends.model.internal.user.UserApi;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Named("friendshipApplication")
 public class FriendshipApplication implements FriendshipApi {
@@ -48,13 +47,7 @@ public class FriendshipApplication implements FriendshipApi {
     }
 
     @Override
-    public List<String> friends(String username) {
-        return friendApi.getFriends(username).stream()
-                .sorted(FriendshipApplication::reverseComparator)
-                .collect(Collectors.toList());
-    }
-
-    private static int reverseComparator(String o1, String o2) {
-        return o1.compareTo(o2) * -1;
+    public Set<String> friends(String username) {
+        return friendApi.getFriends(username);
     }
 }

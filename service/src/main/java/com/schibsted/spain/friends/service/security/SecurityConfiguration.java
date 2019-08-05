@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.security;
+package com.schibsted.spain.friends.service.security;
 
 import com.schibsted.spain.friends.model.internal.user.UserApi;
 import org.springframework.context.annotation.Configuration;

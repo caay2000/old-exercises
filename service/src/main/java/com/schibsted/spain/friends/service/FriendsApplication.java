@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends;
+package com.schibsted.spain.friends.service;
 
 import static org.springframework.boot.SpringApplication.run;
 

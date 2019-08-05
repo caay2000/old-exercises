@@ -3,10 +3,7 @@ package com.schibsted.spain.friends.repository;
 import com.schibsted.spain.friends.model.internal.friend.FriendApi;
 
 import javax.inject.Named;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Objects.isNull;
 
@@ -45,7 +42,7 @@ public class FriendRepository implements FriendApi {
     private Set<String> get(String value, Map<String, Set<String>> map) {
         Set<String> set = map.get(value);
         if (isNull(set)) {
-            set = new HashSet<>();
+            set = new LinkedHashSet<>();
             map.put(value, set);
         }
         return set;

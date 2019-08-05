@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.legacy;
+package com.schibsted.spain.friends.service.legacy;
 
 import com.schibsted.spain.friends.model.api.SignUpApi;
 import org.springframework.web.bind.annotation.*;

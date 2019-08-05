@@ -12,7 +12,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -161,9 +164,9 @@ public class FriendshipApplicationTest {
         when(friendApi.getFriends(eq(ANY_USERNAME))).thenReturn(expectedResponse);
         FriendshipApi testee = new FriendshipApplication(userApi, friendApi);
 
-        List<String> response = testee.friends(ANY_USERNAME);
+        Set<String> response = testee.friends(ANY_USERNAME);
 
-        Assert.assertEquals(new ArrayList<>(expectedResponse), response);
+        Assert.assertEquals(expectedResponse, response);
     }
 
     private Set<String> setOf(String... values) {
