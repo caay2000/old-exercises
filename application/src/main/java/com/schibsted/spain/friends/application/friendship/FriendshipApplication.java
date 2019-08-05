@@ -11,13 +11,11 @@ import java.util.Set;
 @Named("friendshipApplication")
 public class FriendshipApplication implements FriendshipApi {
 
-    private final UserApi userApi;
     private final FriendApi friendApi;
     private final FriendshipValidator validator;
 
     @Inject
     public FriendshipApplication(UserApi userApi, FriendApi friendApi) {
-        this.userApi = userApi;
         this.friendApi = friendApi;
         this.validator = new FriendshipValidator(userApi, friendApi);
     }

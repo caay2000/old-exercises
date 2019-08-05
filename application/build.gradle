@@ -13,7 +13,6 @@ repositories {
 
 dependencies {
     compile project(':model')
-    compile project(':common')
     compile project(':internal-model')
     
     compile group: 'javax.inject', name: 'javax.inject', version: '1'

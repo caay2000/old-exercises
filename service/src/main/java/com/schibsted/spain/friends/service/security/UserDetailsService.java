@@ -27,13 +27,11 @@ class UserDetailsService implements org.springframework.security.core.userdetail
             throw new UsernameNotFoundException(String.format("username %s not found", username));
         }
 
-        UserDetails build = org.springframework.security.core.userdetails.User.builder()
+        return org.springframework.security.core.userdetails.User.builder()
                 .username(username)
                 .password(encoder.encode(user.get().getPassword()))
                 .authorities(new ArrayList<>())
                 .build();
-
-        return build;
     }
 }
 

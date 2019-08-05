@@ -1,0 +1,20 @@
+language: java
+
+plugins {
+  id "org.sonarqube" version "2.7"
+}
+
+sonarqube {
+  properties {
+    sonar.projectKey: caay2000_friend-challenge
+  }
+}
+
+addons:
+  sonarcloud:
+    organization: "caay2000-github"
+    token:
+      secure: "${tokan}"
+
+  script:
+    - ./gradlew sonarqube
