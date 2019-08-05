@@ -1,4 +1,9 @@
 language: java
+install: true
+
+os: linux
+dist: trusty
+jdk: oraclejdk8
 
 plugins {
   id "org.sonarqube" version "2.7"
@@ -10,6 +15,11 @@ sonarqube {
   }
 }
 
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
 addons:
   sonarcloud:
     organization: "caay2000-github"
@@ -17,4 +27,4 @@ addons:
       secure: "${tokan}"
 
   script:
-    - ./gradlew sonarqube
+    - ./gradlew build sonarqube
