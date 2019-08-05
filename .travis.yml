@@ -1,8 +1,7 @@
 language: java
+sudo: false
 install: true
 
-os: linux
-dist: trusty
 jdk: oraclejdk8
 
 plugins: id "org.sonarqube" version "2.7"
@@ -18,4 +17,4 @@ addons:
       secure: "${token}"
 
 script:
-  - ./gradlew sonarqube -Dsonar.projectKey=caay2000_searcher
+  - ./travis.sh
