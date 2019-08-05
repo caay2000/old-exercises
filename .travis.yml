@@ -5,15 +5,15 @@ os: linux
 dist: trusty
 jdk: oraclejdk8
 
-plugins {
-  id "org.sonarqube" version "2.7"
-}
-
-sonarqube {
-  properties {
-    sonar.projectKey: caay2000_friend-challenge
-  }
-}
+#plugins {
+#  id "org.sonarqube" version "2.7"
+#}
+#
+#sonarqube {
+#  properties {
+#    sonar.projectKey: caay2000_friend-challenge
+#  }
+#}
 
 cache:
   directories:
@@ -24,7 +24,7 @@ addons:
   sonarcloud:
     organization: "caay2000-github"
     token:
-      secure: "${tokan}"
+      secure: "${token}"
 
   script:
     - ./gradlew build sonarqube
