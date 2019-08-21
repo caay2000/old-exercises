@@ -1,0 +1,50 @@
+package com.github.caay2000.metropolis;
+
+import com.google.maps.DistanceMatrixApi;
+import com.google.maps.DistanceMatrixApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.errors.ApiException;
+import com.google.maps.internal.PolylineEncoding;
+import com.google.maps.model.DistanceMatrix;
+import com.google.maps.model.LatLng;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.List;
+
+public class GmapsTPOC {
+
+    private static final String POLYLINE = "mpjyHx`i@VjAVKnAh@BHHX@LZR@Bj@Ml@WWc@]w@bAyAfBmCb@o@pLeQfCsDVa@@ODQR}AJ{A?{BGuAD_@FKb@MTUX]Le@^kBVcAVo@Ta@|EaFh@m@FWaA{DCo@q@mCm@cC{A_GWeA}@sGSeAcA_EOSMa@}A_GsAwFkAiEoAaFaBoEGo@]_AIWW{AQyAUyBQqAI_BFkEd@aHZcDlAyJLaBPqDDeD?mBEiA}@F]yKWqGSkICmCIeZIuZi@_Sw@{WgAoXS{DOcAWq@KQGIFQDGn@Y`@MJEFIHyAVQVOJGHgFRJBBCCSKBcAKoACyA?m@^yVJmLJ{FGGWq@e@eBIe@Ei@?q@Bk@Hs@Le@Rk@gCuIkJcZsDwLd@g@Oe@o@mB{BgHQYq@qBQYOMSMGBUBGCYc@E_@H]DWJST?JFFHBDNBJ?LED?LBv@WfAc@@EDGNK|@e@hAa@`Bk@b@OEk@Go@IeACoA@a@PyB`@yDDc@e@K{Bi@oA_@w@]m@_@]QkBoAwC{BmAeAo@s@uAoB_AaBmAwCa@mAo@iCgAwFg@iDq@}G[uEU_GBuP@cICmA?eI?qCB{FBkCI}BOyCMiAGcAC{AN{YFqD^}FR}CNu@JcAHu@b@_E`@}DVsB^mBTsAQKkCmAg@[YQOIOvAi@[m@e@s@g@GKCKAEJIn@g@GYGIc@ScBoAf@{A`@uAlBfAG`@";
+
+    @Test
+    public void test() throws InterruptedException, ApiException, IOException {
+
+        List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
+
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey("AIzaSyBZaHXhVzMVOdkwbuj3wI-IyPEx649X6vo")
+                .build();
+
+
+        DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(context);
+        DistanceMatrix trix = req.origins(latLngs.get(0))
+                .destinations(latLngs.get(1))
+                .await();
+
+
+        LatLng robot = new LatLng(latLngs.get(0).lat, latLngs.get(0).lng);
+
+    }
+
+    @Test
+    public void testmeters() {
+
+        List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
+
+        double RAD = 0.000008998719243599958;
+        LatLng origin = latLngs.get(0);
+        LatLng destination = latLngs.get(1);
+
+        HaversineDistance.main(origin.lat, destination.lat, origin.lng, destination.lng);
+    }
+}
