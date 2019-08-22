@@ -2,18 +2,38 @@ package com.github.caay2000.metropolis.model;
 
 public class Step {
 
-    private final Position position;
-    private final Position newPosition;
+    private final Position origin;
+    private final Position destination;
     private final double distance;
-    private final int roundedUpTime;
+    private final int time;
     private final double speed;
 
-    public Step(Position position, Position newPosition, double distance, int roundedUpTime, double speed) {
+    public Step(Position origin, Position destination, double distance, int time, double speed) {
 
-        this.position = position;
-        this.newPosition = newPosition;
+        this.origin = origin;
+        this.destination = destination;
         this.distance = distance;
-        this.roundedUpTime = roundedUpTime;
+        this.time = time;
         this.speed = speed;
+    }
+
+    public Position getOrigin() {
+        return origin;
+    }
+
+    public Position getDestination() {
+        return destination;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public double getSpeed() {
+        return speed;
     }
 }

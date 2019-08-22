@@ -1,51 +1,43 @@
 package com.github.caay2000.metropolis.model;
 
-import com.github.caay2000.metropolis.DistanceCalculator;
-
 public class Robot {
 
     public static final double MAX_ROBOT_SPEED = 3d; // meters/second
 
     private Position position;
-    private final double nextReportDistance;
-    private final Route route;
 
-    public Robot(Position position, double reportDistance) {
+    private final MovementEngine engine;
+    private double nextReportDistance;
+    private final Route route;
+    private final DataCollector dataCollector;
+    private final DataStorage dataStorage;
+
+    public Robot(Position position, double reportDistance, DataCollector dataCollector) {
         this.position = position;
         this.nextReportDistance = reportDistance;
+        this.dataCollector = dataCollector;
         this.route = new Route();
+        this.dataStorage = new DataStorage();
+        this.engine = new MovementEngine(MAX_ROBOT_SPEED);
     }
 
     public void moveTo(Position newPosition) {
 
-        if (newPosition.equals(this.position)) {
-            return;
+        System.out.println("moving from " + this.position + " to " + newPosition);
+        Step step = this.engine.move(this.position, newPosition, nextReportDistance);
+
+        this.position = step.getDestination();
+        this.route.addStep(step);
+        this.nextReportDistance -= step.getDistance();
+
+        if (nextReportDistance == 0d) {
+            System.out.println("report");
+            this.nextReportDistance = 100d;
         }
 
-        System.out.println("movingTo:" + newPosition);
-
-        double distance = DistanceCalculator.distanceBetween(position, newPosition);
-        if (distance < nextReportDistance) {
-            fullMovementTo(newPosition);
-        } else {
-            moveToReportLocation(newPosition);
+        if (!this.position.equals(newPosition)) {
+            this.moveTo(newPosition);
         }
-    }
-
-    private void moveToReportLocation(Position newPosition) {
-
-        Position nextPosition = DistanceCalculator.getPositionOnRoute(this.position, newPosition, nextReportDistance);
-        fullMovementTo(nextPosition);
-        moveTo(newPosition);
-    }
-
-    private void fullMovementTo(Position newPosition) {
-        double distance = DistanceCalculator.distanceBetween(position, newPosition);
-        int roundedUpTime = (int) Math.ceil(distance / Robot.MAX_ROBOT_SPEED);
-        double speed = distance / roundedUpTime;
-
-        route.addStep(this.position, newPosition, distance, roundedUpTime, speed);
-        this.position = newPosition;
     }
 
     public Route getRoute() {

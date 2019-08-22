@@ -1,5 +1,6 @@
 package com.github.caay2000.metropolis;
 
+import com.github.caay2000.metropolis.model.DataCollector;
 import com.github.caay2000.metropolis.model.Position;
 import com.github.caay2000.metropolis.model.Robot;
 import com.github.caay2000.metropolis.model.Route;
@@ -18,8 +19,8 @@ public class GmapsTPOC {
 
         List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
 
-        Robot robot = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 100d);
-        Robot robot2 = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 10000000d);
+        Robot robot = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 100d, new DataCollector());
+        Robot robot2 = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 10000000d, new DataCollector());
         for (int i = 1; i < latLngs.size(); i++) {
             robot.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
             robot2.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
@@ -31,24 +32,24 @@ public class GmapsTPOC {
         System.out.println(route2);
     }
 
-    @Test
-    public void testmeters() {
-
-        List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
-
-        double total = 0d;
-        double newTotal = 0d;
-        for (int i = 1; i < latLngs.size(); i++) {
-            LatLng origin = latLngs.get(i - 1);
-            LatLng destination = latLngs.get(i);
-
-            Double distance = DistanceCalculator.distanceBetween(new Position(origin.lat, origin.lng), new Position(destination.lat, destination.lng), DistanceCalculator.Algorithm.HAVERSINE);
-            Double distance2 = DistanceCalculator.distanceBetween(new Position(origin.lat, origin.lng), new Position(destination.lat, destination.lng), DistanceCalculator.Algorithm.VINCENTY);
-
-            total = total + distance;
-            newTotal = newTotal + distance2;
-        }
-        System.out.println("total haversine : " + total);
-        System.out.println("total vincenty  : " + newTotal);
-    }
+//    @Test
+//    public void testmeters() {
+//
+//        List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
+//
+//        double total = 0d;
+//        double newTotal = 0d;
+//        for (int i = 1; i < latLngs.size(); i++) {
+//            LatLng origin = latLngs.get(i - 1);
+//            LatLng destination = latLngs.get(i);
+//
+//            Double distance = DistanceCalculator.distanceBetween(new Position(origin.lat, origin.lng), new Position(destination.lat, destination.lng));
+//            Double distance2 = DistanceCalculator.distanceBetween(new Position(origin.lat, origin.lng), new Position(destination.lat, destination.lng));
+//
+//            total = total + distance;
+//            newTotal = newTotal + distance2;
+//        }
+//        System.out.println("total haversine : " + total);
+//        System.out.println("total vincenty  : " + newTotal);
+//    }
 }

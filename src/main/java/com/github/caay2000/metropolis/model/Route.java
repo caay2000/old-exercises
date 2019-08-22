@@ -16,12 +16,12 @@ public class Route {
         this.steps = new ArrayList<>();
     }
 
-    public void addStep(Position position, Position newPosition, double distance, int time, double speed) {
+    public void addStep(Step step) {
 
-        this.steps.add(new Step(position, newPosition, distance, time, speed));
+        this.steps.add(step);
 
-        this.distanceTraveled += distance;
-        this.timeElapsed += time;
+        this.distanceTraveled += step.getDistance();
+        this.timeElapsed += step.getTime();
         this.averageSpeed = distanceTraveled / timeElapsed;
     }
 
