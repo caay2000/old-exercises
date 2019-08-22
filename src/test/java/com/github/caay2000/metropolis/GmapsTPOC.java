@@ -1,15 +1,12 @@
 package com.github.caay2000.metropolis;
 
-import com.google.maps.DistanceMatrixApi;
-import com.google.maps.DistanceMatrixApiRequest;
-import com.google.maps.GeoApiContext;
-import com.google.maps.errors.ApiException;
+import com.github.caay2000.metropolis.model.Position;
+import com.github.caay2000.metropolis.model.Robot;
+import com.github.caay2000.metropolis.model.Route;
 import com.google.maps.internal.PolylineEncoding;
-import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.LatLng;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 public class GmapsTPOC {
@@ -17,23 +14,21 @@ public class GmapsTPOC {
     private static final String POLYLINE = "mpjyHx`i@VjAVKnAh@BHHX@LZR@Bj@Ml@WWc@]w@bAyAfBmCb@o@pLeQfCsDVa@@ODQR}AJ{A?{BGuAD_@FKb@MTUX]Le@^kBVcAVo@Ta@|EaFh@m@FWaA{DCo@q@mCm@cC{A_GWeA}@sGSeAcA_EOSMa@}A_GsAwFkAiEoAaFaBoEGo@]_AIWW{AQyAUyBQqAI_BFkEd@aHZcDlAyJLaBPqDDeD?mBEiA}@F]yKWqGSkICmCIeZIuZi@_Sw@{WgAoXS{DOcAWq@KQGIFQDGn@Y`@MJEFIHyAVQVOJGHgFRJBBCCSKBcAKoACyA?m@^yVJmLJ{FGGWq@e@eBIe@Ei@?q@Bk@Hs@Le@Rk@gCuIkJcZsDwLd@g@Oe@o@mB{BgHQYq@qBQYOMSMGBUBGCYc@E_@H]DWJST?JFFHBDNBJ?LED?LBv@WfAc@@EDGNK|@e@hAa@`Bk@b@OEk@Go@IeACoA@a@PyB`@yDDc@e@K{Bi@oA_@w@]m@_@]QkBoAwC{BmAeAo@s@uAoB_AaBmAwCa@mAo@iCgAwFg@iDq@}G[uEU_GBuP@cICmA?eI?qCB{FBkCI}BOyCMiAGcAC{AN{YFqD^}FR}CNu@JcAHu@b@_E`@}DVsB^mBTsAQKkCmAg@[YQOIOvAi@[m@e@s@g@GKCKAEJIn@g@GYGIc@ScBoAf@{A`@uAlBfAG`@";
 
     @Test
-    public void test() throws InterruptedException, ApiException, IOException {
+    public void robotTpoc() {
 
         List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
 
-        GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey("AIzaSyBZaHXhVzMVOdkwbuj3wI-IyPEx649X6vo")
-                .build();
+        Robot robot = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 100d);
+        Robot robot2 = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 10000000d);
+        for (int i = 1; i < latLngs.size(); i++) {
+            robot.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
+            robot2.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
+        }
+        Route route = robot.getRoute();
+        Route route2 = robot2.getRoute();
 
-
-        DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(context);
-        DistanceMatrix trix = req.origins(latLngs.get(0))
-                .destinations(latLngs.get(1))
-                .await();
-
-
-        LatLng robot = new LatLng(latLngs.get(0).lat, latLngs.get(0).lng);
-
+        System.out.println(route);
+        System.out.println(route2);
     }
 
     @Test
@@ -41,10 +36,19 @@ public class GmapsTPOC {
 
         List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
 
-        double RAD = 0.000008998719243599958;
-        LatLng origin = latLngs.get(0);
-        LatLng destination = latLngs.get(1);
+        double total = 0d;
+        double newTotal = 0d;
+        for (int i = 1; i < latLngs.size(); i++) {
+            LatLng origin = latLngs.get(i - 1);
+            LatLng destination = latLngs.get(i);
 
-        HaversineDistance.main(origin.lat, destination.lat, origin.lng, destination.lng);
+            Double distance = DistanceCalculator.distanceBetween(new Position(origin.lat, origin.lng), new Position(destination.lat, destination.lng), DistanceCalculator.Algorithm.HAVERSINE);
+            Double distance2 = DistanceCalculator.distanceBetween(new Position(origin.lat, origin.lng), new Position(destination.lat, destination.lng), DistanceCalculator.Algorithm.VINCENTY);
+
+            total = total + distance;
+            newTotal = newTotal + distance2;
+        }
+        System.out.println("total haversine : " + total);
+        System.out.println("total vincenty  : " + newTotal);
     }
 }
