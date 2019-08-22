@@ -1,9 +1,13 @@
 package com.github.caay2000.metropolis.model;
 
+import com.google.common.math.DoubleMath;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Position {
+
+    private final double DELTA = 0.000001d;
 
     private final double lat;
     private final double lng;
@@ -26,8 +30,8 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return Double.compare(position.lat, lat) == 0 &&
-                Double.compare(position.lng, lng) == 0;
+        return DoubleMath.fuzzyCompare(position.lat, lat, DELTA) == 0 &&
+                DoubleMath.fuzzyCompare(position.lng, lng, DELTA) == 0;
     }
 
     @Override

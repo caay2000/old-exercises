@@ -25,6 +25,22 @@ public class Route {
         this.averageSpeed = distanceTraveled / timeElapsed;
     }
 
+    public double getAverageSpeed() {
+        return averageSpeed;
+    }
+
+    public double getTimeElapsed() {
+        return timeElapsed;
+    }
+
+    public double getDistanceTraveled() {
+        return distanceTraveled;
+    }
+
+    public List<Step> getSteps() {
+        return steps;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Route.class.getSimpleName() + "[", "]")

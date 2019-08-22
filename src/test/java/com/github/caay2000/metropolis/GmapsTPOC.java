@@ -29,6 +29,7 @@ public class GmapsTPOC {
         Route route2 = robot2.getRoute();
 
         System.out.println(route);
+        System.out.println(route.getSteps().stream().filter(e -> e.getSpeed() < 1d).count());
         System.out.println(route2);
     }
 

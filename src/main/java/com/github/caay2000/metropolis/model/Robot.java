@@ -1,8 +1,11 @@
 package com.github.caay2000.metropolis.model;
 
+import com.google.common.math.DoubleMath;
+
 public class Robot {
 
     public static final double MAX_ROBOT_SPEED = 3d; // meters/second
+    private static final double DELTA = 0.1d;
 
     private Position position;
 
@@ -23,15 +26,15 @@ public class Robot {
 
     public void moveTo(Position newPosition) {
 
-        System.out.println("moving from " + this.position + " to " + newPosition);
+        //System.out.println("moving from " + this.position + " to " + newPosition);
         Step step = this.engine.move(this.position, newPosition, nextReportDistance);
 
         this.position = step.getDestination();
         this.route.addStep(step);
         this.nextReportDistance -= step.getDistance();
 
-        if (nextReportDistance == 0d) {
-            System.out.println("report");
+        if (DoubleMath.fuzzyCompare(nextReportDistance, 0d, DELTA) == 0) {
+            //System.out.println("report");
             this.nextReportDistance = 100d;
         }
 
