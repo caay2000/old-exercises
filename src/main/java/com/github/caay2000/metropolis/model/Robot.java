@@ -1,14 +1,18 @@
 package com.github.caay2000.metropolis.model;
 
+import com.github.caay2000.metropolis.model.collector.DataCollector;
+import com.github.caay2000.metropolis.model.event.CollectDataEvent;
+import com.github.caay2000.metropolis.model.event.EventBus;
 import com.google.common.math.DoubleMath;
 
 public class Robot {
 
     public static final double MAX_ROBOT_SPEED = 3d; // meters/second
-    private static final double DELTA = 0.1d;
+    private static final double DELTA = 0.5d;
 
     private Position position;
 
+    private final EventBus eventBus;
     private final MovementEngine engine;
     private double nextReportDistance;
     private final Route route;
@@ -19,6 +23,7 @@ public class Robot {
         this.position = position;
         this.nextReportDistance = reportDistance;
         this.dataCollector = dataCollector;
+        this.eventBus = new EventBus();
         this.route = new Route();
         this.dataStorage = new DataStorage();
         this.engine = new MovementEngine(MAX_ROBOT_SPEED);
@@ -26,7 +31,6 @@ public class Robot {
 
     public void moveTo(Position newPosition) {
 
-        //System.out.println("moving from " + this.position + " to " + newPosition);
         Step step = this.engine.move(this.position, newPosition, nextReportDistance);
 
         this.position = step.getDestination();
@@ -34,6 +38,7 @@ public class Robot {
         this.nextReportDistance -= step.getDistance();
 
         if (DoubleMath.fuzzyCompare(nextReportDistance, 0d, DELTA) == 0) {
+            this.eventBus.publish(new CollectDataEvent(this.position));
             //System.out.println("report");
             this.nextReportDistance = 100d;
         }
@@ -43,7 +48,4 @@ public class Robot {
         }
     }
 
-    public Route getRoute() {
-        return route;
-    }
 }

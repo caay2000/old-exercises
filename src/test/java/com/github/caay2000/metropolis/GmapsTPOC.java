@@ -1,6 +1,6 @@
 package com.github.caay2000.metropolis;
 
-import com.github.caay2000.metropolis.model.DataCollector;
+import com.github.caay2000.metropolis.model.collector.DataCollector;
 import com.github.caay2000.metropolis.model.Position;
 import com.github.caay2000.metropolis.model.Robot;
 import com.github.caay2000.metropolis.model.Route;
