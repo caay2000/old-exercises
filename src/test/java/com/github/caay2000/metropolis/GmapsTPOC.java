@@ -1,17 +1,13 @@
 package com.github.caay2000.metropolis;
 
-import com.github.caay2000.metropolis.model.engine.Position;
-import com.github.caay2000.metropolis.model.Robot;
-import com.github.caay2000.metropolis.model.Route;
-import com.github.caay2000.metropolis.model.collector.RandomDataMeter;
-import com.github.caay2000.metropolis.model.provider.FakeDateProvider;
-import com.github.caay2000.metropolis.model.provider.JacksonJsonSerializer;
-import com.github.caay2000.metropolis.model.reporter.SystemReporter;
+import java.util.List;
+import org.junit.Test;
+import com.github.caay2000.metropolis.collector.RandomDataMeter;
+import com.github.caay2000.metropolis.engine.Position;
+import com.github.caay2000.metropolis.reporter.SystemReporter;
+import com.github.caay2000.metropolis.simulation.Simulation;
 import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.LatLng;
-import org.junit.Test;
-
-import java.util.List;
 
 public class GmapsTPOC {
 
@@ -22,11 +18,11 @@ public class GmapsTPOC {
 
         List<LatLng> latLngs = PolylineEncoding.decode(POLYLINE);
 
-        Robot robot = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 100d, new RandomDataMeter(), 15*60, new FakeDateProvider(), new SystemReporter(new JacksonJsonSerializer()));
+        Robot robot = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 100d, new RandomDataMeter(), 15 * 60, new Simulation(), new SystemReporter());
 //        Robot robot2 = new Robot(new Position(latLngs.get(0).lat, latLngs.get(0).lng), 10000000d, new RandomDataMeter(), 15*60);
         for (int i = 1; i < latLngs.size(); i++) {
             robot.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
-           // robot2.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
+            // robot2.moveTo(new Position(latLngs.get(i).lat, latLngs.get(i).lng));
         }
         Route route = robot.getRoute();
 //        Route route2 = robot2.getRoute();
@@ -56,6 +52,4 @@ public class GmapsTPOC {
 //        System.out.println("total haversine : " + total);
 //        System.out.println("total vincenty  : " + newTotal);
 //    }
-
-
 }
