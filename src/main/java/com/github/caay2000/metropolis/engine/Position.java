@@ -18,19 +18,19 @@ public class Position {
         this.lng = this.round(lng);
     }
 
-    private double round(double value) {
-
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(5, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
-
     public double getLat() {
         return lat;
     }
 
     public double getLng() {
         return lng;
+    }
+
+    private double round(double value) {
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(5, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @Override

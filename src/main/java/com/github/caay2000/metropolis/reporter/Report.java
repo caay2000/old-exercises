@@ -16,7 +16,7 @@ public class Report {
         this.source = source;
     }
 
-    private class Location {
+    public class Location {
         private final double lat;
         private final double lng;
 
@@ -24,6 +24,30 @@ public class Report {
             this.lat = lat;
             this.lng = lng;
         }
+
+        public double getLat() {
+            return lat;
+        }
+
+        public double getLng() {
+            return lng;
+        }
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public String getSource() {
+        return source;
     }
 }
 

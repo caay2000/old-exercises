@@ -11,23 +11,23 @@ import com.github.caay2000.metropolis.reporter.Reporter;
 
 public class DataStorage {
 
-    private final EventBus eventBus;
+    private final EventBus systemEventBus;
     private final Reporter reporter;
 
     private int measurements;
     private int totalPollution;
 
-    public DataStorage(Reporter reporter) {
-        this.eventBus = EventBus.getInstance();
+    public DataStorage(EventBus systemEventBus, Reporter reporter) {
+        this.systemEventBus = systemEventBus;
         this.reporter = reporter;
 
-        this.eventBus.subscribe(EventType.STORE_COLLECT_DATA, this::store);
-        this.eventBus.subscribe(EventType.PUBLISH_REPORT, this::report);
+        this.systemEventBus.subscribe(EventType.STORE_COLLECT_DATA, this::store);
+        this.systemEventBus.subscribe(EventType.PUBLISH_REPORT, this::publishReport);
         this.measurements = 0;
         this.totalPollution = 0;
     }
 
-    private void store(Event<EventStoreCollectData> event) {
+    public void store(Event<EventStoreCollectData> event) {
 
         EventStoreCollectData eventStoreCollectData = event.to(EventStoreCollectData.class);
 
@@ -35,7 +35,7 @@ public class DataStorage {
         this.totalPollution += eventStoreCollectData.getCollectedData().getPollutionValue();
     }
 
-    private void report(Event<EventPublishReport> event) {
+    public void publishReport(Event<EventPublishReport> event) {
 
         EventPublishReport eventPublishReport = event.to(EventPublishReport.class);
 

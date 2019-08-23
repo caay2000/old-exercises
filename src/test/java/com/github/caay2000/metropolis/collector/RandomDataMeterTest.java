@@ -1,13 +1,14 @@
 package com.github.caay2000.metropolis.collector;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class RandomDataMeterTest {
 
     @Test
+    @Ignore("not a test, only to manually check distribution of random function")
     public void generatesRandomNumbers() {
         RandomDataMeter testee = new RandomDataMeter();
         List<Integer> values = new ArrayList<>();
@@ -20,5 +21,4 @@ public class RandomDataMeterTest {
         System.out.println(values.stream().filter(e -> e > 100 && e < 150).count());
         System.out.println(values.stream().filter(e -> e > 150).count());
     }
-
 }

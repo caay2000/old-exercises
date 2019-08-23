@@ -18,6 +18,10 @@ public class CollectedData {
         return position;
     }
 
+    public PollutionLevel getPollutionLevel() {
+        return pollutionLevel;
+    }
+
     public int getPollutionValue() {
         return pollutionValue;
     }

@@ -5,7 +5,7 @@ import com.github.caay2000.metropolis.collector.DataMeter;
 import com.github.caay2000.metropolis.engine.MovementEngine;
 import com.github.caay2000.metropolis.engine.Position;
 import com.github.caay2000.metropolis.engine.Step;
-import com.github.caay2000.metropolis.event.EventBus;
+import com.github.caay2000.metropolis.event.SystemEventBus;
 import com.github.caay2000.metropolis.event.EventCollectData;
 import com.github.caay2000.metropolis.event.EventPublishReport;
 import com.github.caay2000.metropolis.reporter.SystemReporter;
@@ -18,7 +18,7 @@ public class Robot {
     public static final double MAX_ROBOT_SPEED = 3d; // meters/second
     private static final double DELTA = 0.5d;
     private final int reportTime;
-    private final EventBus eventBus;
+    private final SystemEventBus systemEventBus;
     private final MovementEngine engine;
     private final double reportDistance;
     private final Route route;
@@ -27,13 +27,18 @@ public class Robot {
     private final Simulation simulation;
     private double nextReportDistance;
 
-    public Robot(Position position, double reportDistance, DataMeter dataMeter, int reportTime, Simulation simulation, SystemReporter reporter) {
+    public Robot(Position position,
+                 double reportDistance,
+                 DataMeter dataMeter,
+                 int reportTime,
+                 Simulation simulation,
+                 SystemReporter reporter,
+                 SystemEventBus systemEventBus) {
         this.position = position;
         this.simulation = simulation;
-        this.eventBus = EventBus.getInstance();
         this.reportDistance = reportDistance;
         this.nextReportDistance = reportDistance;
-
+        this.systemEventBus = systemEventBus;
         this.reportTime = reportTime;
         this.nextReportTime = reportTime;
         this.route = new Route();
@@ -42,8 +47,8 @@ public class Robot {
     }
 
     private void initSystems(DataMeter dataMeter, SystemReporter reporter) {
-        new DataCollector(dataMeter, simulation);
-        new DataStorage(reporter);
+        new DataCollector(simulation, systemEventBus, dataMeter);
+        new DataStorage(systemEventBus, reporter);
     }
 
     public void moveTo(Position newPosition) {
@@ -55,7 +60,7 @@ public class Robot {
         this.nextReportDistance -= step.getDistance();
 
         if (DoubleMath.fuzzyCompare(nextReportDistance, 0d, DELTA) == 0) {
-            this.eventBus.publish(new EventCollectData(simulation.getSimulationTime(), this.position));
+            this.systemEventBus.publish(new EventCollectData(simulation.getSimulationTime(), this.position));
             this.nextReportDistance = reportDistance;
         }
 
@@ -63,7 +68,7 @@ public class Robot {
 
         this.simulation.updateSimulation(step.getTime());
         if (this.nextReportTime <= 0) {
-            this.eventBus.publish(new EventPublishReport(simulation.getSimulationTime(), this.position, "robot"));
+            this.systemEventBus.publish(new EventPublishReport(simulation.getSimulationTime(), this.position, "robot"));
             this.nextReportTime = reportTime;
         }
 

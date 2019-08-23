@@ -11,7 +11,7 @@ public class SystemReporter implements Reporter {
     private final ObjectMapper serializer;
 
     public SystemReporter() {
-        this.serializer = new ObjectMapper().setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        this.serializer = new ObjectMapper();
     }
 
     @Override

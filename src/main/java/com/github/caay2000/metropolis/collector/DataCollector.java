@@ -13,17 +13,21 @@ public class DataCollector {
     private final DataMeter meter;
     private final Simulation simulation;
 
-    public DataCollector(DataMeter meter, Simulation simulation) {
+    public DataCollector(Simulation simulation, EventBus eventBus, DataMeter meter) {
         this.simulation = simulation;
-        this.eventBus = EventBus.getInstance();
-        this.eventBus.subscribe(EventType.COLLECT_DATA, this::collect);
+        this.eventBus = eventBus;
         this.meter = meter;
+
+        this.eventBus.subscribe(EventType.COLLECT_DATA, this::collectHandler);
     }
 
-    public void collect(Event<EventCollectData> event) {
+    public void collectHandler(Event<EventCollectData> event) {
 
-        EventCollectData eventCollectData = event.to(EventCollectData.class);
-        CollectedData collectedData = new CollectedData(eventCollectData.getPosition(), this.meter.getValue());
+        CollectedData collectedData = collect(event.to(EventCollectData.class));
         this.eventBus.publish(new EventStoreCollectData(simulation.getSimulationTime(), collectedData));
+    }
+
+    public CollectedData collect(EventCollectData eventCollectData) {
+        return new CollectedData(eventCollectData.getPosition(), this.meter.getValue());
     }
 }
