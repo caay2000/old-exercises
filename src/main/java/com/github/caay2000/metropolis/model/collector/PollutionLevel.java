@@ -1,5 +1,7 @@
 package com.github.caay2000.metropolis.model.collector;
 
+import com.github.caay2000.metropolis.model.exception.MetropolisException;
+
 public enum PollutionLevel {
 
     GOOD(0, 50),
@@ -20,5 +22,15 @@ public enum PollutionLevel {
         this.maxValue = Integer.MAX_VALUE;
     }
 
+    public static class Factory {
 
+        public static PollutionLevel getLevel(int value) {
+            for (PollutionLevel level : PollutionLevel.values()) {
+                if (value >= level.minValue && value <= level.maxValue) {
+                    return level;
+                }
+            }
+            throw new MetropolisException(String.format("incorrect value %d", value));
+        }
+    }
 }

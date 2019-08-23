@@ -1,4 +1,4 @@
-package com.github.caay2000.metropolis.model;
+package com.github.caay2000.metropolis.model.engine;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class MovementEngineTest {
     private final Position ORIGIN_PLUS_ONE = new Position(0d, -0.001d);
     private final Position ORIGIN_PLUS_TWO = new Position(0d, -0.002d);
 
-    private final double DISTANCE_ONE = MovementEngine.DistanceCalculator.distanceBetween(ORIGIN, ORIGIN_PLUS_ONE);
+    private final double DISTANCE_ONE = new HaversineDistance().distanceBetween(ORIGIN, ORIGIN_PLUS_ONE);
 
     private final int TIME_DISTANCE_ONE = (int) Math.ceil(DISTANCE_ONE / MAX_ROBOT_SPEED);
     private final double SPEED_DISTANCE_ONE = DISTANCE_ONE / TIME_DISTANCE_ONE;

@@ -1,4 +1,4 @@
-package com.github.caay2000.metropolis.model;
+package com.github.caay2000.metropolis.model.engine;
 
 public class Step {
 

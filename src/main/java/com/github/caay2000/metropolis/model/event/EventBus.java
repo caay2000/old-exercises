@@ -1,15 +1,33 @@
 package com.github.caay2000.metropolis.model.event;
 
-import com.github.caay2000.metropolis.model.event.Event;
+import java.util.HashMap;
+import java.util.function.Consumer;
 
-public class EventBus {
+public final class EventBus {
 
-    public void publish(Event event) {
+    private static EventBus instance;
 
+    private final HashMap<EventType, Consumer<? super Event>> subscriptions;
+
+    private EventBus() {
+        this.subscriptions = new HashMap<>();
     }
 
-    public void subscribe(Event event) {
+    public static EventBus getInstance() {
+        if (instance == null) {
+            instance = new EventBus();
+        }
+        return instance;
+    }
 
+    public void publish(Event event) {
+        subscriptions.entrySet().stream()
+                .filter(entry -> event.getType().equals(entry.getKey()))
+                .forEach(entry -> entry.getValue().accept(event));
+    }
+
+    public void subscribe(EventType eventType, Consumer<? super Event> function) {
+        this.subscriptions.put(eventType, function);
     }
 
 }

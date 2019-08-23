@@ -16,7 +16,7 @@ incredible your solution, if it does not run, it does not count.
 
 Thanks
 
-####Problem description
+### Problem description
 The city of London has implemented a robot that moves through a predetermined route every
 morning, collecting pollution data at fixed intervals, and reporting them.
 The goal of this exercise is to implement code that would control such robot, within the following
@@ -26,7 +26,7 @@ guidelines:
 the route of the robot (see polyline below).
 - The robot will move along the points of the polyline.
 - Acceptable speed for the robot is between 1 and 3 meters per second
-- Every 100 meters, the robot “reads” the level of PM2.5 particles in the location.
+- Every 100 meters, the robot "reads" the level of PM2.5 particles in the location.
 - Values of PM2.5 will be in the following range:
 - 0 to 50: Good
 - 51 - 100: Moderate
@@ -36,7 +36,7 @@ the route of the robot (see polyline below).
 - Every 15 minutes the robot reports the average of all new readings since the last one
 and reports according to the grouping above. The output should be a json like:
 ```
-{“timestamp”: 1528106219,“location”: {“lat”: 51.23241, “lng”: -0.1223},“level”: “USG”,“source”: “robot”}
+{ "timestamp ": 1528106219, "location": { "lat ": 51.23241, "lng": -0.1223 },"level": "USG", "source": "robot" }
 ```
 
 #### Inputs / Outputs
@@ -56,12 +56,12 @@ or even suggest another one.
     As the robot enters a radius of 100 meters of one of these monitoring stations, they should output
 a message in the same format as above, ensuring that the robot is moving safe and soundly.
 ```
-{“timestamp”: 1528106219,“location”: {“lat”: 51.23241, “lng”: -0.1223},“level”: “USG”,“source”: “station_name”}
+{"timestamp": 1528106219,"location": {"lat": 51.23241, "lng": -0.1223},"level": "USG","source": "station_name"}
 ```
 
  - Bonus 2
  
-    Implement an API for an operator to interact with the robot, with the following “commands”
+    Implement an API for an operator to interact with the robot, with the following "commands"
     - start/stop
     - re-route (a new polyline would be sent)
     - report: to generate an ad-hoc report wit the same json format as above

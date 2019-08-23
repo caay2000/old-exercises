@@ -1,16 +1,17 @@
 package com.github.caay2000.metropolis.model;
 
+import com.github.caay2000.metropolis.model.engine.Step;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class Route {
 
+    private final List<Step> steps;
     private double averageSpeed;
     private double timeElapsed;
     private double distanceTraveled;
-
-    private final List<Step> steps;
 
     public Route() {
         this.steps = new ArrayList<>();

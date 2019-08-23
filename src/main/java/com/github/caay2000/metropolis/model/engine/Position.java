@@ -1,7 +1,9 @@
-package com.github.caay2000.metropolis.model;
+package com.github.caay2000.metropolis.model.engine;
 
 import com.google.common.math.DoubleMath;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -9,12 +11,19 @@ public class Position {
 
     private final double DELTA = 0.000001d;
 
-    private final double lat;
+    private final Double lat;
     private final double lng;
 
     public Position(double lat, double lng) {
-        this.lat = lat;
-        this.lng = lng;
+        this.lat = this.round(lat);
+        this.lng = this.round(lng);
+    }
+
+    private double round(double value) {
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(5, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     public double getLat() {
