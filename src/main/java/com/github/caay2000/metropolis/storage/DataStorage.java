@@ -1,6 +1,8 @@
 package com.github.caay2000.metropolis.storage;
 
+import com.github.caay2000.metropolis.collector.CollectedData;
 import com.github.caay2000.metropolis.collector.PollutionLevel;
+import com.github.caay2000.metropolis.engine.Position;
 import com.github.caay2000.metropolis.event.Event;
 import com.github.caay2000.metropolis.event.EventBus;
 import com.github.caay2000.metropolis.event.EventPublishReport;
@@ -21,28 +23,33 @@ public class DataStorage {
         this.systemEventBus = systemEventBus;
         this.reporter = reporter;
 
-        this.systemEventBus.subscribe(EventType.STORE_COLLECT_DATA, this::store);
-        this.systemEventBus.subscribe(EventType.PUBLISH_REPORT, this::publishReport);
+        this.systemEventBus.subscribe(EventType.STORE_COLLECT_DATA, this::storeHandler);
+        this.systemEventBus.subscribe(EventType.PUBLISH_REPORT, this::publishReportHandler);
         this.measurements = 0;
         this.totalPollution = 0;
     }
 
-    public void store(Event<EventStoreCollectData> event) {
-
-        EventStoreCollectData eventStoreCollectData = event.to(EventStoreCollectData.class);
-
-        this.measurements++;
-        this.totalPollution += eventStoreCollectData.getCollectedData().getPollutionValue();
+    public void storeHandler(Event<EventStoreCollectData> event) {
+        this.store(event.to(EventStoreCollectData.class).getCollectedData());
     }
 
-    public void publishReport(Event<EventPublishReport> event) {
+    public void store(CollectedData collectedData) {
 
+        this.measurements++;
+        this.totalPollution += collectedData.getPollutionValue();
+    }
+
+    public void publishReportHandler(Event<EventPublishReport> event) {
         EventPublishReport eventPublishReport = event.to(EventPublishReport.class);
+        this.publishReport(eventPublishReport.getEventTime(), eventPublishReport.getPosition(), eventPublishReport.getSource());
+    }
+
+    public void publishReport(long eventTime, Position position, String source) {
 
         String level = calculateLevel();
         resetMeasurements();
 
-        Report report = new Report(event.getEventTime(), eventPublishReport.getPosition(), level, eventPublishReport.getSource());
+        Report report = new Report(eventTime, position, level, source);
         this.reporter.report(report);
     }
 
