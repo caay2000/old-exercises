@@ -3,63 +3,56 @@ package com.github.caay2000.metropolis.storage;
 import com.github.caay2000.metropolis.collector.CollectedData;
 import com.github.caay2000.metropolis.collector.PollutionLevel;
 import com.github.caay2000.metropolis.engine.Position;
-import com.github.caay2000.metropolis.event.Event;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.EventPublishReport;
-import com.github.caay2000.metropolis.event.EventStoreCollectData;
-import com.github.caay2000.metropolis.event.EventType;
-import com.github.caay2000.metropolis.reporter.Report;
+import com.github.caay2000.metropolis.event.EventHandler;
+import com.github.caay2000.metropolis.reporter.DataReport;
 import com.github.caay2000.metropolis.reporter.Reporter;
 
 public class DataStorage {
 
-    private final EventBus systemEventBus;
+    private final EventHandler eventHandler;
+
     private final Reporter reporter;
+    private final Data data;
 
-    private int measurements;
-    private int totalPollution;
-
-    public DataStorage(EventBus systemEventBus, Reporter reporter) {
-        this.systemEventBus = systemEventBus;
+    public DataStorage(EventBus eventBus, Reporter reporter) {
+        this.eventHandler = new DataStorageEventHandler(eventBus, this);
         this.reporter = reporter;
-
-        this.systemEventBus.subscribe(EventType.STORE_COLLECT_DATA, this::storeHandler);
-        this.systemEventBus.subscribe(EventType.PUBLISH_REPORT, this::publishReportHandler);
-        this.measurements = 0;
-        this.totalPollution = 0;
-    }
-
-    public void storeHandler(Event<EventStoreCollectData> event) {
-        this.store(event.to(EventStoreCollectData.class).getCollectedData());
+        this.data = new Data();
     }
 
     public void store(CollectedData collectedData) {
-
-        this.measurements++;
-        this.totalPollution += collectedData.getPollutionValue();
-    }
-
-    public void publishReportHandler(Event<EventPublishReport> event) {
-        EventPublishReport eventPublishReport = event.to(EventPublishReport.class);
-        this.publishReport(eventPublishReport.getEventTime(), eventPublishReport.getPosition(), eventPublishReport.getSource());
+        this.data.addMeasurement(collectedData.getPollutionValue());
     }
 
     public void publishReport(long eventTime, Position position, String source) {
 
-        String level = calculateLevel();
-        resetMeasurements();
-
-        Report report = new Report(eventTime, position, level, source);
-        this.reporter.report(report);
+        this.reporter.publishReport(new DataReport(eventTime, position, this.data.getAverage(), source));
+        this.data.resetMeasurements();
     }
 
-    private String calculateLevel() {
-        int average = this.totalPollution / this.measurements;
-        return PollutionLevel.Factory.getLevel(average).name();
-    }
+    private class Data {
+        private int measurements;
+        private int totalPollution;
 
-    private void resetMeasurements() {
-        this.measurements = 0;
-        this.totalPollution = 0;
+        public Data() {
+            this.measurements = 0;
+            this.totalPollution = 0;
+        }
+
+        public void addMeasurement(int pollutionValue) {
+            this.measurements++;
+            this.totalPollution += pollutionValue;
+        }
+
+        public String getAverage() {
+            int average = this.totalPollution / this.measurements;
+            return PollutionLevel.Factory.getLevel(average).name();
+        }
+
+        public void resetMeasurements() {
+            this.measurements = 0;
+            this.totalPollution = 0;
+        }
     }
 }

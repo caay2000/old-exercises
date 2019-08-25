@@ -1,53 +1,60 @@
 package com.github.caay2000.metropolis;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
-import com.github.caay2000.metropolis.engine.Step;
+import java.util.stream.Collectors;
+import com.github.caay2000.metropolis.engine.Position;
+import com.google.maps.internal.PolylineEncoding;
 
 public class Route {
 
-    private final List<Step> steps;
-    private double averageSpeed;
-    private double timeElapsed;
-    private double distanceTraveled;
+    private final String originalPolyline;
+    private final List<Position> routeStops;
 
-    public Route() {
-        this.steps = new ArrayList<>();
+    private int stopIndex;
+    private Direction direction;
+
+    private enum Direction {
+        FORWARD,
+        BACKWARD
     }
 
-    public void addStep(Step step) {
-
-        this.steps.add(step);
-
-        this.distanceTraveled += step.getDistance();
-        this.timeElapsed += step.getTime();
-        this.averageSpeed = distanceTraveled / timeElapsed;
+    public Route(String polyline) {
+        this.originalPolyline = polyline;
+        this.routeStops = PolylineEncoding.decode(polyline).stream()
+                .map(e -> new Position(e.lat, e.lng))
+                .collect(Collectors.toList());
+        this.stopIndex = 0;
+        this.direction = Direction.BACKWARD;
     }
 
-    public double getAverageSpeed() {
-        return averageSpeed;
+    public Position getCurrentStop() {
+        return this.routeStops.get(stopIndex);
     }
 
-    public double getTimeElapsed() {
-        return timeElapsed;
+    public Position getNextStop() {
+        if(isEndOfRoute()){
+            this.swapDirection();
+        }
+        return nextStop();
     }
 
-    public double getDistanceTraveled() {
-        return distanceTraveled;
+    public boolean isEndOfRoute() {
+        return stopIndex == routeStops.size() - 1 ||
+                stopIndex == 0;
     }
 
-    public List<Step> getSteps() {
-        return steps;
+    private void swapDirection() {
+        if (this.direction == Direction.FORWARD) {
+            this.direction = Direction.BACKWARD;
+        } else {
+            this.direction = Direction.FORWARD;
+        }
     }
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Route.class.getSimpleName() + "[", "]")
-                .add("averageSpeed=" + averageSpeed)
-                .add("timeElapsed=" + timeElapsed)
-                .add("distanceTraveled=" + distanceTraveled)
-                .add("stepsSize=" + steps.size())
-                .toString();
+    private Position nextStop() {
+        if (this.direction == Direction.FORWARD) {
+            return this.routeStops.get(stopIndex++);
+        }
+        return this.routeStops.get(stopIndex--);
     }
 }

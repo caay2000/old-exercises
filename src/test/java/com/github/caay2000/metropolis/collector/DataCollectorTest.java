@@ -13,23 +13,21 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import com.github.caay2000.metropolis.engine.Position;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.EventCollectData;
-import com.github.caay2000.metropolis.event.EventStoreCollectData;
+import com.github.caay2000.metropolis.event.type.EventStoreCollectData;
 import com.github.caay2000.metropolis.event.EventType;
 import com.github.caay2000.metropolis.simulation.Simulation;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataCollectorTest {
 
-    private static final long ANY_TIME = 1235l;
+    private static final long ANY_TIME = 1234l;
     private static final Position ANY_POSITION = new Position(0d, 0d);
-    private static final EventCollectData ANY_COLLECT_DATA_EVENT = new EventCollectData(1l, ANY_POSITION);
 
     @Mock
     private Simulation simulation;
 
     @Mock
-    private EventBus systemEventBus;
+    private EventBus eventBus;
 
     @Mock
     private DataMeter dataMeter;
@@ -41,68 +39,69 @@ public class DataCollectorTest {
 
     @Before
     public void setUp() {
-        testee = new DataCollector(simulation, systemEventBus, dataMeter);
+        testee = new DataCollector(simulation, eventBus, dataMeter);
     }
 
     @Test
-    public void collectDataEventPublishStoreCollectDataEvent() {
+    public void collectDataEventPublishStoreCollectedDataEvent() {
 
-        when(dataMeter.getValue()).thenReturn(1);
+        int pollutionValue = 1;
         when(simulation.getSimulationTime()).thenReturn(ANY_TIME);
+        when(dataMeter.getValue()).thenReturn(pollutionValue);
 
-        testee.collectHandler(ANY_COLLECT_DATA_EVENT);
+        testee.collect(ANY_POSITION);
 
         EventStoreCollectData eventStoreCollectData = retrieveEventStoreCollectData();
-        Assert.assertEquals(EventType.STORE_COLLECT_DATA, eventStoreCollectData.getType());
         Assert.assertEquals(ANY_TIME, eventStoreCollectData.getEventTime());
+        Assert.assertEquals(EventType.STORE_COLLECT_DATA, eventStoreCollectData.getType());
     }
 
     @Test
-    public void collectDataEventGoodLevel() {
+    public void collectDataGoodLevel() {
 
         int pollutionValue = 1;
         when(dataMeter.getValue()).thenReturn(pollutionValue);
 
-        CollectedData collectedData = testee.collect(ANY_COLLECT_DATA_EVENT);
+        testee.collect(ANY_POSITION);
 
-        assertCollectData(collectedData, ANY_POSITION, pollutionValue, PollutionLevel.GOOD);
+        assertCollectData(retrieveEventStoreCollectData().getCollectedData(), ANY_POSITION, pollutionValue, PollutionLevel.GOOD);
     }
 
     @Test
-    public void collectDataEventModerateLevel() {
+    public void collectDataModerateLevel() {
 
         int pollutionValue = 51;
         when(dataMeter.getValue()).thenReturn(pollutionValue);
 
-        CollectedData collectedData = testee.collect(ANY_COLLECT_DATA_EVENT);
+        testee.collect(ANY_POSITION);
 
-        assertCollectData(collectedData, ANY_POSITION, pollutionValue, PollutionLevel.MODERATE);
+        assertCollectData(retrieveEventStoreCollectData().getCollectedData(), ANY_POSITION, pollutionValue, PollutionLevel.MODERATE);
     }
 
     @Test
-    public void collectDataEventUSGLevel() {
+    public void collectDataUSGLevel() {
 
         int pollutionValue = 101;
         when(dataMeter.getValue()).thenReturn(pollutionValue);
 
-        CollectedData collectedData = testee.collect(ANY_COLLECT_DATA_EVENT);
+        testee.collect(ANY_POSITION);
 
-        assertCollectData(collectedData, ANY_POSITION, pollutionValue, PollutionLevel.USG);
+        assertCollectData(retrieveEventStoreCollectData().getCollectedData(), ANY_POSITION, pollutionValue, PollutionLevel.USG);
     }
 
     @Test
-    public void collectDataEventUnhealthyLevel() {
+    public void collectDataUnhealthyLevel() {
 
         int pollutionValue = 151;
         when(dataMeter.getValue()).thenReturn(pollutionValue);
 
-        CollectedData collectedData = testee.collect(ANY_COLLECT_DATA_EVENT);
+        testee.collect(ANY_POSITION);
 
-        assertCollectData(collectedData, ANY_POSITION, pollutionValue, PollutionLevel.UNHEALTHY);
+        assertCollectData(retrieveEventStoreCollectData().getCollectedData(), ANY_POSITION, pollutionValue, PollutionLevel.UNHEALTHY);
     }
 
     private EventStoreCollectData retrieveEventStoreCollectData() {
-        verify(systemEventBus).publish(eventStoreCollectDataCaptor.capture());
+        verify(eventBus).publish(eventStoreCollectDataCaptor.capture());
         return eventStoreCollectDataCaptor.getValue();
     }
 

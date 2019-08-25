@@ -13,6 +13,6 @@ public class RandomDataMeter implements DataMeter {
     @Override
     public int getValue() {
 
-        return Math.min(random.nextInt(200), random.nextInt(200));
+        return (int) Math.floor(Math.abs(Math.log(random.nextDouble()) * random.nextInt(90)));
     }
 }

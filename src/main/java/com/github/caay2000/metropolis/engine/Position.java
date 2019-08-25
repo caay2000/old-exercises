@@ -3,7 +3,6 @@ package com.github.caay2000.metropolis.engine;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-import java.util.StringJoiner;
 import com.google.common.math.DoubleMath;
 
 public class Position {
@@ -49,13 +48,5 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(lat, lng);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Position.class.getSimpleName() + "[", "]")
-                .add("lat=" + lat)
-                .add("lng=" + lng)
-                .toString();
     }
 }

@@ -1,83 +1,122 @@
 package com.github.caay2000.metropolis;
 
 import com.github.caay2000.metropolis.collector.DataCollector;
-import com.github.caay2000.metropolis.collector.DataMeter;
 import com.github.caay2000.metropolis.engine.MovementEngine;
 import com.github.caay2000.metropolis.engine.Position;
 import com.github.caay2000.metropolis.engine.Step;
-import com.github.caay2000.metropolis.event.SystemEventBus;
-import com.github.caay2000.metropolis.event.EventCollectData;
-import com.github.caay2000.metropolis.event.EventPublishReport;
-import com.github.caay2000.metropolis.reporter.SystemReporter;
+import com.github.caay2000.metropolis.event.EventBus;
+import com.github.caay2000.metropolis.event.type.EventCollectData;
+import com.github.caay2000.metropolis.event.type.EventPublishDataReport;
+import com.github.caay2000.metropolis.event.type.EventPublishRouteReport;
 import com.github.caay2000.metropolis.simulation.Simulation;
 import com.github.caay2000.metropolis.storage.DataStorage;
+import com.github.caay2000.metropolis.storage.RouteStorage;
 import com.google.common.math.DoubleMath;
 
-public class Robot {
+public class Robot implements Runnable {
 
-    public static final double MAX_ROBOT_SPEED = 3d; // meters/second
-    private static final double DELTA = 0.5d;
-    private final int reportTime;
-    private final SystemEventBus systemEventBus;
-    private final MovementEngine engine;
-    private final double reportDistance;
-    private final Route route;
-    private int nextReportTime;
-    private Position position;
+    private final RobotConfiguration robotConfiguration;
+
     private final Simulation simulation;
-    private double nextReportDistance;
+    private final EventBus eventBus;
+    private final MovementEngine engine;
+    private final RouteStorage routeStorage;
 
-    public Robot(Position position,
-                 double reportDistance,
-                 DataMeter dataMeter,
-                 int reportTime,
-                 Simulation simulation,
-                 SystemReporter reporter,
-                 SystemEventBus systemEventBus) {
-        this.position = position;
+    private Route route;
+    private Position currentPosition;
+
+    private int nextCollectDataDistance;
+    private int nextPublishReportTime;
+
+    private volatile boolean running = true;
+
+    @Override
+    public void run() {
+        while (running) {
+            moveTo(route.getNextStop());
+        }
+    }
+
+    public void stop() {
+        this.running = false;
+    }
+
+    public void restart() {
+        this.running = true;
+    }
+
+    public Robot(Simulation simulation, EventBus eventBus, RobotConfiguration robotConfiguration) {
+
         this.simulation = simulation;
-        this.reportDistance = reportDistance;
-        this.nextReportDistance = reportDistance;
-        this.systemEventBus = systemEventBus;
-        this.reportTime = reportTime;
-        this.nextReportTime = reportTime;
-        this.route = new Route();
-        this.engine = new MovementEngine(MAX_ROBOT_SPEED);
-        initSystems(dataMeter, reporter);
+        this.eventBus = eventBus;
+        this.robotConfiguration = robotConfiguration;
+
+        this.engine = new MovementEngine(robotConfiguration.getMaxRobotSpeed());
+        this.routeStorage = new RouteStorage(eventBus, robotConfiguration.getReporter());
+        new DataCollector(simulation, eventBus, robotConfiguration.getDataMeter());
+        new DataStorage(eventBus, robotConfiguration.getReporter());
+
+        this.nextCollectDataDistance = robotConfiguration.getCollectDataDistance();
+        this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
     }
 
-    private void initSystems(DataMeter dataMeter, SystemReporter reporter) {
-        new DataCollector(simulation, systemEventBus, dataMeter);
-        new DataStorage(systemEventBus, reporter);
+    public void start(String polyline) {
+        this.route = new Route(polyline);
+        this.currentPosition = route.getCurrentStop();
     }
 
-    public void moveTo(Position newPosition) {
+    public void moveTo(Position nextStop) {
 
-        Step step = this.engine.move(this.position, newPosition, nextReportDistance);
+        Step step = this.engine.move(this.currentPosition, nextStop, this.nextCollectDataDistance);
 
-        this.position = step.getDestination();
-        this.route.addStep(step);
-        this.nextReportDistance -= step.getDistance();
+        updateSimulation(step.getTime());
+        updateRobot(step);
+        checkCollectDataEvent();
+        checkPublishDataReportEvent();
 
-        if (DoubleMath.fuzzyCompare(nextReportDistance, 0d, DELTA) == 0) {
-            this.systemEventBus.publish(new EventCollectData(simulation.getSimulationTime(), this.position));
-            this.nextReportDistance = reportDistance;
-        }
-
-        this.nextReportTime -= step.getTime();
-
-        this.simulation.updateSimulation(step.getTime());
-        if (this.nextReportTime <= 0) {
-            this.systemEventBus.publish(new EventPublishReport(simulation.getSimulationTime(), this.position, "robot"));
-            this.nextReportTime = reportTime;
-        }
-
-        if (!this.position.equals(newPosition)) {
-            this.moveTo(newPosition);
+        if (notOnNextStop(nextStop)) {
+            this.moveTo(nextStop);
+        } else {
+            checkPublishRouteReportEvent();
         }
     }
 
-    public Route getRoute() {
-        return route;
+    private void checkPublishRouteReportEvent() {
+        if (this.route.isEndOfRoute()) {
+            this.eventBus.publish(new EventPublishRouteReport(simulation.getSimulationTime(), this.currentPosition));
+        }
+    }
+
+    private boolean notOnNextStop(Position nextStop) {
+        return !this.currentPosition.equals(nextStop);
+    }
+
+    private void checkPublishDataReportEvent() {
+        if (this.nextPublishReportTime <= 0) {
+            this.eventBus.publish(new EventPublishDataReport(simulation.getSimulationTime(), this.currentPosition, "robot"));
+            this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
+        }
+    }
+
+    private void updateSimulation(int secondsElapsed) {
+        this.simulation.updateSimulation(secondsElapsed);
+    }
+
+    private void updateRobot(Step step) {
+        this.currentPosition = step.getDestination();
+        this.nextCollectDataDistance -= step.getDistance();
+        this.nextPublishReportTime -= step.getTime();
+        this.routeStorage.addStep(step);
+    }
+
+    private void checkCollectDataEvent() {
+        if (DoubleMath.fuzzyCompare(nextCollectDataDistance, 0d, robotConfiguration.getDistanceDelta()) == 0) {
+            this.eventBus.publish(new EventCollectData(simulation.getSimulationTime(), this.currentPosition));
+            this.nextCollectDataDistance = this.robotConfiguration.getCollectDataDistance();
+        }
+    }
+
+    public RouteStorage getRouteStorage() {
+        return routeStorage;
     }
 }

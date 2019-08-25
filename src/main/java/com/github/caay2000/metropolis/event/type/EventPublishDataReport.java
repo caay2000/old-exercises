@@ -1,13 +1,15 @@
-package com.github.caay2000.metropolis.event;
+package com.github.caay2000.metropolis.event.type;
 
 import com.github.caay2000.metropolis.engine.Position;
+import com.github.caay2000.metropolis.event.Event;
+import com.github.caay2000.metropolis.event.EventType;
 
-public class EventPublishReport extends Event {
+public class EventPublishDataReport extends Event {
 
     private final Position position;
     private final String source;
 
-    public EventPublishReport(long time, Position position, String source) {
+    public EventPublishDataReport(long time, Position position, String source) {
         super(time);
         this.position = position;
         this.source = source;
@@ -15,7 +17,7 @@ public class EventPublishReport extends Event {
 
     @Override
     public EventType getType() {
-        return EventType.PUBLISH_REPORT;
+        return EventType.PUBLISH_DATA_REPORT;
     }
 
     public Position getPosition() {

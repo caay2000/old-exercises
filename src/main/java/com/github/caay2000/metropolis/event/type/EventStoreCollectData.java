@@ -1,6 +1,8 @@
-package com.github.caay2000.metropolis.event;
+package com.github.caay2000.metropolis.event.type;
 
 import com.github.caay2000.metropolis.collector.CollectedData;
+import com.github.caay2000.metropolis.event.Event;
+import com.github.caay2000.metropolis.event.EventType;
 
 public class EventStoreCollectData extends Event {
 

@@ -1,6 +1,8 @@
-package com.github.caay2000.metropolis.event;
+package com.github.caay2000.metropolis.event.type;
 
 import com.github.caay2000.metropolis.engine.Position;
+import com.github.caay2000.metropolis.event.Event;
+import com.github.caay2000.metropolis.event.EventType;
 
 public class EventCollectData extends Event {
 
