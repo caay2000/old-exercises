@@ -1,7 +1,7 @@
 package com.github.caay2000.metropolis;
 
+import java.io.PrintStream;
 import com.github.caay2000.metropolis.collector.DataMeter;
-import com.github.caay2000.metropolis.reporter.Reporter;
 
 public class RobotConfiguration {
 
@@ -11,17 +11,17 @@ public class RobotConfiguration {
     private static final int DEFAULT_COLLECT_DATA_DISTANCE = 100; // meters
     private static final int DEFAULT_PUBLISH_REPORT_TIME = 15 * 60; // seconds
 
-    private DataMeter dataMeter;
-    private Reporter reporter;
+    private final DataMeter dataMeter;
+    private final PrintStream output;
 
     private double maxRobotSpeed;
     private double distanceDelta;
     private int collectDataDistance;
     private int publishReportTime;
 
-    public RobotConfiguration(DataMeter dataMeter, Reporter reporter) {
+    public RobotConfiguration(DataMeter dataMeter, PrintStream output) {
         this.dataMeter = dataMeter;
-        this.reporter = reporter;
+        this.output = output;
         this.maxRobotSpeed = MAX_ROBOT_SPEED;
         this.distanceDelta = DISTANCE_DELTA;
         this.collectDataDistance = DEFAULT_COLLECT_DATA_DISTANCE;
@@ -32,18 +32,8 @@ public class RobotConfiguration {
         return dataMeter;
     }
 
-    public RobotConfiguration setDataMeter(DataMeter dataMeter) {
-        this.dataMeter = dataMeter;
-        return this;
-    }
-
-    public Reporter getReporter() {
-        return reporter;
-    }
-
-    public RobotConfiguration setReporter(Reporter reporter) {
-        this.reporter = reporter;
-        return this;
+    public PrintStream getOutput() {
+        return output;
     }
 
     public double getMaxRobotSpeed() {

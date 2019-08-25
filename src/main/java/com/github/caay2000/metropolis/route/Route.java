@@ -1,4 +1,4 @@
-package com.github.caay2000.metropolis;
+package com.github.caay2000.metropolis.route;
 
 import java.util.List;
 import java.util.stream.Collectors;

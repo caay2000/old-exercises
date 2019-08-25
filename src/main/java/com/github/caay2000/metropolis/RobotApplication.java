@@ -21,4 +21,12 @@ public class RobotApplication {
     public void stop() {
         this.robot.stop();
     }
+
+    public void restart() {
+        this.robot.restart();
+    }
+
+    public void publishInstantReport(){
+        this.robot.publishInstantReport();
+    }
 }

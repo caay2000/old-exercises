@@ -6,24 +6,27 @@ import com.github.caay2000.metropolis.engine.Position;
 import com.github.caay2000.metropolis.engine.Step;
 import com.github.caay2000.metropolis.event.EventBus;
 import com.github.caay2000.metropolis.event.EventHandler;
-import com.github.caay2000.metropolis.reporter.Reporter;
+import com.github.caay2000.metropolis.event.type.EventOutputReport;
 import com.github.caay2000.metropolis.reporter.RouteReport;
+import com.github.caay2000.metropolis.simulation.Simulation;
 
 public class RouteStorage {
 
-    private final EventHandler eventHandler;
+    private final EventBus eventBus;
+    private final Simulation simulation;
 
-    private final Reporter reporter;
+    private final EventHandler eventHandler;
 
     private final List<Step> steps;
     private double distanceTraveled;
     private int timeElapsed;
     private double averageSpeed;
 
-    public RouteStorage(EventBus eventBus, Reporter reporter) {
-
+    public RouteStorage(Simulation simulation, EventBus eventBus) {
+        this.eventBus = eventBus;
+        this.simulation = simulation;
         this.eventHandler = new RouteStorageEventHandler(eventBus, this);
-        this.reporter = reporter;
+
         this.steps = new ArrayList<>();
     }
 
@@ -53,6 +56,13 @@ public class RouteStorage {
     }
 
     public void publishReport(long eventTime, Position position) {
-        reporter.publishReport(new RouteReport(eventTime, position, distanceTraveled, timeElapsed, averageSpeed, "route"));
+        RouteReport routeReport = new RouteReport(eventTime, position, distanceTraveled, timeElapsed, averageSpeed, "route");
+        this.eventBus.publish(new EventOutputReport(simulation.getSimulationTime(), routeReport));
+        this.resetMeasurements();
+    }
+
+    private void resetMeasurements() {
+        this.distanceTraveled = 0;
+        this.timeElapsed = 0;
     }
 }

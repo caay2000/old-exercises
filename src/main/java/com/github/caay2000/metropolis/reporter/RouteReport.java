@@ -1,22 +1,25 @@
 package com.github.caay2000.metropolis.reporter;
 
+import java.text.DecimalFormat;
 import com.github.caay2000.metropolis.engine.Position;
 
 public class RouteReport implements Report {
 
+    private static final DecimalFormat FORMATTER = new DecimalFormat("###,###.##");
+
     private final long timestamp;
     private final Location location;
-    private final double distanceTravelled;
-    private final int timeElapsed;
-    private final double averageSpeed;
+    private final String distanceTravelled;
+    private final String timeElapsed;
+    private final String averageSpeed;
     private final String source;
 
     public RouteReport(long timestamp, Position position, double distanceTravelled, int timeElapsed, double averageSpeed, String source) {
         this.timestamp = timestamp;
         this.location = new Location(position.getLat(), position.getLng());
-        this.distanceTravelled = distanceTravelled;
-        this.timeElapsed = timeElapsed;
-        this.averageSpeed = averageSpeed;
+        this.distanceTravelled = FORMATTER.format(distanceTravelled);
+        this.timeElapsed = String.valueOf(timeElapsed);
+        this.averageSpeed = FORMATTER.format(averageSpeed);
         this.source = source;
     }
 
@@ -28,15 +31,15 @@ public class RouteReport implements Report {
         return location;
     }
 
-    public double getDistanceTravelled() {
+    public String getDistanceTravelled() {
         return distanceTravelled;
     }
 
-    public int getTimeElapsed() {
+    public String getTimeElapsed() {
         return timeElapsed;
     }
 
-    public double getAverageSpeed() {
+    public String getAverageSpeed() {
         return averageSpeed;
     }
 

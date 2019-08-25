@@ -7,7 +7,10 @@ import com.github.caay2000.metropolis.engine.Step;
 import com.github.caay2000.metropolis.event.EventBus;
 import com.github.caay2000.metropolis.event.type.EventCollectData;
 import com.github.caay2000.metropolis.event.type.EventPublishDataReport;
+import com.github.caay2000.metropolis.event.type.EventPublishInstantDataReport;
 import com.github.caay2000.metropolis.event.type.EventPublishRouteReport;
+import com.github.caay2000.metropolis.reporter.SystemReporter;
+import com.github.caay2000.metropolis.route.Route;
 import com.github.caay2000.metropolis.simulation.Simulation;
 import com.github.caay2000.metropolis.storage.DataStorage;
 import com.github.caay2000.metropolis.storage.RouteStorage;
@@ -20,7 +23,6 @@ public class Robot implements Runnable {
     private final Simulation simulation;
     private final EventBus eventBus;
     private final MovementEngine engine;
-    private final RouteStorage routeStorage;
 
     private Route route;
     private Position currentPosition;
@@ -52,9 +54,10 @@ public class Robot implements Runnable {
         this.robotConfiguration = robotConfiguration;
 
         this.engine = new MovementEngine(robotConfiguration.getMaxRobotSpeed());
-        this.routeStorage = new RouteStorage(eventBus, robotConfiguration.getReporter());
         new DataCollector(simulation, eventBus, robotConfiguration.getDataMeter());
-        new DataStorage(eventBus, robotConfiguration.getReporter());
+        new RouteStorage(simulation, eventBus);
+        new DataStorage(simulation, eventBus);
+        new SystemReporter(eventBus, robotConfiguration.getOutput());
 
         this.nextCollectDataDistance = robotConfiguration.getCollectDataDistance();
         this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
@@ -116,7 +119,7 @@ public class Robot implements Runnable {
         }
     }
 
-    public RouteStorage getRouteStorage() {
-        return routeStorage;
+    public void publishInstantReport() {
+        this.eventBus.publish(new EventPublishInstantDataReport(simulation.getSimulationTime(), this.currentPosition, "robot_instant"));
     }
 }

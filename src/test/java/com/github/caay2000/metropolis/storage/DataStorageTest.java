@@ -32,7 +32,7 @@ public class DataStorageTest {
     @Test
     public void dataStoredCorrectlyOneValue() throws Exception {
 
-        DataStorage testee = new DataStorage(eventBus, reporter);
+        DataStorage testee = new DataStorage(reporter, eventBus);
 
         testee.store(new CollectedData(ANY_POSITION, 10));
 
@@ -44,7 +44,7 @@ public class DataStorageTest {
     @Test
     public void dataStoredCorrectlyMultipleValues() throws Exception {
 
-        DataStorage testee = new DataStorage(eventBus, reporter);
+        DataStorage testee = new DataStorage(reporter, eventBus);
 
         testee.store(new CollectedData(ANY_POSITION, 10));
         testee.store(new CollectedData(ANY_POSITION, 10));
@@ -57,7 +57,7 @@ public class DataStorageTest {
     @Test
     public void publishReportPublishedCorrectly() {
 
-        DataStorage testee = new DataStorage(eventBus, reporter);
+        DataStorage testee = new DataStorage(reporter, eventBus);
         testee.store(new CollectedData(ANY_POSITION, 100));
         testee.store(new CollectedData(ANY_POSITION, 100));
 
@@ -69,7 +69,7 @@ public class DataStorageTest {
     @Test
     public void publishReportResetsMeasurements() throws Exception {
 
-        DataStorage testee = new DataStorage(eventBus, reporter);
+        DataStorage testee = new DataStorage(reporter, eventBus);
         testee.store(new CollectedData(ANY_POSITION, 100));
 
         testee.publishReport(ANY_TIME, ANY_POSITION, ANY_SOURCE);
