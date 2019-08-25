@@ -1,16 +1,11 @@
 package com.github.caay2000.metropolis;
 
 import com.github.caay2000.metropolis.collector.DataCollector;
-import com.github.caay2000.metropolis.engine.MovementEngine;
-import com.github.caay2000.metropolis.engine.Position;
-import com.github.caay2000.metropolis.engine.Step;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.type.EventCollectData;
-import com.github.caay2000.metropolis.event.type.EventPublishDataReport;
-import com.github.caay2000.metropolis.event.type.EventPublishInstantDataReport;
-import com.github.caay2000.metropolis.event.type.EventPublishRouteReport;
+import com.github.caay2000.metropolis.event.type.*;
+import com.github.caay2000.metropolis.reporter.Source;
 import com.github.caay2000.metropolis.reporter.SystemReporter;
-import com.github.caay2000.metropolis.route.Route;
+import com.github.caay2000.metropolis.route.*;
 import com.github.caay2000.metropolis.simulation.Simulation;
 import com.github.caay2000.metropolis.storage.DataStorage;
 import com.github.caay2000.metropolis.storage.RouteStorage;
@@ -32,6 +27,24 @@ public class Robot implements Runnable {
 
     private volatile boolean running = true;
 
+    public Robot(Simulation simulation, EventBus eventBus, RobotConfiguration robotConfiguration) {
+
+        this.simulation = simulation;
+        this.eventBus = eventBus;
+        this.robotConfiguration = robotConfiguration;
+
+        this.engine = new MovementEngine(robotConfiguration.getMaxRobotSpeed());
+
+        new DataCollector(simulation, eventBus, robotConfiguration.getDataMeter());
+        new SystemReporter(eventBus, robotConfiguration.getOutput());
+        new StationRange(simulation, eventBus);
+        new RouteStorage(simulation, eventBus);
+        new DataStorage(simulation, eventBus);
+
+        this.nextCollectDataDistance = robotConfiguration.getCollectDataDistance();
+        this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
+    }
+
     @Override
     public void run() {
         while (running) {
@@ -47,41 +60,34 @@ public class Robot implements Runnable {
         this.running = true;
     }
 
-    public Robot(Simulation simulation, EventBus eventBus, RobotConfiguration robotConfiguration) {
-
-        this.simulation = simulation;
-        this.eventBus = eventBus;
-        this.robotConfiguration = robotConfiguration;
-
-        this.engine = new MovementEngine(robotConfiguration.getMaxRobotSpeed());
-        new DataCollector(simulation, eventBus, robotConfiguration.getDataMeter());
-        new RouteStorage(simulation, eventBus);
-        new DataStorage(simulation, eventBus);
-        new SystemReporter(eventBus, robotConfiguration.getOutput());
-
-        this.nextCollectDataDistance = robotConfiguration.getCollectDataDistance();
-        this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
-    }
-
     public void start(String polyline) {
         this.route = new Route(polyline);
         this.currentPosition = route.getCurrentStop();
     }
 
-    public void moveTo(Position nextStop) {
+    public void publishInstantReport() {
+        this.eventBus.publish(new EventCollectInstantData(simulation.getSimulationTime(), this.currentPosition, Source.ON_DEMAND.getValue()));
+    }
 
-        Step step = this.engine.move(this.currentPosition, nextStop, this.nextCollectDataDistance);
+    private void moveTo(Position nextStop) {
 
-        updateSimulation(step.getTime());
-        updateRobot(step);
+        RouteData routeData = this.engine.move(this.currentPosition, nextStop, this.nextCollectDataDistance);
+
+        updateSimulation(routeData.getTime());
+        updateRobot(routeData);
         checkCollectDataEvent();
         checkPublishDataReportEvent();
+        checkPublishStationDataReportEvent();
 
         if (notOnNextStop(nextStop)) {
             this.moveTo(nextStop);
         } else {
             checkPublishRouteReportEvent();
         }
+    }
+
+    private void checkPublishStationDataReportEvent() {
+        this.eventBus.publish(new EventStationInRange(simulation.getSimulationTime(), this.currentPosition, this.route, this.robotConfiguration.getDistanceRangeStation()));
     }
 
     private void checkPublishRouteReportEvent() {
@@ -96,7 +102,7 @@ public class Robot implements Runnable {
 
     private void checkPublishDataReportEvent() {
         if (this.nextPublishReportTime <= 0) {
-            this.eventBus.publish(new EventPublishDataReport(simulation.getSimulationTime(), this.currentPosition, "robot"));
+            this.eventBus.publish(new EventPublishDataReport(simulation.getSimulationTime(), this.currentPosition, Source.ROBOT.getValue()));
             this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
         }
     }
@@ -105,11 +111,11 @@ public class Robot implements Runnable {
         this.simulation.updateSimulation(secondsElapsed);
     }
 
-    private void updateRobot(Step step) {
-        this.currentPosition = step.getDestination();
-        this.nextCollectDataDistance -= step.getDistance();
-        this.nextPublishReportTime -= step.getTime();
-        this.routeStorage.addStep(step);
+    private void updateRobot(RouteData routeData) {
+        this.currentPosition = routeData.getDestination();
+        this.nextCollectDataDistance -= routeData.getDistance();
+        this.nextPublishReportTime -= routeData.getTime();
+        this.eventBus.publish(new EventStoreRouteData(simulation.getSimulationTime(), routeData));
     }
 
     private void checkCollectDataEvent() {
@@ -119,7 +125,4 @@ public class Robot implements Runnable {
         }
     }
 
-    public void publishInstantReport() {
-        this.eventBus.publish(new EventPublishInstantDataReport(simulation.getSimulationTime(), this.currentPosition, "robot_instant"));
-    }
 }

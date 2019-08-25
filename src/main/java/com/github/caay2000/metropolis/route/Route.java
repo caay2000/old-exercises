@@ -1,25 +1,18 @@
 package com.github.caay2000.metropolis.route;
 
+import com.google.maps.internal.PolylineEncoding;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import com.github.caay2000.metropolis.engine.Position;
-import com.google.maps.internal.PolylineEncoding;
 
 public class Route {
 
-    private final String originalPolyline;
     private final List<Position> routeStops;
 
     private int stopIndex;
     private Direction direction;
 
-    private enum Direction {
-        FORWARD,
-        BACKWARD
-    }
-
     public Route(String polyline) {
-        this.originalPolyline = polyline;
         this.routeStops = PolylineEncoding.decode(polyline).stream()
                 .map(e -> new Position(e.lat, e.lng))
                 .collect(Collectors.toList());
@@ -32,7 +25,7 @@ public class Route {
     }
 
     public Position getNextStop() {
-        if(isEndOfRoute()){
+        if (isEndOfRoute()) {
             this.swapDirection();
         }
         return nextStop();
@@ -56,5 +49,10 @@ public class Route {
             return this.routeStops.get(stopIndex++);
         }
         return this.routeStops.get(stopIndex--);
+    }
+
+    private enum Direction {
+        FORWARD,
+        BACKWARD
     }
 }

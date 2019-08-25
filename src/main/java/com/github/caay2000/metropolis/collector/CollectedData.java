@@ -1,6 +1,6 @@
 package com.github.caay2000.metropolis.collector;
 
-import com.github.caay2000.metropolis.engine.Position;
+import com.github.caay2000.metropolis.route.Position;
 
 public class CollectedData {
 

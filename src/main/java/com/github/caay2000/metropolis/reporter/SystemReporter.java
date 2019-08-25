@@ -1,21 +1,20 @@
 package com.github.caay2000.metropolis.reporter;
 
-import java.io.PrintStream;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.caay2000.metropolis.event.EventBus;
 import com.github.caay2000.metropolis.event.EventHandler;
 import com.github.caay2000.metropolis.exception.MetropolisException;
 
-public class SystemReporter implements Reporter {
+import java.io.PrintStream;
 
-    private final EventHandler eventHandler;
+public class SystemReporter implements Reporter {
 
     private final PrintStream printStream;
     private final ObjectMapper serializer;
 
     public SystemReporter(EventBus eventBus, PrintStream printStream) {
-        this.eventHandler = new ReporterEventHandler(eventBus, this);
+        new SystemReporterEventHandler(eventBus, this);
 
         this.printStream = printStream;
         this.serializer = new ObjectMapper();

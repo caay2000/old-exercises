@@ -26,7 +26,7 @@ public class RobotApplication {
         this.robot.restart();
     }
 
-    public void publishInstantReport(){
+    public void publishInstantReport() {
         this.robot.publishInstantReport();
     }
 }

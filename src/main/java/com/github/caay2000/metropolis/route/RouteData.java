@@ -1,6 +1,6 @@
-package com.github.caay2000.metropolis.engine;
+package com.github.caay2000.metropolis.route;
 
-public class Step {
+public class RouteData {
 
     private final Position origin;
     private final Position destination;
@@ -8,7 +8,7 @@ public class Step {
     private final int time;
     private final double speed;
 
-    public Step(Position origin, Position destination, double distance, int time, double speed) {
+    public RouteData(Position origin, Position destination, double distance, int time, double speed) {
 
         this.origin = origin;
         this.destination = destination;

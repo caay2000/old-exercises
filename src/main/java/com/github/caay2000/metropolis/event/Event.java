@@ -4,7 +4,7 @@ import com.github.caay2000.metropolis.exception.MetropolisException;
 
 public abstract class Event<T> {
 
-    protected final long eventTime;
+    private final long eventTime;
 
     protected Event(long time) {
 

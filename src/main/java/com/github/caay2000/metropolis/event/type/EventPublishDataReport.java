@@ -1,8 +1,9 @@
 package com.github.caay2000.metropolis.event.type;
 
-import com.github.caay2000.metropolis.engine.Position;
+import com.github.caay2000.metropolis.route.Position;
 import com.github.caay2000.metropolis.event.Event;
 import com.github.caay2000.metropolis.event.EventType;
+import com.github.caay2000.metropolis.reporter.Source;
 
 public class EventPublishDataReport extends Event {
 

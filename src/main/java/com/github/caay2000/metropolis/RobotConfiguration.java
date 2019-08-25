@@ -1,7 +1,8 @@
 package com.github.caay2000.metropolis;
 
-import java.io.PrintStream;
 import com.github.caay2000.metropolis.collector.DataMeter;
+
+import java.io.PrintStream;
 
 public class RobotConfiguration {
 
@@ -10,6 +11,7 @@ public class RobotConfiguration {
 
     private static final int DEFAULT_COLLECT_DATA_DISTANCE = 100; // meters
     private static final int DEFAULT_PUBLISH_REPORT_TIME = 15 * 60; // seconds
+    private static final int DEFAULT_DISTANCE_RANGE_STATION = 100; // meters
 
     private final DataMeter dataMeter;
     private final PrintStream output;
@@ -18,6 +20,7 @@ public class RobotConfiguration {
     private double distanceDelta;
     private int collectDataDistance;
     private int publishReportTime;
+    private int distanceRangeStation;
 
     public RobotConfiguration(DataMeter dataMeter, PrintStream output) {
         this.dataMeter = dataMeter;
@@ -26,6 +29,7 @@ public class RobotConfiguration {
         this.distanceDelta = DISTANCE_DELTA;
         this.collectDataDistance = DEFAULT_COLLECT_DATA_DISTANCE;
         this.publishReportTime = DEFAULT_PUBLISH_REPORT_TIME;
+        this.distanceRangeStation = DEFAULT_DISTANCE_RANGE_STATION;
     }
 
     public DataMeter getDataMeter() {
@@ -69,6 +73,15 @@ public class RobotConfiguration {
 
     public RobotConfiguration setPublishReportTime(int publishReportTime) {
         this.publishReportTime = publishReportTime;
+        return this;
+    }
+
+    public int getDistanceRangeStation() {
+        return distanceRangeStation;
+    }
+
+    public RobotConfiguration setDistanceRangeStation(int distanceRangeStation) {
+        this.distanceRangeStation = distanceRangeStation;
         return this;
     }
 }

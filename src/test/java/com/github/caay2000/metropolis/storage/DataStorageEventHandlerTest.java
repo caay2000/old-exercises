@@ -1,24 +1,24 @@
 package com.github.caay2000.metropolis.storage;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-
+import com.github.caay2000.metropolis.collector.CollectedData;
+import com.github.caay2000.metropolis.event.EventBus;
+import com.github.caay2000.metropolis.event.SystemEventBus;
+import com.github.caay2000.metropolis.event.type.EventPublishDataReport;
+import com.github.caay2000.metropolis.event.type.EventStoreCollectData;
+import com.github.caay2000.metropolis.route.Position;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import com.github.caay2000.metropolis.collector.CollectedData;
-import com.github.caay2000.metropolis.engine.Position;
-import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.type.EventPublishDataReport;
-import com.github.caay2000.metropolis.event.type.EventStoreCollectData;
-import com.github.caay2000.metropolis.event.SystemEventBus;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataStorageEventHandlerTest {
 
-    private static final long ANY_TIME = 1234l;
-    private static final String ANY_SOURCE = "testSource";
+    private static final long ANY_TIME = 1234;
+    private static final String ANY_SOURCE = "test_source";
     private static final Position ANY_POSITION = new Position(0d, 0d);
     private static final CollectedData SOME_COLLECTED_DATA = new CollectedData(ANY_POSITION, 1);
 

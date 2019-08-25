@@ -1,22 +1,20 @@
-package com.github.caay2000.metropolis.engine;
+package com.github.caay2000.metropolis.route;
 
 public class MovementEngine {
 
-    private final HaversineDistance haversineDistance;
     private final double maxRobotSpeed;
 
     public MovementEngine(double maxRobotSpeed) {
-        this.haversineDistance = new HaversineDistance();
         this.maxRobotSpeed = maxRobotSpeed;
     }
 
-    public Step move(Position origin, Position destination, double maxDistance) {
+    public RouteData move(Position origin, Position destination, double maxDistance) {
 
         if (origin.equals(destination)) {
-            return new Step(origin, origin, 0d, 0, 0d);
+            return new RouteData(origin, origin, 0d, 0, 0d);
         }
 
-        double distance = this.haversineDistance.distanceBetween(origin, destination);
+        double distance = HaversineDistance.distanceBetween(origin, destination);
 
         if (distance > maxDistance) {
             destination = getDeltaPosition(origin, destination, distance, maxDistance);
@@ -25,7 +23,7 @@ public class MovementEngine {
         int roundedUpTime = (int) Math.ceil(distance / this.maxRobotSpeed);
         double speed = distance / roundedUpTime;
 
-        return new Step(origin, destination, distance, roundedUpTime, speed);
+        return new RouteData(origin, destination, distance, roundedUpTime, speed);
     }
 
     private Position getDeltaPosition(Position origin, Position destination, double distance, double maxDistance) {

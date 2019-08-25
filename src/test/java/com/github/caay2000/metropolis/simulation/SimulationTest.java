@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 public class SimulationTest {
 
-    public static final double TEST_SIMULATION_FACTOR = 1000d / (60d * 10d);
+    private static final double TEST_SIMULATION_FACTOR = 1000d / (60d * 10d);
 
     @Test
     public void simulationTimeFactor() {

@@ -1,7 +1,11 @@
-package com.github.caay2000.metropolis.reporter;
+package com.github.caay2000.metropolis.reporter.type;
+
+import com.github.caay2000.metropolis.reporter.Report;
+import com.github.caay2000.metropolis.route.Position;
 
 import java.text.DecimalFormat;
-import com.github.caay2000.metropolis.engine.Position;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 public class RouteReport implements Report {
 
@@ -46,4 +50,5 @@ public class RouteReport implements Report {
     public String getSource() {
         return source;
     }
+
 }

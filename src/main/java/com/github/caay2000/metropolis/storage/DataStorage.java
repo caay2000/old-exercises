@@ -2,25 +2,25 @@ package com.github.caay2000.metropolis.storage;
 
 import com.github.caay2000.metropolis.collector.CollectedData;
 import com.github.caay2000.metropolis.collector.PollutionLevel;
-import com.github.caay2000.metropolis.engine.Position;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.EventHandler;
 import com.github.caay2000.metropolis.event.type.EventOutputReport;
-import com.github.caay2000.metropolis.reporter.DataReport;
+import com.github.caay2000.metropolis.reporter.type.DataReport;
+import com.github.caay2000.metropolis.route.Position;
 import com.github.caay2000.metropolis.simulation.Simulation;
 
 public class DataStorage {
 
     private final Simulation simulation;
     private final EventBus eventBus;
-    private final EventHandler eventHandler;
 
     private final Data data;
 
     public DataStorage(Simulation simulation, EventBus eventBus) {
         this.simulation = simulation;
         this.eventBus = eventBus;
-        this.eventHandler = new DataStorageEventHandler(eventBus, this);
+
+        new DataStorageEventHandler(eventBus, this);
+
         this.data = new Data();
     }
 
@@ -35,26 +35,26 @@ public class DataStorage {
         this.data.resetMeasurements();
     }
 
-    private class Data {
+    private static class Data {
         private int measurements;
         private int totalPollution;
 
-        public Data() {
+        private Data() {
             this.measurements = 0;
             this.totalPollution = 0;
         }
 
-        public void addMeasurement(int pollutionValue) {
+        private void addMeasurement(int pollutionValue) {
             this.measurements++;
             this.totalPollution += pollutionValue;
         }
 
-        public String getAverage() {
+        private String getAverage() {
             int average = this.totalPollution / this.measurements;
             return PollutionLevel.Factory.getLevel(average).name();
         }
 
-        public void resetMeasurements() {
+        private void resetMeasurements() {
             this.measurements = 0;
             this.totalPollution = 0;
         }

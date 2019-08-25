@@ -1,9 +1,10 @@
-package com.github.caay2000.metropolis.engine;
+package com.github.caay2000.metropolis.route;
+
+import com.google.common.math.DoubleMath;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-import com.google.common.math.DoubleMath;
 
 public class Position {
 
@@ -23,6 +24,10 @@ public class Position {
 
     public double getLng() {
         return lng;
+    }
+
+    public boolean isInRange(Position other, int distance) {
+        return HaversineDistance.distanceBetween(this, other) <= distance;
     }
 
     private double round(double value) {

@@ -1,12 +1,13 @@
 package com.github.caay2000.metropolis.simulation;
 
-import java.util.Date;
 import com.github.caay2000.metropolis.exception.MetropolisException;
+
+import java.util.Date;
 
 public class Simulation {
 
     private static final double SIMULATION_TIME_FACTOR = 1000d / 60d;
-    private static final long ZERO_MILLI_SECONDS = 0l;
+    private static final long ZERO_MILLI_SECONDS = 0;
 
     private long realEpoch;
     private long simulationEpoch;

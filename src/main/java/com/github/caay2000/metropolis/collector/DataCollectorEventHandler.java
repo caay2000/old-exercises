@@ -2,25 +2,31 @@ package com.github.caay2000.metropolis.collector;
 
 import com.github.caay2000.metropolis.event.Event;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.type.EventCollectData;
 import com.github.caay2000.metropolis.event.EventHandler;
 import com.github.caay2000.metropolis.event.EventType;
+import com.github.caay2000.metropolis.event.type.EventCollectData;
+import com.github.caay2000.metropolis.event.type.EventCollectInstantData;
 
-public class DataCollectorEventHandler implements EventHandler {
+class DataCollectorEventHandler implements EventHandler {
 
-    private final EventBus eventBus;
     private final DataCollector dataCollector;
 
-    public DataCollectorEventHandler(EventBus eventBus, DataCollector dataCollector) {
-        this.eventBus = eventBus;
+    DataCollectorEventHandler(EventBus eventBus, DataCollector dataCollector) {
         this.dataCollector = dataCollector;
 
-        this.eventBus.subscribe(EventType.COLLECT_DATA, this::collectHandler);
+        eventBus.subscribe(EventType.COLLECT_DATA, this::collectHandler);
+        eventBus.subscribe(EventType.COLLECT_INSTANT_DATA, this::collectInstantHandler);
     }
 
-    public void collectHandler(Event<EventCollectData> event) {
+
+    private void collectHandler(Event<EventCollectData> event) {
 
         EventCollectData eventCollectData = event.to(EventCollectData.class);
         dataCollector.collect(eventCollectData.getPosition());
+    }
+
+    private void collectInstantHandler(Event<EventCollectInstantData> event) {
+        EventCollectInstantData eventCollectInstantData = event.to(EventCollectInstantData.class);
+        dataCollector.collectInstant(eventCollectInstantData.getPosition(), eventCollectInstantData.getSource());
     }
 }

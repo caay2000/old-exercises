@@ -1,15 +1,16 @@
 package com.github.caay2000.metropolis;
 
-import java.io.PrintStream;
+import com.github.caay2000.metropolis.collector.RandomDataMeter;
+import com.github.caay2000.metropolis.event.EventBus;
+import com.github.caay2000.metropolis.event.SystemEventBus;
+import com.github.caay2000.metropolis.simulation.Simulation;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import com.github.caay2000.metropolis.collector.RandomDataMeter;
-import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.SystemEventBus;
-import com.github.caay2000.metropolis.reporter.SystemReporter;
-import com.github.caay2000.metropolis.simulation.Simulation;
+
+import java.io.PrintStream;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RobotIntegrationTest {
@@ -25,12 +26,16 @@ public class RobotIntegrationTest {
 
         Simulation simualtion = new Simulation(TEST_SIMULATION_FACTOR);
         EventBus eventBus = new SystemEventBus();
-        RobotConfiguration robotConfiguration = new RobotConfiguration(new RandomDataMeter(), new SystemReporter(System.out));
+        RobotConfiguration robotConfiguration = new RobotConfiguration(new RandomDataMeter(), System.out);
 
         RobotApplication robot = new RobotApplication(simualtion, eventBus, robotConfiguration);
 
         robot.start(POLYLINE);
-        Thread.sleep(20000l);
+        for (int i = 0; i < 20; i++) {
+            Thread.sleep(1000l);
+            robot.publishInstantReport();
+        }
+
         robot.stop();
     }
 }

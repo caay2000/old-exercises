@@ -1,7 +1,9 @@
-package com.github.caay2000.metropolis.reporter;
+package com.github.caay2000.metropolis.reporter.type;
+
+import com.github.caay2000.metropolis.reporter.Report;
+import com.github.caay2000.metropolis.route.Position;
 
 import java.util.Objects;
-import com.github.caay2000.metropolis.engine.Position;
 
 public class DataReport implements Report {
 
@@ -33,24 +35,5 @@ public class DataReport implements Report {
         return source;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        DataReport report = (DataReport) o;
-        return timestamp == report.timestamp &&
-                Objects.equals(location, report.location) &&
-                Objects.equals(level, report.level) &&
-                Objects.equals(source, report.source);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(timestamp, location, level, source);
-    }
 }
 

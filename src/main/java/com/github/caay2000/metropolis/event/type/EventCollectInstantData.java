@@ -1,23 +1,24 @@
 package com.github.caay2000.metropolis.event.type;
 
-import com.github.caay2000.metropolis.engine.Position;
+import com.github.caay2000.metropolis.route.Position;
 import com.github.caay2000.metropolis.event.Event;
 import com.github.caay2000.metropolis.event.EventType;
+import com.github.caay2000.metropolis.reporter.Source;
 
-public class EventPublishInstantDataReport extends Event {
+public class EventCollectInstantData extends Event {
 
     private final Position position;
     private final String source;
 
-    public EventPublishInstantDataReport(long time, Position position, String source) {
-        super(time);
+    public EventCollectInstantData(long eventTime, Position position, String source) {
+        super(eventTime);
         this.position = position;
         this.source = source;
     }
 
     @Override
     public EventType getType() {
-        return EventType.PUBLISH_DATA_REPORT;
+        return EventType.COLLECT_INSTANT_DATA;
     }
 
     public Position getPosition() {

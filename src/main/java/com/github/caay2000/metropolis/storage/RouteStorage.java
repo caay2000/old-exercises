@@ -1,13 +1,11 @@
 package com.github.caay2000.metropolis.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.github.caay2000.metropolis.engine.Position;
-import com.github.caay2000.metropolis.engine.Step;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.EventHandler;
 import com.github.caay2000.metropolis.event.type.EventOutputReport;
-import com.github.caay2000.metropolis.reporter.RouteReport;
+import com.github.caay2000.metropolis.reporter.Source;
+import com.github.caay2000.metropolis.reporter.type.RouteReport;
+import com.github.caay2000.metropolis.route.Position;
+import com.github.caay2000.metropolis.route.RouteData;
 import com.github.caay2000.metropolis.simulation.Simulation;
 
 public class RouteStorage {
@@ -15,54 +13,57 @@ public class RouteStorage {
     private final EventBus eventBus;
     private final Simulation simulation;
 
-    private final EventHandler eventHandler;
-
-    private final List<Step> steps;
-    private double distanceTraveled;
-    private int timeElapsed;
-    private double averageSpeed;
+    private final Data data;
 
     public RouteStorage(Simulation simulation, EventBus eventBus) {
         this.eventBus = eventBus;
         this.simulation = simulation;
-        this.eventHandler = new RouteStorageEventHandler(eventBus, this);
 
-        this.steps = new ArrayList<>();
+        new RouteStorageEventHandler(eventBus, this);
+
+        this.data = new Data();
     }
 
-    public void addStep(Step step) {
-
-        this.steps.add(step);
-
-        this.distanceTraveled += step.getDistance();
-        this.timeElapsed += step.getTime();
-        this.averageSpeed = distanceTraveled / timeElapsed;
-    }
-
-    public double getAverageSpeed() {
-        return averageSpeed;
-    }
-
-    public double getTimeElapsed() {
-        return timeElapsed;
-    }
-
-    public double getDistanceTraveled() {
-        return distanceTraveled;
-    }
-
-    public List<Step> getSteps() {
-        return steps;
+    public void store(RouteData routeData) {
+        this.data.addRouteData(routeData);
     }
 
     public void publishReport(long eventTime, Position position) {
-        RouteReport routeReport = new RouteReport(eventTime, position, distanceTraveled, timeElapsed, averageSpeed, "route");
+        RouteReport routeReport = new RouteReport(eventTime, position, this.data.getDistanceTraveled(), this.data.getTimeElapsed(), this.data.getAverageSpeed(), Source.ROUTE.getValue());
         this.eventBus.publish(new EventOutputReport(simulation.getSimulationTime(), routeReport));
-        this.resetMeasurements();
+        this.data.resetMeasurements();
     }
 
-    private void resetMeasurements() {
-        this.distanceTraveled = 0;
-        this.timeElapsed = 0;
+    private static class Data {
+        private double distanceTraveled;
+        private int timeElapsed;
+        private double averageSpeed;
+
+        private void addRouteData(RouteData routeData) {
+
+            this.distanceTraveled += routeData.getDistance();
+            this.timeElapsed += routeData.getTime();
+            this.averageSpeed = distanceTraveled / timeElapsed;
+        }
+
+
+        private double getAverageSpeed() {
+            return averageSpeed;
+        }
+
+        private int getTimeElapsed() {
+            return timeElapsed;
+        }
+
+        private double getDistanceTraveled() {
+            return distanceTraveled;
+        }
+
+        private void resetMeasurements() {
+            this.distanceTraveled = 0;
+            this.timeElapsed = 0;
+        }
     }
+
+
 }

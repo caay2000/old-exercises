@@ -1,14 +1,14 @@
-package com.github.caay2000.metropolis.engine;
+package com.github.caay2000.metropolis.route;
 
 class HaversineDistance {
 
     private static final double EARTH_RADIUS = 6371d;
 
-    public double distanceBetween(Position origin, Position destination) {
+    static double distanceBetween(Position origin, Position destination) {
         return haversine(origin, destination);
     }
 
-    private double haversine(Position origin, Position destination) {
+    private static double haversine(Position origin, Position destination) {
 
         double dLat = Math.toRadians(destination.getLat() - origin.getLat());
         double dLon = Math.toRadians(destination.getLng() - origin.getLng());
