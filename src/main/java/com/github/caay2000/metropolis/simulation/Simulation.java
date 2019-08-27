@@ -40,6 +40,6 @@ public class Simulation {
     }
 
     public long getSimulationTime() {
-        return this.simulationEpoch / 1000;
+        return this.simulationEpoch;
     }
 }
