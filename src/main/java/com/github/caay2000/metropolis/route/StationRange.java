@@ -1,16 +1,14 @@
 package com.github.caay2000.metropolis.route;
 
-import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.EventHandler;
-import com.github.caay2000.metropolis.event.type.EventCollectInstantData;
-import com.github.caay2000.metropolis.simulation.Simulation;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import com.github.caay2000.metropolis.event.EventBus;
+import com.github.caay2000.metropolis.event.type.EventCollectInstantData;
+import com.github.caay2000.metropolis.simulation.Simulation;
 
 public class StationRange {
 
@@ -43,7 +41,6 @@ public class StationRange {
         if (route.isEndOfRoute()) {
             this.stationsVisited.clear();
         }
-
     }
 
     private Predicate<Station> isInRange(Position position, int distance) {

@@ -11,7 +11,7 @@ public class Position {
 
     private final double DELTA = 0.000001d;
 
-    private final Double lat;
+    private final double lat;
     private final double lng;
 
     public Position(double lat, double lng) {

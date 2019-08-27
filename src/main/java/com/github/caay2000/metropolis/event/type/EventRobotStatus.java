@@ -23,7 +23,7 @@ public class EventRobotStatus extends Event {
     }
 
     public Report getReport() {
-        return new RobotStatusReport(status, position);
+        return new RobotStatusReport(getEventTime(), position, status);
     }
 
     public enum Status {

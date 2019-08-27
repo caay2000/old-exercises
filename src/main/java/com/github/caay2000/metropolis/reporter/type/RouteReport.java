@@ -4,12 +4,10 @@ import com.github.caay2000.metropolis.reporter.Report;
 import com.github.caay2000.metropolis.route.Position;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
-import java.util.StringJoiner;
 
 public class RouteReport implements Report {
 
-    private static final DecimalFormat FORMATTER = new DecimalFormat("###,###.##");
+    private static final DecimalFormat DISTANCE_FORMATTER = new DecimalFormat("###,###.##");
 
     private final long timestamp;
     private final Location location;
@@ -21,9 +19,9 @@ public class RouteReport implements Report {
     public RouteReport(long timestamp, Position position, double distanceTravelled, int timeElapsed, double averageSpeed, String source) {
         this.timestamp = timestamp;
         this.location = new Location(position.getLat(), position.getLng());
-        this.distanceTravelled = FORMATTER.format(distanceTravelled);
+        this.distanceTravelled = DISTANCE_FORMATTER.format(distanceTravelled);
         this.timeElapsed = String.valueOf(timeElapsed);
-        this.averageSpeed = FORMATTER.format(averageSpeed);
+        this.averageSpeed = DISTANCE_FORMATTER.format(averageSpeed);
         this.source = source;
     }
 

@@ -99,27 +99,6 @@ public class Robot implements Runnable {
         }
     }
 
-    private void checkPublishStationDataReportEvent() {
-        this.eventBus.publish(new EventStationInRange(simulation.getSimulationTime(), this.currentPosition, this.route, this.robotConfiguration.getDistanceRangeStation()));
-    }
-
-    private void checkPublishRouteReportEvent() {
-        if (this.route.isEndOfRoute()) {
-            this.eventBus.publish(new EventPublishRouteReport(simulation.getSimulationTime(), this.currentPosition));
-        }
-    }
-
-    private boolean notOnNextStop(Position nextStop) {
-        return !this.currentPosition.equals(nextStop);
-    }
-
-    private void checkPublishDataReportEvent() {
-        if (this.nextPublishReportTime <= 0) {
-            this.eventBus.publish(new EventPublishDataReport(simulation.getSimulationTime(), this.currentPosition, Source.ROBOT.getValue()));
-            this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
-        }
-    }
-
     private void updateSimulation(int secondsElapsed) {
         this.simulation.updateSimulation(secondsElapsed);
     }
@@ -137,4 +116,28 @@ public class Robot implements Runnable {
             this.nextCollectDataDistance = this.robotConfiguration.getCollectDataDistance();
         }
     }
+
+    private void checkPublishRouteReportEvent() {
+        if (this.route.isEndOfRoute()) {
+            this.eventBus.publish(new EventPublishRouteReport(simulation.getSimulationTime(), this.currentPosition));
+        }
+    }
+
+    private void checkPublishStationDataReportEvent() {
+        this.eventBus.publish(new EventStationInRange(simulation.getSimulationTime(), this.currentPosition, this.route, this.robotConfiguration.getDistanceRangeStation()));
+    }
+
+    private boolean notOnNextStop(Position nextStop) {
+        return !this.currentPosition.equals(nextStop);
+    }
+
+    private void checkPublishDataReportEvent() {
+        if (this.nextPublishReportTime <= 0) {
+            this.eventBus.publish(new EventPublishDataReport(simulation.getSimulationTime(), this.currentPosition, Source.ROBOT.getValue()));
+            this.nextPublishReportTime = robotConfiguration.getPublishReportTime();
+        }
+    }
+
+
+
 }

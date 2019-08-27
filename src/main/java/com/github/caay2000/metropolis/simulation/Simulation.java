@@ -1,8 +1,7 @@
 package com.github.caay2000.metropolis.simulation;
 
-import com.github.caay2000.metropolis.exception.MetropolisException;
-
 import java.util.Date;
+import com.github.caay2000.metropolis.exception.MetropolisException;
 
 public class Simulation {
 
@@ -41,6 +40,6 @@ public class Simulation {
     }
 
     public long getSimulationTime() {
-        return this.simulationEpoch;
+        return this.simulationEpoch / 1000;
     }
 }

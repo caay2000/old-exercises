@@ -15,6 +15,7 @@ class SystemReporterEventHandler implements EventHandler {
         this.reporter = reporter;
 
         eventBus.subscribe(EventType.OUTPUT_REPORT, this::printReportHandler);
+        eventBus.subscribe(EventType.ROBOT_STATUS, this::printStatusHandler);
     }
 
     private void printReportHandler(Event<EventOutputReport> event) {

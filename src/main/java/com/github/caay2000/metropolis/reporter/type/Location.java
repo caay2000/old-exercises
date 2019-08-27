@@ -1,6 +1,7 @@
 package com.github.caay2000.metropolis.reporter.type;
 
 public class Location {
+
     private final double lat;
     private final double lng;
 
@@ -16,5 +17,4 @@ public class Location {
     public double getLng() {
         return lng;
     }
-
 }

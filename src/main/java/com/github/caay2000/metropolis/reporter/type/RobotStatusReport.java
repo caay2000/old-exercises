@@ -6,19 +6,27 @@ import com.github.caay2000.metropolis.route.Position;
 
 public class RobotStatusReport implements Report {
 
-    private final EventRobotStatus.Status status;
+    private final long timestamp;
     private final Location location;
+    private final EventRobotStatus.Status status;
 
-    public RobotStatusReport(EventRobotStatus.Status status, Position position) {
+    public RobotStatusReport(long timestamp, Position position, EventRobotStatus.Status status) {
+        this.timestamp = timestamp;
         this.status = status;
         this.location = new Location(position.getLat(), position.getLng());
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     public EventRobotStatus.Status getStatus() {
         return status;
     }
 
-    public Location getLocation() {
-        return location;
-    }
+
 }
