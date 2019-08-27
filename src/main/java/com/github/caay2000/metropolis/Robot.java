@@ -2,10 +2,20 @@ package com.github.caay2000.metropolis;
 
 import com.github.caay2000.metropolis.collector.DataCollector;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.type.*;
+import com.github.caay2000.metropolis.event.type.EventCollectData;
+import com.github.caay2000.metropolis.event.type.EventCollectInstantData;
+import com.github.caay2000.metropolis.event.type.EventPublishDataReport;
+import com.github.caay2000.metropolis.event.type.EventPublishRouteReport;
+import com.github.caay2000.metropolis.event.type.EventRobotStatus;
+import com.github.caay2000.metropolis.event.type.EventStationInRange;
+import com.github.caay2000.metropolis.event.type.EventStoreRouteData;
 import com.github.caay2000.metropolis.reporter.Source;
 import com.github.caay2000.metropolis.reporter.SystemReporter;
-import com.github.caay2000.metropolis.route.*;
+import com.github.caay2000.metropolis.route.MovementEngine;
+import com.github.caay2000.metropolis.route.Position;
+import com.github.caay2000.metropolis.route.Route;
+import com.github.caay2000.metropolis.route.RouteData;
+import com.github.caay2000.metropolis.route.StationRange;
 import com.github.caay2000.metropolis.simulation.Simulation;
 import com.github.caay2000.metropolis.storage.DataStorage;
 import com.github.caay2000.metropolis.storage.RouteStorage;
@@ -52,17 +62,20 @@ public class Robot implements Runnable {
         }
     }
 
+    public void start(String polyline) {
+        this.route = new Route(polyline);
+        this.currentPosition = route.getCurrentStop();
+        this.eventBus.publish(new EventRobotStatus(simulation.getSimulationTime(), this.currentPosition, EventRobotStatus.Status.START));
+    }
+
     public void stop() {
         this.running = false;
+        this.eventBus.publish(new EventRobotStatus(simulation.getSimulationTime(), this.currentPosition, EventRobotStatus.Status.STOP));
     }
 
     public void restart() {
         this.running = true;
-    }
-
-    public void start(String polyline) {
-        this.route = new Route(polyline);
-        this.currentPosition = route.getCurrentStop();
+        this.eventBus.publish(new EventRobotStatus(simulation.getSimulationTime(), this.currentPosition, EventRobotStatus.Status.RESTART));
     }
 
     public void publishInstantReport() {
@@ -124,5 +137,4 @@ public class Robot implements Runnable {
             this.nextCollectDataDistance = this.robotConfiguration.getCollectDataDistance();
         }
     }
-
 }

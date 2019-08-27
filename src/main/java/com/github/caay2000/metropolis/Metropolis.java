@@ -1,13 +1,12 @@
-import com.github.caay2000.metropolis.RobotApplication;
-import com.github.caay2000.metropolis.RobotConfiguration;
-import com.github.caay2000.metropolis.collector.RandomDataMeter;
-import com.github.caay2000.metropolis.console.SystemConsole;
-import com.github.caay2000.metropolis.event.SystemEventBus;
-import com.github.caay2000.metropolis.simulation.Simulation;
+package com.github.caay2000.metropolis;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import com.github.caay2000.metropolis.collector.RandomDataMeter;
+import com.github.caay2000.metropolis.console.SystemConsole;
+import com.github.caay2000.metropolis.event.SystemEventBus;
+import com.github.caay2000.metropolis.simulation.Simulation;
 
 public class Metropolis {
 
