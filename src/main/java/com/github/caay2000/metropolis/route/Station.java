@@ -2,7 +2,7 @@ package com.github.caay2000.metropolis.route;
 
 public enum Station {
 
-//    BUCKINGHAM("Buckingham Palace", new Position(51.501299d, -0.141935d), true),
+    //    BUCKINGHAM("Buckingham Palace", new Position(51.501299d, -0.141935d), true),
     BUCKINGHAM("Buckingham Palace", new Position(51.50155d, -0.14200d), true),
     TEMPLE_STATION("Temple Station", new Position(51.510852d, -0.114165d), true),
     TRAFALGAR_SQUARE("Trafalgar Square", new Position(51.50807d, -0.12808), true),

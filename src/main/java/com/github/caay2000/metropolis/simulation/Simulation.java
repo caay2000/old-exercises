@@ -1,7 +1,8 @@
 package com.github.caay2000.metropolis.simulation;
 
-import java.util.Date;
 import com.github.caay2000.metropolis.exception.MetropolisException;
+
+import java.util.Date;
 
 public class Simulation {
 
@@ -10,13 +11,7 @@ public class Simulation {
 
     private long realEpoch;
     private long simulationEpoch;
-    private double simulationFactor;
-
-    public Simulation() {
-        this.simulationEpoch = new Date().getTime();
-        this.realEpoch = this.simulationEpoch;
-        this.simulationFactor = SIMULATION_TIME_FACTOR;
-    }
+    private final double simulationFactor;
 
     public Simulation(double simulationFactor) {
         this.simulationEpoch = new Date().getTime();

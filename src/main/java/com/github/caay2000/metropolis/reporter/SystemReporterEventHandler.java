@@ -20,13 +20,13 @@ class SystemReporterEventHandler implements EventHandler {
 
     private void printReportHandler(Event<EventOutputReport> event) {
 
-        EventOutputReport eventOutputReport = event.to(EventOutputReport.class);
+        EventOutputReport eventOutputReport = event.to();
         reporter.printReport(eventOutputReport.getReport());
     }
 
     private void printStatusHandler(Event<EventRobotStatus> event) {
 
-        EventRobotStatus eventRobotStatus = event.to(EventRobotStatus.class);
+        EventRobotStatus eventRobotStatus = event.to();
         reporter.printReport(eventRobotStatus.getReport());
     }
 }

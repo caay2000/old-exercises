@@ -1,12 +1,10 @@
 package com.github.caay2000.metropolis.collector;
 
-import com.github.caay2000.metropolis.route.Position;
 import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.EventHandler;
 import com.github.caay2000.metropolis.event.type.EventOutputReport;
 import com.github.caay2000.metropolis.event.type.EventStoreCollectData;
 import com.github.caay2000.metropolis.reporter.type.DataReport;
-import com.github.caay2000.metropolis.reporter.Source;
+import com.github.caay2000.metropolis.route.Position;
 import com.github.caay2000.metropolis.simulation.Simulation;
 
 public class DataCollector {

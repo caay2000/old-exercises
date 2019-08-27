@@ -48,17 +48,20 @@ public class SystemConsole implements Console {
         if (line.startsWith("start")) {
             return ConsoleOperation.aStartOperation(line.replace("start ", ""));
         }
-        if (line.startsWith("stop")) {
+        if (line.equals("stop")) {
             return ConsoleOperation.aStopOperation();
         }
-        if (line.startsWith("restart")) {
+        if (line.equals("restart")) {
             return ConsoleOperation.aRestartOperation();
         }
-        if (line.startsWith("report")) {
+        if (line.equals("report")) {
             return ConsoleOperation.aReportOperation();
         }
-        if (line.startsWith(":quit")) {
-            return ConsoleOperation.aQuitOperation();
+        if (line.equals("example")) {
+            return ConsoleOperation.anExampleOperation();
+        }
+        if (line.equals("exit")) {
+            return ConsoleOperation.anExitOperation();
         }
         return null;
     }

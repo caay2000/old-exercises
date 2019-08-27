@@ -1,8 +1,8 @@
 package com.github.caay2000.metropolis.event.type;
 
-import com.github.caay2000.metropolis.route.RouteData;
 import com.github.caay2000.metropolis.event.Event;
 import com.github.caay2000.metropolis.event.EventType;
+import com.github.caay2000.metropolis.route.RouteData;
 
 public class EventStoreRouteData extends Event {
 

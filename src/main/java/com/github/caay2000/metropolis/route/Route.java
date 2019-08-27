@@ -1,6 +1,6 @@
 package com.github.caay2000.metropolis.route;
 
-import com.google.maps.internal.PolylineEncoding;
+import com.github.caay2000.metropolis.util.PolylineEncoding;
 
 import java.util.List;
 import java.util.stream.Collectors;

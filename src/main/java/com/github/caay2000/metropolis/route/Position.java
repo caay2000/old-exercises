@@ -1,6 +1,6 @@
 package com.github.caay2000.metropolis.route;
 
-import com.google.common.math.DoubleMath;
+import com.github.caay2000.metropolis.util.DoubleMath;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

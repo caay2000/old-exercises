@@ -35,11 +35,11 @@ public class RobotIntegrationTest {
 
         robot.start(POLYLINE);
         for (int i = 0; i < 20; i++) {
-            Thread.sleep(1000l);
+            Thread.sleep(1000);
             robot.stop();
-            Thread.sleep(100l);
+            Thread.sleep(100);
             robot.publishInstantReport();
-            Thread.sleep(100l);
+            Thread.sleep(100);
             robot.restart();
         }
 

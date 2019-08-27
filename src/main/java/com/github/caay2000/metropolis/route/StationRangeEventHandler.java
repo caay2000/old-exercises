@@ -17,7 +17,7 @@ class StationRangeEventHandler implements EventHandler {
     }
 
     private void inRangeHandler(Event<EventStationInRange> event) {
-        EventStationInRange eventStationInRange = event.to(EventStationInRange.class);
+        EventStationInRange eventStationInRange = event.to();
         this.stationRange.check(eventStationInRange.getPosition(), eventStationInRange.getRoute(), eventStationInRange.getDistanceRange());
     }
 }

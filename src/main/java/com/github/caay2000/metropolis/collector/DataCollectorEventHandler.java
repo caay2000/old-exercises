@@ -21,12 +21,12 @@ class DataCollectorEventHandler implements EventHandler {
 
     private void collectHandler(Event<EventCollectData> event) {
 
-        EventCollectData eventCollectData = event.to(EventCollectData.class);
+        EventCollectData eventCollectData = event.to();
         dataCollector.collect(eventCollectData.getPosition());
     }
 
     private void collectInstantHandler(Event<EventCollectInstantData> event) {
-        EventCollectInstantData eventCollectInstantData = event.to(EventCollectInstantData.class);
+        EventCollectInstantData eventCollectInstantData = event.to();
         dataCollector.collectInstant(eventCollectInstantData.getPosition(), eventCollectInstantData.getSource());
     }
 }

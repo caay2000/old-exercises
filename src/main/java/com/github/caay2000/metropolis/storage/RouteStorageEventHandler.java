@@ -19,11 +19,11 @@ class RouteStorageEventHandler implements EventHandler {
     }
 
     private void storeHandler(Event<EventStoreRouteData> event) {
-        this.routeStorage.store(event.to(EventStoreRouteData.class).getRouteData());
+        this.routeStorage.store(event.to().getRouteData());
     }
 
     private void publishReportHandler(Event<EventPublishRouteReport> event) {
-        EventPublishRouteReport eventPublishRouteReport = event.to(EventPublishRouteReport.class);
+        EventPublishRouteReport eventPublishRouteReport = event.to();
         this.routeStorage.publishReport(eventPublishRouteReport.getEventTime(), eventPublishRouteReport.getPosition());
     }
 }

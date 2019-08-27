@@ -1,9 +1,9 @@
 package com.github.caay2000.metropolis.route;
 
-import com.github.caay2000.metropolis.utils.ReflectionTestUtils;
 import com.github.caay2000.metropolis.event.EventBus;
 import com.github.caay2000.metropolis.event.type.EventCollectInstantData;
 import com.github.caay2000.metropolis.simulation.Simulation;
+import com.github.caay2000.metropolis.utils.ReflectionTestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

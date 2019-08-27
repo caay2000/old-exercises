@@ -2,6 +2,7 @@ package com.github.caay2000.metropolis.simulation;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 public class SimulationTest {
 
     private static final double TEST_SIMULATION_FACTOR = 1000d / (60d * 10d);

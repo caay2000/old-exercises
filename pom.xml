@@ -15,16 +15,12 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.0-jre</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.maps</groupId>
-            <artifactId>google-maps-services</artifactId>
-            <version>0.9.4</version>
-        </dependency>
+        <!--        This is removed because the polyline encoding utility is copied directly on /src, avoiding dependencies with google-maps-services -->
+        <!--                <dependency>-->
+        <!--                    <groupId>com.google.maps</groupId>-->
+        <!--                    <artifactId>google-maps-services</artifactId>-->
+        <!--                    <version>0.9.4</version>-->
+        <!--                </dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -34,11 +30,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.9.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -55,42 +46,7 @@
 
     </dependencies>
     <build>
-<!--        <finalName>metropolis</finalName>-->
-
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-dependency-plugin</artifactId>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>copy-dependencies</id>-->
-<!--                        <phase>prepare-package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>copy-dependencies</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <outputDirectory>${project.build.directory}/lib</outputDirectory>-->
-<!--                            <overWriteReleases>false</overWriteReleases>-->
-<!--                            <overWriteSnapshots>false</overWriteSnapshots>-->
-<!--                            <overWriteIfNewer>true</overWriteIfNewer>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-jar-plugin</artifactId>-->
-<!--                <version>3.1.0</version>-->
-<!--                <configuration>-->
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <addClasspath>true</addClasspath>-->
-<!--                            <classpathPrefix>lib/</classpathPrefix>-->
-<!--                            <mainClass>com.github.caay2000.metropolis.Metropolis</mainClass>-->
-<!--                        </manifest>-->
-<!--                    </archive>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -115,7 +71,6 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
-
                     </execution>
                 </executions>
             </plugin>

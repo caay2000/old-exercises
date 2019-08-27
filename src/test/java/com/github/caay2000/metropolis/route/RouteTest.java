@@ -30,7 +30,7 @@ public class RouteTest {
         testee.getNextStop();
         testee.getNextStop();
 
-        Assert.assertEquals(true, testee.isEndOfRoute());
+        Assert.assertTrue(testee.isEndOfRoute());
     }
 
     @Test

@@ -1,12 +1,13 @@
 package com.github.caay2000.metropolis;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import com.github.caay2000.metropolis.collector.RandomDataMeter;
 import com.github.caay2000.metropolis.console.SystemConsole;
 import com.github.caay2000.metropolis.event.SystemEventBus;
 import com.github.caay2000.metropolis.simulation.Simulation;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 
 public class Metropolis {
 

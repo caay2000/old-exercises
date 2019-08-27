@@ -1,8 +1,9 @@
 package com.github.caay2000.metropolis.reporter.type;
 
-import java.text.DecimalFormat;
 import com.github.caay2000.metropolis.reporter.Report;
 import com.github.caay2000.metropolis.route.Position;
+
+import java.text.DecimalFormat;
 
 public class RouteReport extends Report {
 

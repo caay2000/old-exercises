@@ -1,9 +1,10 @@
 package com.github.caay2000.metropolis.collector;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RandomDataMeterTest {
 

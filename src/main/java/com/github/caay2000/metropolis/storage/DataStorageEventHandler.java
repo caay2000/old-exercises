@@ -19,11 +19,11 @@ class DataStorageEventHandler implements EventHandler {
     }
 
     private void storeHandler(Event<EventStoreCollectData> event) {
-        this.dataStorage.store(event.to(EventStoreCollectData.class).getCollectedData());
+        this.dataStorage.store(event.to().getCollectedData());
     }
 
     private void publishReportHandler(Event<EventPublishDataReport> event) {
-        EventPublishDataReport eventPublishDataReport = event.to(EventPublishDataReport.class);
+        EventPublishDataReport eventPublishDataReport = event.to();
         this.dataStorage.publishReport(eventPublishDataReport.getEventTime(), eventPublishDataReport.getPosition(), eventPublishDataReport.getSource());
     }
 }

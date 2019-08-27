@@ -78,7 +78,7 @@ public class RobotTest {
     }
 
     @Test
-    public void runMakesRobotStartMoving() throws Exception {
+    public void runMakesRobotStartMoving() {
 
         run();
 
@@ -86,7 +86,7 @@ public class RobotTest {
     }
 
     @Test
-    public void eachMoveSimulationIsUpdated() throws Exception {
+    public void eachMoveSimulationIsUpdated() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(Integer.valueOf(robotConfiguration.getCollectDataDistance()).doubleValue())))
                 .thenReturn(new RouteData(POINT_1, POINT_2, LONG_DISTANCE, ANY_DURATION, ANY_SPEED));
@@ -97,7 +97,7 @@ public class RobotTest {
     }
 
     @Test
-    public void eachMoveRobotRouteIsUpdated() throws Exception {
+    public void eachMoveRobotRouteIsUpdated() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(Integer.valueOf(robotConfiguration.getCollectDataDistance()).doubleValue())))
                 .thenReturn(new RouteData(POINT_1, POINT_2, LONG_DISTANCE, ANY_DURATION, ANY_SPEED));
@@ -114,7 +114,7 @@ public class RobotTest {
     }
 
     @Test
-    public void shortDistanceDoesNotCollectData() throws Exception {
+    public void shortDistanceDoesNotCollectData() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(Integer.valueOf(robotConfiguration.getCollectDataDistance()).doubleValue())))
                 .thenReturn(new RouteData(POINT_1, POINT_2, SHORT_DISTANCE, ANY_DURATION, ANY_SPEED));
@@ -127,7 +127,7 @@ public class RobotTest {
     }
 
     @Test
-    public void longDistanceDoCollectData() throws Exception {
+    public void longDistanceDoCollectData() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(Integer.valueOf(robotConfiguration.getCollectDataDistance()).doubleValue())))
                 .thenReturn(new RouteData(POINT_1, POINT_2, LONG_DISTANCE, ANY_DURATION, ANY_SPEED));
@@ -140,7 +140,7 @@ public class RobotTest {
     }
 
     @Test
-    public void eachPeriodReportIsPublished() throws Exception {
+    public void eachPeriodReportIsPublished() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(Integer.valueOf(robotConfiguration.getCollectDataDistance()).doubleValue())))
                 .thenReturn(new RouteData(POINT_1, POINT_2, LONG_DISTANCE, REPORT_DURATION, ANY_SPEED));
@@ -154,7 +154,7 @@ public class RobotTest {
     }
 
     @Test
-    public void eachMovePublishStationReportEvent() throws Exception {
+    public void eachMovePublishStationReportEvent() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(Integer.valueOf(robotConfiguration.getCollectDataDistance()).doubleValue())))
                 .thenReturn(new RouteData(POINT_1, POINT_2, LONG_DISTANCE, ANY_DURATION, ANY_SPEED));
@@ -186,7 +186,7 @@ public class RobotTest {
     }
 
     @Test
-    public void movementFinishedInDestinationPublishRouteReportEvent() throws Exception {
+    public void movementFinishedInDestinationPublishRouteReportEvent() {
 
         when(engine.move(eq(POINT_1), eq(POINT_2), eq(LONG_DISTANCE)))
                 .thenReturn(new RouteData(POINT_1, POINT_2, LONG_DISTANCE, ANY_DURATION, ANY_SPEED));
@@ -199,7 +199,7 @@ public class RobotTest {
     }
 
     @Test
-    public void publishInstantReportPublishesEvent() throws Exception {
+    public void publishInstantReportPublishesEvent() {
 
 
         testee.publishInstantReport();
@@ -224,7 +224,7 @@ public class RobotTest {
         if (collect.size() == 0) {
             return null;
         }
-        return (T) collect.get(0).to(clazz);
+        return (T) collect.get(0).to();
     }
 
     private void run() {

@@ -1,17 +1,17 @@
 package com.github.caay2000.metropolis.collector;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-
+import com.github.caay2000.metropolis.event.EventBus;
+import com.github.caay2000.metropolis.event.SystemEventBus;
+import com.github.caay2000.metropolis.event.type.EventCollectData;
 import com.github.caay2000.metropolis.event.type.EventCollectInstantData;
+import com.github.caay2000.metropolis.route.Position;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import com.github.caay2000.metropolis.route.Position;
-import com.github.caay2000.metropolis.event.EventBus;
-import com.github.caay2000.metropolis.event.type.EventCollectData;
-import com.github.caay2000.metropolis.event.SystemEventBus;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataCollectorEventHandlerTest {

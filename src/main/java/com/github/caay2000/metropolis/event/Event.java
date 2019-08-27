@@ -13,7 +13,7 @@ public abstract class Event<T> {
 
     public abstract EventType getType();
 
-    public T to(Class<T> clazz) {
+    public T to() {
         try {
             return (T) this;
         } catch (ClassCastException e) {

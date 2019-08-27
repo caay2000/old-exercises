@@ -31,7 +31,7 @@ public class SystemReporterTest {
     @Test
     public void test() {
         String expectedResult = String.format("{\"timestamp\":%s,\"location\":{\"lat\":%s,\"lng\":%s},\"level\":\"%s\",\"source\":\"%s\"}",
-                ANY_TIME,
+                ANY_REPORT.getTimestamp(),
                 ANY_POSITION.getLat(),
                 ANY_POSITION.getLng(),
                 ANY_LEVEL,
