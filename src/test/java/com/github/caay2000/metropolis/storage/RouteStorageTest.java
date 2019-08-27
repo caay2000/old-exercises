@@ -16,7 +16,7 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static com.github.caay2000.metropolis.ReflectionTestUtils.getField;
+import static com.github.caay2000.metropolis.utils.ReflectionTestUtils.getField;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

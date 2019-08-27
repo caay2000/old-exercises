@@ -5,6 +5,7 @@ import com.google.common.math.DoubleMath;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Position {
 
@@ -53,5 +54,13 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(lat, lng);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Position.class.getSimpleName() + "[", "]")
+                .add("lat=" + lat)
+                .add("lng=" + lng)
+                .toString();
     }
 }

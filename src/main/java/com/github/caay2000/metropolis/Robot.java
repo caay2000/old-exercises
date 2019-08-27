@@ -74,7 +74,7 @@ public class Robot implements Runnable {
         RouteData routeData = this.engine.move(this.currentPosition, nextStop, this.nextCollectDataDistance);
 
         updateSimulation(routeData.getTime());
-        updateRobot(routeData);
+        updateRobotRoute(routeData);
         checkCollectDataEvent();
         checkPublishDataReportEvent();
         checkPublishStationDataReportEvent();
@@ -111,7 +111,7 @@ public class Robot implements Runnable {
         this.simulation.updateSimulation(secondsElapsed);
     }
 
-    private void updateRobot(RouteData routeData) {
+    private void updateRobotRoute(RouteData routeData) {
         this.currentPosition = routeData.getDestination();
         this.nextCollectDataDistance -= routeData.getDistance();
         this.nextPublishReportTime -= routeData.getTime();

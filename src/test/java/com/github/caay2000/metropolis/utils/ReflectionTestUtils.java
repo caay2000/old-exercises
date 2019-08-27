@@ -1,4 +1,4 @@
-package com.github.caay2000.metropolis;
+package com.github.caay2000.metropolis.utils;
 
 import java.lang.reflect.Field;
 

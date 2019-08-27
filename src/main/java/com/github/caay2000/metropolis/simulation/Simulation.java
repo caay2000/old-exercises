@@ -14,7 +14,9 @@ public class Simulation {
     private double simulationFactor;
 
     public Simulation() {
-        new Simulation(SIMULATION_TIME_FACTOR);
+        this.simulationEpoch = new Date().getTime();
+        this.realEpoch = this.simulationEpoch;
+        this.simulationFactor = SIMULATION_TIME_FACTOR;
     }
 
     public Simulation(double simulationFactor) {

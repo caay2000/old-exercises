@@ -46,9 +46,9 @@ public class Route {
 
     private Position nextStop() {
         if (this.direction == Direction.FORWARD) {
-            return this.routeStops.get(stopIndex++);
+            return this.routeStops.get(++stopIndex);
         }
-        return this.routeStops.get(stopIndex--);
+        return this.routeStops.get(--stopIndex);
     }
 
     private enum Direction {

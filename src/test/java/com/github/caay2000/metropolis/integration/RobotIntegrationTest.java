@@ -1,5 +1,7 @@
-package com.github.caay2000.metropolis;
+package com.github.caay2000.metropolis.integration;
 
+import com.github.caay2000.metropolis.RobotApplication;
+import com.github.caay2000.metropolis.RobotConfiguration;
 import com.github.caay2000.metropolis.collector.RandomDataMeter;
 import com.github.caay2000.metropolis.event.EventBus;
 import com.github.caay2000.metropolis.event.SystemEventBus;
@@ -22,13 +24,14 @@ public class RobotIntegrationTest {
     private PrintStream printer;
 
     @Test
+    @Ignore("not a test, only to check if everything works as expected")
     public void test() throws Exception {
 
-        Simulation simualtion = new Simulation(TEST_SIMULATION_FACTOR);
+        Simulation simulation = new Simulation(TEST_SIMULATION_FACTOR);
         EventBus eventBus = new SystemEventBus();
         RobotConfiguration robotConfiguration = new RobotConfiguration(new RandomDataMeter(), System.out);
 
-        RobotApplication robot = new RobotApplication(simualtion, eventBus, robotConfiguration);
+        RobotApplication robot = new RobotApplication(null, simulation, eventBus, robotConfiguration);
 
         robot.start(POLYLINE);
         for (int i = 0; i < 20; i++) {
