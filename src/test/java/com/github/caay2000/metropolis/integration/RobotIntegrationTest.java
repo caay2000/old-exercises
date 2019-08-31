@@ -24,7 +24,7 @@ public class RobotIntegrationTest {
     private PrintStream printer;
 
     @Test
-//    @Ignore("not a test, only to check if everything works as expected")
+    @Ignore("not a test, only to check if everything works as expected")
     public void test() throws Exception {
 
         Simulation simulation = new Simulation(TEST_SIMULATION_FACTOR);
