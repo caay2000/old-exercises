@@ -1,12 +1,11 @@
 package com.github.caay2000.metropolis.event;
 
+import static java.util.Objects.isNull;
+
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
-
-import static java.util.Objects.isNull;
 
 public final class SystemEventBus implements EventBus {
 
