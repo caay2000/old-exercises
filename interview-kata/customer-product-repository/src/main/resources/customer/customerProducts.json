@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1,
+    "customerId": 3,
+    "productId": 8,
+    "effectiveFrom": "12/03/2019",
+    "effectiveTo": "05/12/2019"
+  },
+  {
+    "id": 2,
+    "customerId": 2,
+    "productId": 10,
+    "effectiveFrom": "26/07/2019",
+    "effectiveTo": "23/12/2019"
+  },
+  {
+    "id": 3,
+    "customerId": 1,
+    "productId": 12,
+    "effectiveFrom": "18/08/2017",
+    "effectiveTo": "20/06/2019"
+  },
+  {
+    "id": 4,
+    "customerId": 3,
+    "productId": 10,
+    "effectiveFrom": "16/02/2019",
+    "effectiveTo": "19/05/2019"
+  },
+  {
+    "id": 5,
+    "customerId": 2,
+    "productId": 7,
+    "effectiveFrom": "14/07/2018",
+    "effectiveTo": "19/04/2019"
+  },
+  {
+    "id": 6,
+    "customerId": 2,
+    "productId": 7,
+    "effectiveFrom": "24/04/2017",
+    "effectiveTo": "26/05/2018"
+  },
+  {
+    "id": 7,
+    "customerId": 5,
+    "productId": 4,
+    "effectiveFrom": "27/04/2017",
+    "effectiveTo": "23/06/2017"
+  },
+  {
+    "id": 8,
+    "customerId": 1,
+    "productId": 12,
+    "effectiveFrom": "07/05/2016",
+    "effectiveTo": "16/07/2019"
+  },
+  {
+    "id": 9,
+    "customerId": 3,
+    "productId": 3,
+    "effectiveFrom": "08/02/2018",
+    "effectiveTo": "26/04/2018"
+  },
+  {
+    "id": 10,
+    "customerId": 2,
+    "productId": 6,
+    "effectiveFrom": "14/05/2016",
+    "effectiveTo": "15/03/2017"
+  },
+  {
+    "id": 11,
+    "customerId": 1,
+    "productId": 3,
+    "effectiveFrom": "11/02/2018",
+    "effectiveTo": "02/12/2018"
+  },
+  {
+    "id": 12,
+    "customerId": 3,
+    "productId": 11,
+    "effectiveFrom": "26/04/2018",
+    "effectiveTo": "12/09/2019"
+  },
+  {
+    "id": 13,
+    "customerId": 2,
+    "productId": 11,
+    "effectiveFrom": "08/11/2016",
+    "effectiveTo": "19/12/2019"
+  },
+  {
+    "id": 14,
+    "customerId": 1,
+    "productId": 12,
+    "effectiveFrom": "09/04/2017",
+    "effectiveTo": "07/11/2017"
+  },
+  {
+    "id": 15,
+    "customerId": 5,
+    "productId": 2,
+    "effectiveFrom": "31/03/2016",
+    "effectiveTo": "06/07/2016"
+  },
+  {
+    "id": 16,
+    "customerId": 5,
+    "productId": 4,
+    "effectiveFrom": "26/08/2017",
+    "effectiveTo": "28/09/2017"
+  },
+  {
+    "id": 17,
+    "customerId": 5,
+    "productId": 2,
+    "effectiveFrom": "16/08/2016",
+    "effectiveTo": "13/08/2018"
+  },
+  {
+    "id": 18,
+    "customerId": 3,
+    "productId": 13,
+    "effectiveFrom": "22/05/2016",
+    "effectiveTo": "30/12/2019"
+  },
+  {
+    "id": 19,
+    "customerId": 1,
+    "productId": 8,
+    "effectiveFrom": "25/06/2016",
+    "effectiveTo": "07/12/2019"
+  },
+  {
+    "id": 20,
+    "customerId": 4,
+    "productId": 10,
+    "effectiveFrom": "23/11/2016",
+    "effectiveTo": "20/11/2019"
+  },
+  {
+    "id": 21,
+    "customerId": 1,
+    "productId": 6,
+    "effectiveFrom": "24/02/2016",
+    "effectiveTo": "16/06/2019"
+  },
+  {
+    "id": 22,
+    "customerId": 3,
+    "productId": 5,
+    "effectiveFrom": "25/02/2018",
+    "effectiveTo": "21/03/2018"
+  },
+  {
+    "id": 23,
+    "customerId": 2,
+    "productId": 4,
+    "effectiveFrom": "27/03/2019",
+    "effectiveTo": "11/12/2019"
+  },
+  {
+    "id": 24,
+    "customerId": 1,
+    "productId": 9,
+    "effectiveFrom": "29/03/2018",
+    "effectiveTo": "15/12/2018"
+  },
+  {
+    "id": 25,
+    "customerId": 2,
+    "productId": 1,
+    "effectiveFrom": "22/03/2016",
+    "effectiveTo": "03/03/2018"
+  },
+  {
+    "id": 26,
+    "customerId": 3,
+    "productId": 7,
+    "effectiveFrom": "13/05/2017",
+    "effectiveTo": "06/06/2019"
+  },
+  {
+    "id": 27,
+    "customerId": 2,
+    "productId": 1,
+    "effectiveFrom": "08/02/2016",
+    "effectiveTo": "11/05/2019"
+  },
+  {
+    "id": 28,
+    "customerId": 4,
+    "productId": 8,
+    "effectiveFrom": "26/08/2018",
+    "effectiveTo": "13/03/2019"
+  },
+  {
+    "id": 29,
+    "customerId": 2,
+    "productId": 11,
+    "effectiveFrom": "02/01/2016",
+    "effectiveTo": "25/09/2017"
+  },
+  {
+    "id": 30,
+    "customerId": 4,
+    "productId": 12,
+    "effectiveFrom": "13/11/2016",
+    "effectiveTo": "21/10/2019"
+  },
+  {
+    "id": 31,
+    "customerId": 1,
+    "productId": 13,
+    "effectiveFrom": "04/05/2016",
+    "effectiveTo": "27/04/2018"
+  },
+  {
+    "id": 32,
+    "customerId": 3,
+    "productId": 5,
+    "effectiveFrom": "27/06/2016",
+    "effectiveTo": "30/10/2017"
+  },
+  {
+    "id": 33,
+    "customerId": 4,
+    "productId": 10,
+    "effectiveFrom": "10/11/2017",
+    "effectiveTo": "09/10/2019"
+  },
+  {
+    "id": 34,
+    "customerId": 4,
+    "productId": 6,
+    "effectiveFrom": "18/04/2017",
+    "effectiveTo": "11/11/2018"
+  },
+  {
+    "id": 35,
+    "customerId": 1,
+    "productId": 12,
+    "effectiveFrom": "23/01/2018",
+    "effectiveTo": "13/04/2018"
+  },
+  {
+    "id": 36,
+    "customerId": 2,
+    "productId": 12,
+    "effectiveFrom": "06/07/2019",
+    "effectiveTo": "16/08/2019"
+  },
+  {
+    "id": 37,
+    "customerId": 4,
+    "productId": 3,
+    "effectiveFrom": "10/01/2016",
+    "effectiveTo": "12/03/2017"
+  },
+  {
+    "id": 38,
+    "customerId": 1,
+    "productId": 3,
+    "effectiveFrom": "28/05/2016",
+    "effectiveTo": "24/03/2017"
+  },
+  {
+    "id": 39,
+    "customerId": 2,
+    "productId": 5,
+    "effectiveFrom": "28/08/2017",
+    "effectiveTo": "06/12/2017"
+  },
+  {
+    "id": 40,
+    "customerId": 5,
+    "productId": 12,
+    "effectiveFrom": "06/02/2017",
+    "effectiveTo": "17/06/2017"
+  },
+  {
+    "id": 41,
+    "customerId": 3,
+    "productId": 6,
+    "effectiveFrom": "26/10/2016",
+    "effectiveTo": "03/05/2019"
+  },
+  {
+    "id": 42,
+    "customerId": 3,
+    "productId": 9,
+    "effectiveTo": "24/09/2018",
+    "effectiveFrom": "09/06/2016"
+  },
+  {
+    "id": 43,
+    "customerId": 2,
+    "productId": 13,
+    "effectiveFrom": "08/04/2019",
+    "effectiveTo": "21/12/2019"
+  },
+  {
+    "id": 44,
+    "customerId": 1,
+    "productId": 13,
+    "effectiveFrom": "29/05/2017",
+    "effectiveTo": "01/09/2018"
+  },
+  {
+    "id": 45,
+    "customerId": 5,
+    "productId": 6,
+    "effectiveFrom": "08/08/2019",
+    "effectiveTo": "17/10/2019"
+  },
+  {
+    "id": 46,
+    "customerId": 5,
+    "productId": 13,
+    "effectiveFrom": "27/11/2018",
+    "effectiveTo": "25/08/2019"
+  },
+  {
+    "id": 47,
+    "customerId": 1,
+    "productId": 13,
+    "effectiveFrom": "25/05/2016",
+    "effectiveTo": "19/04/2017"
+  },
+  {
+    "id": 48,
+    "customerId": 5,
+    "productId": 5,
+    "effectiveFrom": "15/03/2016",
+    "effectiveTo": "02/09/2018"
+  },
+  {
+    "id": 49,
+    "customerId": 1,
+    "productId": 6,
+    "effectiveFrom": "05/06/2016",
+    "effectiveTo": "24/11/2019"
+  },
+  {
+    "id": 50,
+    "customerId": 3,
+    "productId": 3,
+    "effectiveFrom": "17/09/2018",
+    "effectiveTo": "27/07/2019"
+  },
+  {
+    "id": 51,
+    "customerId": 2,
+    "productId": 5,
+    "effectiveFrom": "19/05/2017",
+    "effectiveTo": "14/03/2018"
+  },
+  {
+    "id": 52,
+    "customerId": 5,
+    "productId": 2,
+    "effectiveFrom": "19/11/2017",
+    "effectiveTo": "07/12/2018"
+  },
+  {
+    "id": 53,
+    "customerId": 5,
+    "productId": 9,
+    "effectiveFrom": "10/01/2018",
+    "effectiveTo": "20/01/2019"
+  },
+  {
+    "id": 54,
+    "customerId": 4,
+    "productId": 1,
+    "effectiveFrom": "25/09/2018",
+    "effectiveTo": "30/07/2019"
+  },
+  {
+    "id": 55,
+    "customerId": 4,
+    "productId": 8,
+    "effectiveFrom": "16/05/2016",
+    "effectiveTo": "26/05/2017"
+  },
+  {
+    "id": 56,
+    "customerId": 2,
+    "productId": 10,
+    "effectiveFrom": "13/07/2017",
+    "effectiveTo": "05/12/2017"
+  },
+  {
+    "id": 57,
+    "customerId": 5,
+    "productId": 11,
+    "effectiveFrom": "26/11/2018",
+    "effectiveTo": "30/06/2019"
+  },
+  {
+    "id": 58,
+    "customerId": 3,
+    "productId": 1,
+    "effectiveFrom": "06/03/2016",
+    "effectiveTo": "22/05/2018"
+  },
+  {
+    "id": 59,
+    "customerId": 4,
+    "productId": 7,
+    "effectiveFrom": "28/09/2017",
+    "effectiveTo": "02/12/2018"
+  },
+  {
+    "id": 60,
+    "customerId": 4,
+    "productId": 9,
+    "effectiveFrom": "18/01/2016",
+    "effectiveTo": "24/03/2016"
+  },
+  {
+    "id": 61,
+    "customerId": 4,
+    "productId": 7,
+    "effectiveFrom": "10/01/2019",
+    "effectiveTo": "15/10/2019"
+  },
+  {
+    "id": 62,
+    "customerId": 3,
+    "productId": 2,
+    "effectiveFrom": "22/09/2016",
+    "effectiveTo": "18/11/2016"
+  },
+  {
+    "id": 63,
+    "customerId": 4,
+    "productId": 4,
+    "effectiveFrom": "01/03/2018",
+    "effectiveTo": "02/08/2018"
+  },
+  {
+    "id": 64,
+    "customerId": 3,
+    "productId": 13,
+    "effectiveFrom": "20/04/2017",
+    "effectiveTo": "18/11/2019"
+  },
+  {
+    "id": 65,
+    "customerId": 5,
+    "productId": 10,
+    "effectiveFrom": "24/04/2019",
+    "effectiveTo": "25/08/2019"
+  },
+  {
+    "id": 66,
+    "customerId": 4,
+    "productId": 5,
+    "effectiveFrom": "15/02/2017",
+    "effectiveTo": "09/08/2019"
+  },
+  {
+    "id": 67,
+    "customerId": 3,
+    "productId": 1,
+    "effectiveFrom": "21/05/2016",
+    "effectiveTo": "01/04/2018"
+  },
+  {
+    "id": 68,
+    "customerId": 5,
+    "productId": 13,
+    "effectiveFrom": "18/10/2016",
+    "effectiveTo": "11/08/2017"
+  },
+  {
+    "id": 69,
+    "customerId": 1,
+    "productId": 6,
+    "effectiveFrom": "28/07/2018",
+    "effectiveTo": "01/08/2018"
+  },
+  {
+    "id": 70,
+    "customerId": 5,
+    "productId": 7,
+    "effectiveFrom": "01/10/2017",
+    "effectiveTo": "18/09/2019"
+  },
+  {
+    "id": 71,
+    "customerId": 5,
+    "productId": 4,
+    "effectiveFrom": "07/10/2017",
+    "effectiveTo": "13/01/2019"
+  },
+  {
+    "id": 72,
+    "customerId": 4,
+    "productId": 1,
+    "effectiveFrom": "12/05/2016",
+    "effectiveTo": "27/06/2019"
+  },
+  {
+    "id": 73,
+    "customerId": 2,
+    "productId": 5,
+    "effectiveFrom": "09/02/2017",
+    "effectiveTo": "02/03/2017"
+  },
+  {
+    "id": 74,
+    "customerId": 3,
+    "productId": 3,
+    "effectiveFrom": "17/02/2018",
+    "effectiveTo": "13/03/2018"
+  },
+  {
+    "id": 75,
+    "customerId": 3,
+    "productId": 10,
+    "effectiveFrom": "26/03/2016",
+    "effectiveTo": "20/09/2017"
+  },
+  {
+    "id": 76,
+    "customerId": 2,
+    "productId": 4,
+    "effectiveFrom": "29/07/2016",
+    "effectiveTo": "20/02/2019"
+  },
+  {
+    "id": 77,
+    "customerId": 1,
+    "productId": 13,
+    "effectiveFrom": "06/03/2017",
+    "effectiveTo": "21/09/2018"
+  },
+  {
+    "id": 78,
+    "customerId": 5,
+    "productId": 2,
+    "effectiveFrom": "17/06/2016",
+    "effectiveTo": "27/08/2019"
+  },
+  {
+    "id": 79,
+    "customerId": 2,
+    "productId": 3,
+    "effectiveFrom": "19/04/2017",
+    "effectiveTo": "14/12/2018"
+  },
+  {
+    "id": 80,
+    "customerId": 5,
+    "productId": 2,
+    "effectiveFrom": "10/05/2016",
+    "effectiveTo": "17/05/2017"
+  },
+  {
+    "id": 81,
+    "customerId": 1,
+    "productId": 11,
+    "effectiveFrom": "02/02/2016",
+    "effectiveTo": "14/03/2016"
+  },
+  {
+    "id": 82,
+    "customerId": 3,
+    "productId": 11,
+    "effectiveFrom": "22/10/2016",
+    "effectiveTo": "05/11/2018"
+  },
+  {
+    "id": 83,
+    "customerId": 4,
+    "productId": 5,
+    "effectiveFrom": "14/07/2017",
+    "effectiveTo": "19/07/2017"
+  },
+  {
+    "id": 84,
+    "customerId": 5,
+    "productId": 10,
+    "effectiveFrom": "09/04/2017",
+    "effectiveTo": "13/06/2019"
+  },
+  {
+    "id": 85,
+    "customerId": 5,
+    "productId": 5,
+    "effectiveFrom": "23/06/2016",
+    "effectiveTo": "08/10/2019"
+  },
+  {
+    "id": 86,
+    "customerId": 3,
+    "productId": 8,
+    "effectiveFrom": "14/09/2017",
+    "effectiveTo": "04/11/2019"
+  },
+  {
+    "id": 87,
+    "customerId": 2,
+    "productId": 12,
+    "effectiveFrom": "12/12/2018",
+    "effectiveTo": "03/08/2019"
+  },
+  {
+    "id": 88,
+    "customerId": 3,
+    "productId": 6,
+    "effectiveFrom": "30/05/2019",
+    "effectiveTo": "21/10/2019"
+  },
+  {
+    "id": 89,
+    "customerId": 3,
+    "productId": 5,
+    "effectiveFrom": "21/11/2017",
+    "effectiveTo": "18/03/2019"
+  },
+  {
+    "id": 90,
+    "customerId": 1,
+    "productId": 4,
+    "effectiveFrom": "25/06/2017",
+    "effectiveTo": "11/08/2019"
+  },
+  {
+    "id": 91,
+    "customerId": 5,
+    "productId": 8,
+    "effectiveFrom": "20/09/2017",
+    "effectiveTo": "22/08/2018"
+  },
+  {
+    "id": 92,
+    "customerId": 2,
+    "productId": 4,
+    "effectiveFrom": "05/10/2018",
+    "effectiveTo": "30/10/2019"
+  },
+  {
+    "id": 93,
+    "customerId": 5,
+    "productId": 5,
+    "effectiveFrom": "13/12/2018",
+    "effectiveTo": "01/07/2019"
+  },
+  {
+    "id": 94,
+    "customerId": 3,
+    "productId": 4,
+    "effectiveFrom": "12/09/2017",
+    "effectiveTo": "04/12/2018"
+  },
+  {
+    "id": 95,
+    "customerId": 2,
+    "productId": 9,
+    "effectiveFrom": "07/11/2016",
+    "effectiveTo": "06/02/2019"
+  },
+  {
+    "id": 96,
+    "customerId": 2,
+    "productId": 9,
+    "effectiveFrom": "07/02/2017",
+    "effectiveTo": "06/08/2017"
+  },
+  {
+    "id": 97,
+    "customerId": 2,
+    "productId": 11,
+    "effectiveFrom": "07/03/2017",
+    "effectiveTo": "10/03/2019"
+  },
+  {
+    "id": 98,
+    "customerId": 3,
+    "productId": 10,
+    "effectiveFrom": "24/03/2017",
+    "effectiveTo": "13/12/2019"
+  },
+  {
+    "id": 99,
+    "customerId": 4,
+    "productId": 3,
+    "effectiveFrom": "04/09/2017",
+    "effectiveTo": "01/11/2017"
+  },
+  {
+    "id": 100,
+    "customerId": 5,
+    "productId": 1,
+    "effectiveFrom": "23/08/2016",
+    "effectiveTo": "19/09/2019"
+  }
+]

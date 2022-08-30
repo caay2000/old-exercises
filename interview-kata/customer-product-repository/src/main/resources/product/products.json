@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "name": "Basic TV Pack",
+    "price": 9.95
+  },
+  {
+    "id": 2,
+    "name": "Advanced TV Pack",
+    "price": 29.95
+  },
+  {
+    "id": 3,
+    "name": "Full HD Pack",
+    "price": 49.95
+  },
+  {
+    "id": 4,
+    "name": "Family Pack",
+    "price": 39.95
+  },
+  {
+    "id": 5,
+    "name": "Sports Pack",
+    "price": 49.95
+  },
+  {
+    "id": 6,
+    "name": "Complete Pack",
+    "price": 79.95
+  },
+  {
+    "id": 7,
+    "name": "Multiple Screen AddOn",
+    "price": 14.95
+  },
+  {
+    "id": 8,
+    "name": "Mobile TV AddOn",
+    "price": 9.95
+  },
+  {
+    "id": 9,
+    "name": "Football Season AddOn",
+    "price": 39.95
+  },
+  {
+    "id": 10,
+    "name": "Adult Section AddOn",
+    "price": 19.95
+  },
+  {
+    "id": 11,
+    "name": "Netflax AddOn",
+    "price": 13.95
+  },
+  {
+    "id": 12,
+    "name": "MBO AddOn",
+    "price": 11.95
+  },
+  {
+    "id": 13,
+    "name": "Sportify AddOn",
+    "price": 9.95
+  }
+]

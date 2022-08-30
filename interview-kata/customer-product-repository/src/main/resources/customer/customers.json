@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "Ellsworth Cicerone",
+    "gender": "Male",
+    "birthday": "3/12/1998",
+    "email": "ecicerone0@people.com.cn",
+    "phoneNumber": "509-454-8496",
+    "accountNumber": "60001234",
+    "address": {
+      "addressLine1": "67380 Fallview Way",
+      "addressLine2": "8th",
+      "city": "Rathdrum",
+      "postCode": "V14",
+      "country": "Ireland"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Ora Tickner",
+    "gender": "Female",
+    "birthday": "12/1/1984",
+    "email": "otickner1@sina.com.cn",
+    "phoneNumber": "645-308-3605",
+    "accountNumber": "60007890",
+    "address": {
+      "addressLine1": "7 Fordem Park",
+      "addressLine2": "La Follette",
+      "city": "Ballinteer",
+      "postCode": "D6W",
+      "country": "Ireland"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Mason Ray Champneys",
+    "gender": "Male",
+    "birthday": "4/17/1964",
+    "email": "mchampneys2@plala.or.jp",
+    "phoneNumber": "490-270-9258",
+    "accountNumber": "60003456",
+    "address": {
+      "addressLine1": "9 Golf View Park",
+      "addressLine2": "Haas",
+      "city": "Belfast",
+      "postCode": "BT2",
+      "country": "United Kingdom"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Lennie O'Concannon",
+    "gender": "Male",
+    "birthday": "10/28/1964",
+    "email": "lo3@army.mil",
+    "phoneNumber": "890-400-7048",
+    "accountNumber": "60009012",
+    "address": {
+      "addressLine1": "992 Carey Street",
+      "addressLine2": "Old Shore",
+      "city": "Booterstown",
+      "postCode": "D04",
+      "country": "Ireland"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Andrey Crickmoor",
+    "gender": "Unspecified",
+    "birthday": "9/27/1960",
+    "email": "acrickmoor4@amazonaws.com",
+    "phoneNumber": "398-972-4493",
+    "address": {
+      "addressLine1": "52 Monument Park",
+      "addressLine2": "Drewry",
+      "city": "Weston",
+      "postCode": "GU32",
+      "country": "United Kingdom"
+    }
+  }
+]
