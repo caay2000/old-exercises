@@ -1,0 +1,6 @@
+rootProject.name = 'challenge'
+include 'service'
+include 'application'
+include 'internal-model'
+include 'repository'
+include 'model'
