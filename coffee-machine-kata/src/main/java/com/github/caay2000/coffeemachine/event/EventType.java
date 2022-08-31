@@ -1,0 +1,16 @@
+package com.github.caay2000.coffeemachine.event;
+
+public enum EventType {
+
+    COFFEE_EVENT,
+    TEA_EVENT,
+    CHOCOLATE_EVENT,
+    INCREASE_SUGAR_EVENT,
+    DECREASE_SUGAR_EVENT,
+    SEND_MESSAGE_EVENT,
+    MAKE_DRINK,
+    INSERT_COIN_EVENT,
+    RETURN_MONEY_EVENT,
+    ORANGE_JUICE_EVENT,
+    EXTRA_HOT_EVENT,
+}
